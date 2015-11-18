@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Flickr Viewer</title>
+    <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="less/styles.css">
+</head>
+<body>
+
+    <header><h1>Flickr Viewer</h1></header>
+
+    <div id="main">
+
+        <section ng-controller="FlickrController">
+
+            <img ng-hide="images" src="../712.GIF" title="wait..." alt="wait..."/>
+
+            <fieldset >
+
+                <legend>
+                    Search images
+                </legend>
+
+                <div class="form-container">
+
+                    <label for="searchText">Zoeken op</label>
+                    <input type="text" placeholder="query..." id="searchText" class="form-control" ng-model="searchText"/>
+
+                </div>
+
+                <div class="form-container">
+
+                    <label for="sortOn">Sorteren op</label>
+                    <select id="sortOn" class="form-control" ng-model="sortProperty">
+
+                        <option value="title">Title oplopend</option>
+                        <option value="-title">Title aflopend</option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-container">
+
+                    <label for="searchinImagesText">Zoeken in gevonden images</label>
+                    <input type="text" id="searchinImagesText" placeholder="Iman..." class="form-control" ng-model="filterQuery"/>
+
+                </div>
+
+                <div class="form-container">
+
+                    <button id="button" type="button" class="btn btn-primary" ng-click="searchImages()">
+                        <i class="glyphicon glyphicon-search"></i>
+                    </button>
+
+                </div>
+
+            </fieldset>
+
+            <div ng-show="images" id="wrapper">
+
+                <ul id="imagesList">
+                    <li class="flickrimage" ng-class="checkAndStyleTitle(i)" ng-repeat="i in images | orderBy: sortProperty | filter: filterImages">
+
+                        <figure>
+
+                            <!-- moet toegevoegd worden aan angular, is een directive -->
+                            <flickrimage></flickrimage>
+
+                            <!-- URL is een functie, dus haakjes!-->
+                            <!--<img ng-src="{{i.URL()}}" title="{{i.title}}" alt="{{i.title}}"/>-->
+                            <figcaption>{{i.title}}</figcaption>
+                        </figure>
+
+                    </li>
+                </ul>
+
+            </div>
+
+        </section>
+
+    </div>
+
+    <footer>&copy; 2015 - NMCT (Iman Cocquyt)</footer>
+
+    <script src="../lib/angular/angular.js"></script>
+    <script src="models/flickrImage.js"></script>
+    <script src="app.js"></script>
+    <script src="ImagesOverview/ImagesOverviewController.js"></script>
+
+</body>
+</html>

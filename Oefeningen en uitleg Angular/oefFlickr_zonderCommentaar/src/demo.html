@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<h1>Getting started</h1>
+
+<p>{{1 + 3}}</p>
+<p>{{"angular".length}}</p>
+<p>{{"Iman Cocquyt"}}</p>
+
+<input type="text" placeholder="Uw naam..." ng-model="naam"/>
+<p>Welkom {{naam | uppercase}}</p>
+<input type="text" placeholder="Uw naam..." ng-model="naam"/>
+
+
+<h2>Eerste controller</h2>
+<section ng-controller="demoController">
+    <p>{{person.naam + ' ' + person.voornaam}}</p>
+    <img ng-src="{{person.img}}" />
+    <button type="button" ng-click="sayHello()">Click me</button>
+</section>
+
+<script src="../lib/angular/angular.js"></script>
+<script>
+
+    function Person(naam, voornaam, img){
+        this.naam = naam;
+        this.voornaam = voornaam;
+        this.img = img;
+    }
+
+    var demoController = function ($scope) {
+        $scope.person = new Person("David", "Dries", "https://s3.amazonaws.com/uifaces/faces/twitter/idiot/128.jpg");
+        $scope.sayHello = function(){
+            alert("Hello");
+        }
+
+    };
+
+    var app = angular.module("app", []);
+    app.controller("demoController", demoController);
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<h1>Getting started</h1>
+<!-- DATABINDING : js expressie ertussen schrijven, een lijn code die in js kan worden uitgevoerd -->
+<!-- NIET VERGETEN!!! : ng-app (nog geen naam geven!, vanaf dat je het een naam geeft, dan MOET je het REGISTREREN -->
+
+<p>{{1 + 3}}</p>
+<p>{{"angular".length}}</p>
+<p>{{"Iman Cocquyt"}}</p>
+
+
+<!--Wat je moet weten: angular houdt alles bij in 1 object
+ DUS databinding = link leggen tussen textbox object en angularobject
+ property 'naam' toevoegen aan het object ng-model="naam"-->
+<input type="text" placeholder="Uw naam..." ng-model="naam"/>
+<p>Welkom {{naam | uppercase}}</p>
+<input type="text" placeholder="Uw naam..." ng-model="naam"/>
+
+
+<!-- boven de h2 is alles zonder controller, onder de h2 alles met de controller -->
+<h2>Eerste controller</h2>
+<section ng-controller="demoController">
+    <p>{{person.naam + ' ' + person.voornaam}}</p>
+    <!-- zorgt ervoor dat de src nog niet meteen wordt uitgevoerd, maar angular doet het pas wanneer zijn code eraan komt -->
+    <img ng-src="{{person.img}}" />
+    <button type="button" ng-click="sayHello()">Click me</button>
+</section>
+
+<script src="../lib/angular/angular.js"></script>
+<script>
+
+    function Person(naam, voornaam, img){
+        this.naam = naam;
+        this.voornaam = voornaam;
+        this.img = img;
+    }
+
+    var demoController = function ($scope) {
+        //alle velden die je naar je view wil brengen voeg je aan je scope toe
+        //$scope.naam = "Dries";
+        //$scope.voornaam = "David";
+        $scope.person = new Person("David", "Dries", "https://s3.amazonaws.com/uifaces/faces/twitter/idiot/128.jpg");
+        $scope.sayHello = function(){
+            alert("Hello");
+        }
+
+    };
+
+    var app = angular.module("app", []);
+    app.controller("demoController", demoController);
+
+</script>
+
+</body>
+</html>
