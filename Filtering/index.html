@@ -11,6 +11,8 @@
 </ul>
 <script>
     function arrayWoorden() {
+
+
         var str = document.getElementById("text").value;
         var words = str.split(" ");
         var badWords = ["ik", "Ik", "ben", "die", "iemand", "op", "zoek", "is", "naar", "een", "om", "naar", "te", "test", "leuke"];
@@ -26,9 +28,11 @@
 
                 //Om visueel te zien!
                 var node = document.createElement("LI");
-                var correctWord = document.createTextNode(words[i]);
-                console.log(correctWord);
+                var textnode = document.createTextNode(words[i]);
+                node.appendChild(textnode);
                 document.getElementById("correctWords").appendChild(node);
+
+
 
             }
         }
