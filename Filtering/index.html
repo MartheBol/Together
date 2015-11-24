@@ -15,12 +15,12 @@
 
         var str = document.getElementById("text").value;
         var words = str.split(" ");
-        var badWords = ["ik", "Ik", "ben", "die", "iemand", "op", "zoek", "is", "naar", "een", "om", "naar", "te", "test", "leuke"];
+        var badWords = ["ik", "ben", "die", "iemand", "op", "zoek", "is", "naar", "een", "om", "naar", "te", "test", "leuke", "het", "wil", "leuk", "persoon", "in"];
         var keyWords = [];
 
         for (i = 0; i < words.length; i++) {
             console.log(words[i]);
-            if (badWords.indexOf(words[i]) == -1) {
+            if (badWords.indexOf(words[i].toLowerCase()) == -1) {
 
                 //keywords opvullen
                 keyWords.push(words[i]);
