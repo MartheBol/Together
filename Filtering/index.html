@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+
+<button onclick="arrayWoorden()">Filter</button>
+
+<textarea id="text" placeholder="typ uw text hier"></textarea>
+<ul id="correctWords">
+
+</ul>
+<script>
+    function arrayWoorden() {
+        var str = document.getElementById("text").value;
+        var words = str.split(" ");
+        var badWords = ["ik", "Ik", "ben", "die", "iemand", "op", "zoek", "is", "naar", "een", "om", "naar", "te", "test", "leuke"];
+        var keyWords = [];
+
+        for (i = 0; i < words.length; i++) {
+            console.log(words[i]);
+            if (badWords.indexOf(words[i]) == -1) {
+
+                //keywords opvullen
+                keyWords.push(words[i]);
+                console.log(keyWords);
+
+                //Om visueel te zien!
+                var node = document.createElement("LI");
+                var correctWord = document.createTextNode(words[i]);
+                console.log(correctWord);
+                document.getElementById("correctWords").appendChild(node);
+
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
