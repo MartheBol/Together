@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Filter</title>
+    <link rel="stylesheet" type="text/css" href="src/styles/style.css"/>
+</head>
+<body>
+
+<header><h1>Filter</h1></header>
+
+<div id="main">
+
+        <section ng-controller="FilterController">
+
+            <button ng-click="searchKeywords()">Filter</button>
+
+            <textarea id="text" placeholder="typ uw text hier" ng-model="searchText"></textarea>
+
+            <ul ng-model="correctWords">
+
+                <li class="keyword" ng-repeat="correctWord in correctWords track by $index">
+
+                    #{{correctWord}}
+
+                </li>
+
+            </ul>
+
+
+            <!--
+
+            <p ng-model="noisewords"></p>
+
+            <div>
+
+                <ul>
+                    <li ng-repeat="word in noisewords">
+
+                        {{word}}
+
+                    </li>
+                </ul>
+
+            </div>
+
+            -->
+
+        </section>
+
+
+</div>
+<footer></footer>
+<script src="lib/angular/angular.js"></script> <!-- deze mogen niet geconcateneerd worden!!! -->
+<!-- onderstaande is een nieuwe functionaliteit, dus toevoegen in app.js -->
+<script src="app.js"></script>
+<!-- ervoor zorgen dat deze hier komt te staan, want het wordt in de controller gebruikt -->
+<script src="src/services/filterService.js"></script>
+<script src="src/controller/FilterController.js"></script>
+
+</body>
+</html>
