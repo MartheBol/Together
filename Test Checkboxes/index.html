@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html  ng-app="app" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<div ng-controller="SimpleArrayCtrl">
+
+<label ng-repeat="interest in interests">
+    <input
+            type="checkbox"
+            name="selectedInterests[]"
+            value="{{interest}}"
+            ng-checked="selection.indexOf(interest) > -1"
+            ng-click="toggleSelection(interest)"
+            > {{interest}}
+</label>
+</div>
+<div ng-controller="AddCheckboxCtrl">
+    <input id="checkboxAdd" ng-hide="check" type="text" ng-model="interest.name"/>
+    <p ng-click="addCheckbox(interest.name)">add</p>
+    <label ng-repeat="interest in interests">
+        <input
+                type="checkbox"
+                name="selectedInterests[]"
+                value="{{interest.name}}"
+                ng-checked="selection.indexOf(interest) > -1"
+
+                > {{interest}}
+    </label>
+
+</div>
+
+</body>
+<script src="lib/angular/angular.js"></script>
+<script src="lib/angular/angular-route.js"></script>
+<script src="app.js"></script>
+
+</html>
