@@ -82,7 +82,7 @@ h2 {
   }
 }
 .shadow {
-  box-shadow: 0 0 12px 2px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.1);
 }
 @media (min-width: 768px) {
   .shadow {
@@ -120,7 +120,7 @@ h2 {
 .right-inner-addon {
   position: relative;
   width: 50%;
-  margin-top: 15px;
+  margin: 15px auto;
 }
 @media (max-width: 1200px) {
   .right-inner-addon {
@@ -143,7 +143,6 @@ h2 {
 .info div {
   display: inline-block;
   width: 50%;
-  margin-bottom: 25px;
 }
 .info div p {
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
@@ -152,12 +151,27 @@ h2 {
 .vcenter {
   margin-top: 70px;
 }
+.col-sm-4 .col-lg-12 {
+  padding: 20px 0;
+}
+input[type="text"] {
+  border-bottom: solid #d1d1d1 1px;
+  box-shadow: none;
+  -webkit-border-radius: 0 ;
+  -moz-border-radius: 0;
+  border-radius: 0 ;
+}
+input[type="text"]:focus {
+  outline: none;
+  border-bottom: solid #fea540 1px;
+}
 /*.left-inner-addon {
  position: relative;
 }
 .left-inner-addon input {
  padding-left: 30px;
 }
+
 .left-inner-addon i {
  position: absolute;
  padding: 10px 12px;
