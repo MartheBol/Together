@@ -57,6 +57,11 @@ body:nth-child(2){
 
 .title{
   margin-top: 46px;
+
+  img{
+    width: auto;
+    height: auto;
+  }
 }
 h1,h2{
   font-family: @fontFamilySpecial;
@@ -97,6 +102,8 @@ h1,h2{
     padding-right: 0;
     padding-left: 0;
   }
+
+
 }
 
 @media (max-width: 768px){
@@ -104,7 +111,20 @@ h1,h2{
     margin: 0 15px;
   }
 
+
 }
+
+@media (max-width: 420px){
+
+  .title{
+    img{
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+}
+
 
 .shadow{
 
@@ -187,23 +207,42 @@ h1,h2{
 .col-sm-4{
   .col-lg-12{
     padding: 20px 0;
+    .right-inner-addon{
+      width: 70%;
+
+      button{
+        margin-top:40px;
+      }
+    }
   }
 }
 
-input[type="text"]{
+input[type="text"], input[type="password"], input[type="email"], input[type="date"] {
   border-bottom: solid @subColor 1px;
   box-shadow: none;
   -webkit-border-radius:0 ;
   -moz-border-radius: 0;
   border-radius: 0 ;
+  margin-bottom:15px;
+  padding-left: 0;
 
- &:focus {
-  outline: none;
-   border-bottom: solid @mainColor 1px;
+
+  &:focus {
+    outline: none;
+    border-bottom: solid @mainColor 1px;
+
+  }
 
 }
 
+
+label{
+  margin-right: 10px;
 }
+
+
+
+
 
 
 //ICON RECHTS ZETTEN!
