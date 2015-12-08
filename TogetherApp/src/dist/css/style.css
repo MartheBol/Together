@@ -46,7 +46,6 @@ body:nth-child(2) {
 }
 .title {
   margin-top: 46px;
-  background-color: red;
 }
 @media (max-width: 768px) {
   .title img {
