@@ -34,6 +34,8 @@ body:nth-child(2) {
 }
 .navbar-inverse {
   background-color: #fff;
+  border-color: #eeeeee;
+  border-width: 0 0 1px 0;
 }
 .navbar-inverse .navbar-toggle {
   border: none;
@@ -44,10 +46,6 @@ body:nth-child(2) {
 }
 .title {
   margin-top: 46px;
-}
-.title img {
-  width: auto;
-  height: auto;
 }
 h1,
 h2 {
@@ -68,13 +66,30 @@ h2 {
   color: #fff;
   background-color: #fea540;
 }
+.btn-inverse {
+  font-family: 'Pacifico', cursive;
+  color: #fff;
+  background-color: #fea540;
+  border: none;
+  font-size: 20px;
+  margin-top: 5px;
+}
+.btn-inverse .fa {
+  color: #fff;
+}
+.btn-inverse .btn-inverse:focus,
+.btn-inverse:active,
+.btn-inverse:hover {
+  color: #fea540;
+  background-color: #fff;
+  outline: none;
+}
+.btn-inverse .btn-inverse:focus .fa,
+.btn-inverse:active .fa,
+.btn-inverse:hover .fa {
+  color: #fea540;
+}
 @media (min-width: 768px) {
-  .elements > :first-child {
-    padding: 0 30px 0 0;
-  }
-  .elements > :last-child {
-    padding: 0 0 0 30px;
-  }
   .navbar .container {
     padding-right: 0;
     padding-left: 0;
@@ -83,12 +98,6 @@ h2 {
 @media (max-width: 768px) {
   .row > .col-lg-12 {
     margin: 0 15px;
-  }
-}
-@media (max-width: 420px) {
-  .title img {
-    width: 100%;
-    height: 100%;
   }
 }
 .shadow {
@@ -153,6 +162,7 @@ h2 {
 .info div {
   display: inline-block;
   width: 50%;
+  padding-bottom: 20px;
 }
 .info div p {
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
@@ -162,35 +172,18 @@ h2 {
   margin-top: 70px;
 }
 .col-sm-4 .col-lg-12 {
-  padding: 20px 0;
+  padding: 20px 0 0px 0;
 }
-.col-sm-4 .col-lg-12 .right-inner-addon {
-  width: 70%;
-}
-.col-sm-4 .col-lg-12 .right-inner-addon button {
-  margin-top: 40px;
-}
-input[type="text"],
-input[type="password"],
-input[type="email"],
-input[type="date"] {
+input[type="text"] {
   border-bottom: solid #d1d1d1 1px;
   box-shadow: none;
   -webkit-border-radius: 0 ;
   -moz-border-radius: 0;
   border-radius: 0 ;
-  margin-bottom: 15px;
-  padding-left: 0;
 }
-input[type="text"]:focus,
-input[type="password"]:focus,
-input[type="email"]:focus,
-input[type="date"]:focus {
+input[type="text"]:focus {
   outline: none;
   border-bottom: solid #fea540 1px;
-}
-label {
-  margin-right: 10px;
 }
 /*.left-inner-addon {
  position: relative;

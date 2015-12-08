@@ -6,7 +6,7 @@
 
     var app = angular.module("app", ["ngRoute"]);
     app.config(function ($routeProvider) {
-        //als de pagina eindige op all dan {} uitvoeren
+        //als de pagina eindigt op all dan {} uitvoeren
         $routeProvider
             .when("/search", {
                 templateUrl: "ImagesOverview/search.html"
