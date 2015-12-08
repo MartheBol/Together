@@ -89,11 +89,9 @@ h2 {
 .btn-inverse:hover .fa {
   color: #fea540;
 }
-@media (min-width: 768px) {
-  .navbar .container {
-    padding-right: 0;
-    padding-left: 0;
-  }
+.navbar > .container .navbar-brand,
+.navbar > .container-fluid .navbar-brand {
+  margin-left: 0;
 }
 @media (max-width: 768px) {
   .row > .col-lg-12 {
@@ -172,18 +170,38 @@ h2 {
   margin-top: 70px;
 }
 .col-sm-4 .col-lg-12 {
-  padding: 20px 0 0px 0;
+  padding: 20px 0 0 0;
 }
-input[type="text"] {
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="date"] {
   border-bottom: solid #d1d1d1 1px;
   box-shadow: none;
   -webkit-border-radius: 0 ;
   -moz-border-radius: 0;
   border-radius: 0 ;
+  margin-bottom: 15px;
+  padding-left: 0;
 }
-input[type="text"]:focus {
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="date"]:focus {
   outline: none;
   border-bottom: solid #fea540 1px;
+}
+label {
+  margin-right: 10px;
+}
+.row {
+  margin-left: 0;
+  margin-right: 0;
+}
+@media (min-width: 768px) {
+  .login {
+    margin: 0 14px;
+  }
 }
 /*.left-inner-addon {
  position: relative;
