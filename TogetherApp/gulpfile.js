@@ -10,8 +10,10 @@ var gulp = require("gulp"),
     notify = require("gulp-notify"),
     uglify = require("gulp-uglify"),
     jshint = require("gulp-jshint"),
-    jsStylish = require("jshint-stylish");
+    jsStylish = require("jshint-stylish"),
+    nodemon = require('gulp-nodemon');
 
+var jsFiles = ['*.js', 'src/**/*.js'];
 
 gulp.task("default", function(){
   gulp.watch("./public/less/**/*.less", ['css']);
@@ -63,4 +65,18 @@ gulp.task("css", function(){
    * alleen nodig om te debuggen
    * link naar files staan in de sourcemaps
    * */
+});
+
+gulp.task('serve', ['js', 'css'], function () {
+    var options = {
+        script: 'app.js',
+        delayTime: 1,
+        watch: jsFiles
+    };
+
+    return nodemon(options)
+        .on('restart', function (ev) {
+            console.log('Restarting....');
+
+        })
 });
