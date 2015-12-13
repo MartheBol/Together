@@ -48,9 +48,10 @@
 
                     arrActivities.push(activity);
                 }
-            }
 
                 return arrActivities;
+
+            }
 
         };
 

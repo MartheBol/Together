@@ -172,6 +172,14 @@ h2 {
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   margin-bottom: 10px;
 }
+.info_activities div {
+  width: 90%;
+  padding-bottom: 20px;
+}
+.info_activities div p {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  margin-bottom: 10px;
+}
 .vcenter {
   margin-top: 70px;
 }
@@ -208,6 +216,18 @@ label {
   .login {
     margin: 0 14px;
   }
+}
+.padding-top {
+  padding-top: 20px;
+}
+.inverse {
+  font-family: 'Pacifico', cursive;
+  background-color: #fea540;
+  margin-bottom: 32px;
+}
+.inverse h1,
+.inverse h2 {
+  color: white;
 }
 /*.left-inner-addon {
  position: relative;
