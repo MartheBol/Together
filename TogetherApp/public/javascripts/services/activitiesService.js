@@ -22,80 +22,35 @@
 
                 var arrActivities = [];
 
-                for(var i=0; i < data.length; i++){
+                for (var i = 0; i < data.length; i++) {
+
+                    var d = data[i];
+
+                    var text = "";
+                    for (var ii = 0; ii < d.keywords.length; ii++) {
+                        if (ii == d.keywords.length - 1) {
+                            text += d.keywords[ii];
+                        }
+                        else {
+                            text += d.keywords[ii];
+                            text += ", ";
+                        }
+                    }
 
                     var activity = {
-                        "img": data[i].img,
-                        "name": data[i].name,
-                        "place": data[i].place,
-                        "keywords": data[i].keywords,
-                        "participants": data[i].participants,
-                        "myEvent": data[i].myEvent
+                        "img": d.img,
+                        "name": d.name,
+                        "place": d.place,
+                        "keywords": text,
+                        "participants": d.participants,
+                        "myEvent": d.myEvent
                     };
 
                     arrActivities.push(activity);
                 }
-
-                //console.log(arrActivities);
-
-                return arrActivities;
-
-                /*
-                var arr = [];
-                var arrMatches = [];
-                var arrMatchUsers = [];
-                var arrMatchInterests = [];
-
-                for(var i=0; i < data.length; i++){
-
-                    var obj = {
-                        "user": data[i].user,
-                        "matches":data[i].matches
-                    };
-
-                    arr.push(obj);
-
-                }
-
-                for(var ii = 0; ii<arr.length; ii++){
-
-                    var index = arr[ii].user.indexOf(nameUser);
-                    if(index === 0){
-                        arrMatches.push(arr[ii].matches);
-                    }
-                    //console.log("Index: "+index);
-                }
-
-                //console.log(arr);
-                //console.log(arrMatches[0]);
-
-
-                var arrMatchesByUser = arrMatches[0];
-                //console.log("Aantal matches: " + arrMatchesByUser.length);
-
-                return arrMatchesByUser;
-
-*/
-                /*
-                for(var iii = 0; iii<arrMatches[0].length; iii++){
-
-                    var matchUser = arrMatches[0][iii].user;
-                    var matchInterests = arrMatches[0][iii].interests;
-
-                    arrMatchUsers.push(matchUser);
-                    arrMatchInterests.push(matchInterests);
-
-                    //console.log(matchUser);
-                    //console.log(matchInterests);
-                }
-
-                console.log(arrMatchUsers);
-                console.log(arrMatchInterests);
-                */
-
             }
 
-
+                return arrActivities;
 
         };
 
