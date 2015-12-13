@@ -1,0 +1,42 @@
+[
+  {
+    "img": "https://scontent-ams3-1.cdninstagram.com/hphotos-xpf1/t51.2885-15/s640x640/sh0.08/e35/c112.0.856.856/12353486_1502691293360464_933422766_n.jpg",
+    "name": "Hike",
+    "place":"Canada",
+    "keywords": ["hike", "backpack", "woods"],
+    "participants": 3,
+    "myEvent": false
+  },
+  {
+    "img": "https://scontent-ams3-1.cdninstagram.com/hphotos-xaf1/t51.2885-15/e35/12356314_176442366043972_732812193_n.jpg",
+    "name": "12 Apostles",
+    "place":"Australia",
+    "keywords": ["ocean", "australia", "sunset"],
+    "participants": 8,
+    "myEvent": false
+  },
+  {
+    "img": "https://scontent-ams3-1.cdninstagram.com/hphotos-xtf1/t51.2885-15/s640x640/sh0.08/e35/12357599_724114367690723_2047867889_n.jpg",
+    "name": "Isle",
+    "place":"Ocean",
+    "keywords": ["sun", "sand", "paradise"],
+    "participants": 2,
+    "myEvent": false
+  },
+  {
+    "img": "https://scontent-ams3-1.cdninstagram.com/hphotos-xaf1/t51.2885-15/s640x640/sh0.08/e35/c180.0.720.720/12357918_568883466592684_922404177_n.jpg",
+    "name": "Castle",
+    "place":"Germany",
+    "keywords": ["nature", "castle", "traveller"],
+    "participants": 5,
+    "myEvent": false
+  },
+  {
+    "img": "https://scontent-ams3-1.cdninstagram.com/hphotos-xtf1/t51.2885-15/e35/11910098_893179277426061_1815808249_n.jpg",
+    "name": "Cinque Terre",
+    "place":"Manarola",
+    "keywords": ["Italia", "cinque", "terre"],
+    "participants": 7,
+    "myEvent": true
+  }
+]

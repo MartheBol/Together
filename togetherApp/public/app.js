@@ -21,6 +21,8 @@
             .when("/howto",{
                 templateUrl: "./partials/howTo.html"
             })
-
-    })
+            .when("/activities",{
+                templateUrl: "./partials/activities.html"
+            });
+    });
 })();
