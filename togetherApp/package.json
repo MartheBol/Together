@@ -1,0 +1,38 @@
+{
+  "name": "togetherApp",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "bcrypt": "^0.8.5",
+    "body-parser": "~1.13.2",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "~1.3.5",
+    "debug": "~2.2.0",
+    "ejs": "^2.3.4",
+    "express": "~4.13.1",
+    "express-session": "^1.12.1",
+    "flash": "^1.1.0",
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-csslint": "^0.2.0",
+    "gulp-jshint": "^2.0.0",
+    "gulp-less": "^3.0.5",
+    "gulp-minify-css": "^1.2.2",
+    "gulp-nodemon": "^2.0.4",
+    "gulp-notify": "^2.2.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.5.1",
+    "jade": "~1.11.0",
+    "jshint": "^2.8.0",
+    "jshint-stylish": "^2.1.0",
+    "mongoose": "^4.3.1",
+    "morgan": "~1.6.1",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^3.1.0",
+    "serve-favicon": "~2.3.0"
+  }
+}
