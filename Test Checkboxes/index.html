@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<div ng-controller="SimpleArrayCtrl">
+<!--<div ng-controller="SimpleArrayCtrl">
 
 <label ng-repeat="interest in interests">
     <input
@@ -21,17 +21,52 @@
 <div ng-controller="AddCheckboxCtrl">
     <input id="checkboxAdd" ng-hide="check" type="text" ng-model="interest.name"/>
     <p ng-click="addCheckbox(interest.name)">add</p>
+    <p ng-click="updateInterests()">update</p>
+
     <label ng-repeat="interest in interests">
         <input
                 type="checkbox"
                 name="selectedInterests[]"
                 value="{{interest.name}}"
                 ng-checked="selection.indexOf(interest) > -1"
+                ng-model="checked"
+                ng-change="stateChanged(interest)"
 
                 > {{interest}}
     </label>
 
+</div>-->
+
+
+<div ng-controller="AddCheckboxCtrl" id="main">
+
+    <!--<div ng-view></div>-->
+    <input type="checkbox" ng-checked="selection.indexOf(interest.name) > -1"> <label id="interest" ng-hide="{{newInterest}}" ng-click="updateInterest()" >{{newInterest}}</label>
+                            <input ng-hide="{{newInterest}}" type="text" id="newItem" ng-model="interest.name"  ng-enter="makeCheckbox(interest.name)" />
+
+
+
 </div>
+<div ng-controller="AddCheckboxCtrl" id="main">
+
+    <!--<div ng-view></div>-->
+    <input type="checkbox" ng-checked="selection.indexOf(interest.name) > -1"> <label id="interest" ng-hide="{{newInterest}}" ng-click="updateInterest()" >{{newInterest}}</label>
+    <input ng-hide="{{newInterest}}" type="text" id="newItem" ng-model="interest.name"  ng-enter="makeCheckbox(interest.name)" />
+
+
+
+</div>
+<div ng-controller="AddCheckboxCtrl" id="main">
+
+    <!--<div ng-view></div>-->
+    <input type="checkbox" ng-checked="selection.indexOf(interest.name) > -1"> <label id="interest" ng-hide="{{newInterest}}" ng-click="updateInterest()" >{{newInterest}}</label>
+    <input ng-hide="{{newInterest}}" type="text" id="newItem" ng-model="interest.name"  ng-enter="makeCheckbox(interest.name)" />
+
+
+
+</div>
+
+
 
 </body>
 <script src="lib/angular/angular.js"></script>
