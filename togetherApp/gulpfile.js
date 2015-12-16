@@ -17,26 +17,31 @@ var jsFiles = ['*.js', 'src/**/*.js'];
 
 gulp.task("default", function(){
   gulp.watch("./public/less/**/*.less", ['css']);
-  gulp.watch(["./public/config/config.js",
-    "./public/exceptions/**/*.js",
-    "./public/models/**/*.js",
-    "./public/javascripts/services/**/*.js",
-    "./public/viewmodels/**/*.js",
+  gulp.watch([
+      "./public/config/config.js",
+      "./public/app.js",
+      "./public/javascripts/exceptions/**/*.js",
+      "./public/javascripts/models/**/*.js",
+      "./public/javascripts/services/**/*.js",
+      "./public/javascripts/controllers/**/*.js",
+      "./public/javascripts/viewmodels/**/*.js"
   ], ['js']);
 });
 gulp.task("js", function(){
-  gulp.src(["./public/config/config.js",
-    "./public/exceptions/**/*.js",
-    "./public/models/**/*.js",
+  gulp.src([
+    "./public/config/config.js",
+    "./public/app.js",
+    "./public/javascripts/exceptions/**/*.js",
+    "./public/javascripts/models/**/*.js",
     "./public/javascripts/services/**/*.js",
     "./public/javascripts/controllers/**/*.js",
-    "./public/viewmodels/**/*.js",
-    "./public//app.js"])
+    "./public/javascripts/viewmodels/**/*.js"
+    ])
       .pipe(jshint())
       .pipe(jshint.reporter(jsStylish))
       .pipe(sourcemaps.init())
       .pipe(concat("app.min.js"))
-      .pipe(uglify())
+      //.pipe(uglify())
       .pipe(sourcemaps.write())
       .pipe(gulp.dest("./public/dist/js"))
       .pipe(notify({

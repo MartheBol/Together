@@ -26,27 +26,27 @@
 
                     var d = data[i];
 
+                    var newActivity = new Activity();
+                    newActivity.img = d.img;
+                    newActivity.name = d.name;
+                    newActivity.place = d.place;
+                    newActivity.participants = d.participants;
+                    newActivity.myEvent = d.myEvent;
+
                     var text = "";
-                    for (var ii = 0; ii < d.keywords.length; ii++) {
-                        if (ii == d.keywords.length - 1) {
+
+                    for(var ii=0; ii< d.keywords.length; ii++){
+                        if(ii == d.keywords.length-1){
                             text += d.keywords[ii];
                         }
-                        else {
+                        else{
                             text += d.keywords[ii];
                             text += ", ";
                         }
                     }
 
-                    var activity = {
-                        "img": d.img,
-                        "name": d.name,
-                        "place": d.place,
-                        "keywords": text,
-                        "participants": d.participants,
-                        "myEvent": d.myEvent
-                    };
-
-                    arrActivities.push(activity);
+                    newActivity.keywords = text;
+                    arrActivities.push(newActivity);
                 }
 
                 return arrActivities;
