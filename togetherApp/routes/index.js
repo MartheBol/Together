@@ -67,7 +67,7 @@ router.post('/login', function(req, res) {
       if (err) {
         return res.json(err);
       }
-      return res.json({ redirect: '/matches' });
+      return res.json({ redirect: '/home' });
     });
   })(req, res);
 });
@@ -96,5 +96,19 @@ router.post('/register', function(req, res) {
   })(req, res);
 });
 
+router.get('/user', isLoggedIn, function(req, res){
+  return res.json(req.user);
+});
+
+
+function isLoggedIn(req, res, next) {
+  if (!req.isAuthenticated()) {
+    return res.json({ redirect : '/matches' });
+  } else {
+    next();
+  }
+}
 
 module.exports = router;
+
+

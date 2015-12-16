@@ -6,8 +6,6 @@
 
     var loginController = function ($scope, $http, $location) {
         $scope.login = function() {
-
-            console.log('ik kom hier in');
             $http
                 .post('/login', {
                     username: this.username,

@@ -1,51 +1,51 @@
 <section>
     <!-- Introduction Row -->
     <div class="title text-center">
-        <h1>{{username}}</h1>
+        <h1 ng-controller="userController">{{user.username}}</h1>
 
         <p>This application allows you to search company to travel, to go to a concert, ...</p>
         <img src="../images/title_line.png">
     </div>
 
-    <div class="row login" ng-controller="loginController">
-        <div ng-show="error">{{error}}</div>
+    <div ng-show="user.username == undefined" ng-controller="userController"><div class="row login" ng-controller="loginController">
+
         <div class="col-lg-12 shadow ">
             <div class="col-lg-6 border-right">
 
                 <div ng-show="error" class="alert alert-danger">{{ error }}</div>
 
                 <form ng-submit="login()" >
-                <div class="right-inner-addon center-block">
-                    <i class="fa fa-envelope"></i>
-                    <input type="text"
-                           class="form-control"
-                           placeholder="email"
-                           name="username"
-                           ng-model="username"
-                            />
-                </div>
-                <div class="right-inner-addon center-block">
-                    <i class="fa fa-lock fa-lg"></i>
-                    <input type="password"
-                           class="form-control"
-                           placeholder="password"
-                           name="password"
-                           ng-model="password"
-                           />
-                </div>
+                    <div class="right-inner-addon center-block">
+                        <i class="fa fa-envelope"></i>
+                        <input type="text"
+                               class="form-control"
+                               placeholder="email"
+                               name="username"
+                               ng-model="username"
+                                />
+                    </div>
+                    <div class="right-inner-addon center-block">
+                        <i class="fa fa-lock fa-lg"></i>
+                        <input type="password"
+                               class="form-control"
+                               placeholder="password"
+                               name="password"
+                               ng-model="password"
+                                />
+                    </div>
 
-                <div class="text-center ">
-                    <a href="#">Forgot password</a>
-                </div>
+                    <div class="text-center ">
+                        <a href="#">Forgot password</a>
+                    </div>
 
-                <div class="checkbox text-center">
-                    <label>
-                        <input type="checkbox"> remember me
-                    </label>
-                </div>
+                    <div class="checkbox text-center">
+                        <label>
+                            <input type="checkbox"> remember me
+                        </label>
+                    </div>
 
-                <button class="btn center-block" type="submit" name="log in">Log in</button>
-            </form>
+                    <button class="btn center-block" type="submit" name="log in">Log in</button>
+                </form>
 
             </div>
             <div class="col-lg-6">
@@ -58,7 +58,9 @@
 
 
         </div>
-    </div>
+    </div></div>
+
+
 
     <div class="row">
         <div class="col-sm-4">
