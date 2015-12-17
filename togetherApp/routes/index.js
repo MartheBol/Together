@@ -67,7 +67,15 @@ router.post('/login', function(req, res) {
       if (err) {
         return res.json(err);
       }
-      return res.json({ redirect: '/home' });
+
+      if(user.username = 'admin'){
+        return res.json({redirect: '/activities'})
+      }
+
+      else{
+        return res.json({ redirect: '/matches' });
+      }
+
     });
   })(req, res);
 });
