@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <link href="../lib/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <style>
+        body {
+            margin: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        .btn-no-border {
+            border: 0;
+            background-color: white;
+        }
+
+            .btn-no-border:hover {
+                color: #808080;
+            }
+
+            .btn-no-border:active {
+                color: #808080;
+                border: 0;
+                background-color: white;
+            }
+
+            editable-checkbox{
+                margin: 10px;
+            }
+    </style>
+</head>
+<body>
+    <section ng-controller="indexController">
+
+        <editable-checkbox></editable-checkbox>
+        <editable-checkbox></editable-checkbox>
+        <editable-checkbox></editable-checkbox>
+        <editable-checkbox></editable-checkbox>
+
+
+
+    </section>
+
+
+    <script src="../lib/angular/angular.js"></script>
+    <script src="app.js"></script>
+    <script src="indexController.js"></script>
+</body>
+</html>
