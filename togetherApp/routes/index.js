@@ -47,9 +47,6 @@ router.get('/users', function(req, res){
   //res.json(lijst)
   res.send('users')
 });*/
-router.get('/login', function(req,res){
-  res.send('login get werkt');
-});
 
 router.post('/login', function(req, res) {
 
@@ -109,9 +106,11 @@ router.get('/user', isLoggedIn, function(req, res){
 });
 
 
+
+
 function isLoggedIn(req, res, next) {
   if (!req.isAuthenticated()) {
-    return res.json({ redirect : '/matches' });
+    return res.json({redirect: '/activities'})
   } else {
     next();
   }

@@ -11,7 +11,10 @@ var gulp = require("gulp"),
     uglify = require("gulp-uglify"),
     jshint = require("gulp-jshint"),
     jsStylish = require("jshint-stylish"),
-    nodemon = require('gulp-nodemon');
+    nodemon = require('gulp-nodemon'),
+    less = require('gulp-less'),
+    gutil = require('gulp-util'),
+    autoprefixer = require('gulp-autoprefixer');
 
 var jsFiles = ['*.js', 'src/**/*.js'];
 
@@ -50,27 +53,39 @@ gulp.task("js", function(){
 
 });
 
-gulp.task("css", function(){
-  gulp.src("./public/stylesheets/**/*.less")
-      .pipe(less())
-    /*.pipe(csslint({
-     'ids': false
-     }))
-     .pipe(sourcemaps.init())
-     .pipe(cssMinifier())
-     .pipe(concat("site.css"))
-     .pipe(sourcemaps.write())*/
-      .pipe(gulp.dest("./public/dist/css"))
-      .pipe(notify({
-        message:"css built"
-      }));
+gulp.task("less", function(){
+   gulp.src("./public/stylesheets/*.less")
+       .pipe(less({
+           compress: true
+       }).on('error', gutil.log))
+       .pipe(autoprefixer('last 2 versions', 'ie9'))
+       .pipe(cssMinifier({keepBreaks: false}))
+       .pipe(concat('site.min.css'))
+       .pipe(sourcemaps.write())
+       .pipe(gulp.dest("./public/dist/css"))
+});
+
+//gulp.task("css", function(){
+//  gulp.src("./public/stylesheets/**/*.less")
+//      .pipe(less())
+//    /*.pipe(csslint({
+//     'ids': false
+//     }))
+//     .pipe(sourcemaps.init())
+//     .pipe(cssMinifier())
+//     .pipe(concat("site.css"))
+//     .pipe(sourcemaps.write())*/
+//      .pipe(gulp.dest("./public/dist/css"))
+//      .pipe(notify({
+//        message:"css built"
+//      }));
 
   /**
    * sourcemaps -->
    * alleen nodig om te debuggen
    * link naar files staan in de sourcemaps
    * */
-});
+//});
 
 gulp.task('serve', ['js', 'css'], function () {
     var options = {
@@ -84,4 +99,8 @@ gulp.task('serve', ['js', 'css'], function () {
             console.log('Restarting....');
 
         })
+});
+
+gulp.task("watch", function(){
+    gulp.watch("./public/stylesheets/*.less", ["less"])
 });
