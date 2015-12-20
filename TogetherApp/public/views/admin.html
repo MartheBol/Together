@@ -1,5 +1,7 @@
 <!-- Navigation -->
 
+<div ng-controller="userController">
+
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -15,8 +17,8 @@
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav" ng-controller="userController">
-                <li class="active">
+            <ul class="nav navbar-nav">
+                <li>
                     <a href="#/howto">how to</a>
                 </li>
                 <li ng-hide="auth.isAuth">
@@ -43,7 +45,7 @@
                         <li><a tabindex="-1" href="#">My profile</a></li>
                         <li><a tabindex="-1" href="#">Logout</a></li>
                         <li ng-show="auth.isAuth && auth.isAdmin"  class="divider"></li>
-                        <li ng-show="auth.isAuth && auth.isAdmin"><a tabindex="-1" href="#/{{user.username}}">Admin page</a></li>
+                        <li ng-show="auth.isAuth && auth.isAdmin"  class="active"><a tabindex="-1" href="#/{{user.username}}">Admin page</a></li>
                     </ul>
                 </li>
             </ul>
@@ -53,12 +55,59 @@
     <!-- /.container -->
 </nav>
 
-<h4>Select files from your computer</h4>
-<form action="" method="post" enctype="multipart/form-data">
-    <div class="form-inline">
-        <div class="form-group">
-            <input type="file" name="files[]" multiple>
-        </div>
-        <button type="submit" class="btn btn-sm btn-primary">Upload files</button>
+<section ng-hide="(auth.isAuth && !auth.isAdmin) || (!auth.isAuth)">
+    <!-- Introduction Row -->
+    <div class="title text-center">
+        <h1>{{user.username}}</h1>
+
+        <p>This application allows you to search company to travel, to go to a concert, ...</p>
+        <img src="../images/title_line.png">
     </div>
-</form>
+
+    <div ng-show="!auth.isAuth">
+        <div class="row login" ng-controller="loginController"></div>
+    </div>
+
+    <div class="container" ng-controller="UsersController" data-ng-init="getUsers()">
+        <p>{{arrUsers.length}} users</p>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>View details</th>
+                <th>Delete user</th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            <tr ng-repeat="user in arrUsers">
+                <td>{{user._id}}</td>
+                <td>{{user.username}}</td>
+                <td>{{user.password}}</td>
+                <td><a href="#/userdetails?id={{user._id}}">View details</a></td>
+                <td><a>Delete user</a></td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+</section>
+<section ng-show="(auth.isAuth && !auth.isAdmin) || (!auth.isAuth)">
+    <!-- Introduction Row -->
+    <div class="title text-center">
+
+        <h1>You are not allowed on this page.</h1>
+        <p><a href="#/home">Return to home-page</a></p>
+
+        <img src="../images/title_line.png">
+
+
+    </div>
+
+</section>
+
+</div>

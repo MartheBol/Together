@@ -15,21 +15,36 @@
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav" ng-controller="userController">
                 <li>
                     <a href="#/howto">how to</a>
                 </li>
-                <li>
+                <li ng-hide="auth.isAuth">
+                    <a href="#/signup">register</a>
+                </li>
+                <li ng-show="auth.isAuth && !auth.isAdmin" class="active">
                     <a href="#/activities">activities</a>
                 </li>
-                <li>
+                <li ng-show="auth.isAuth && !auth.isAdmin">
                     <a href="#/matches">matches</a>
                 </li>
-                <li>
-                    <a href="#">search</a>
+                <li ng-show="auth.isAuth && !auth.isAdmin">
+                    <a href="#/searchprofiles">search profiles</a>
                 </li>
                 <li>
-                    <a href="#" ng-show="user.username != undefined" ng-controller="userController">{{user.username}}</a>
+
+                    <button class="btn-dropdown dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" ng-show="auth.isAuth">
+
+                        {{user.username}} <b class="caret"></b>
+
+                    </button>
+
+                    <ul class="dropdown-menu">
+                        <li><a tabindex="-1" href="#">My profile</a></li>
+                        <li><a tabindex="-1" href="#">Logout</a></li>
+                        <li ng-show="auth.isAuth && auth.isAdmin"  class="divider"></li>
+                        <li ng-show="auth.isAuth && auth.isAdmin"><a tabindex="-1" href="#/{{user.username}}">Admin page</a></li>
+                    </ul>
                 </li>
             </ul>
         </div>

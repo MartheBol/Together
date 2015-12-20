@@ -1,5 +1,5 @@
 <!-- Navigation -->
-
+<div ng-controller="userController">
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -19,28 +19,32 @@
                 <li>
                     <a href="#/howto">how to</a>
                 </li>
-                <li>
+                <li ng-hide="auth.isAuth">
+                    <a href="#/signup">register</a>
+                </li>
+                <li ng-show="auth.isAuth && !auth.isAdmin">
                     <a href="#/activities">activities</a>
                 </li>
-                <li>
+                <li ng-show="auth.isAuth && !auth.isAdmin">
                     <a href="#/matches">matches</a>
                 </li>
-                <li>
-                    <a href="#">search</a>
+                <li ng-show="auth.isAuth && !auth.isAdmin">
+                    <a href="#/searchprofiles">search profiles</a>
                 </li>
                 <li>
-                <button class="btn dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">Defaults <b class="caret"></b></button>
-                <ul class="dropdown-menu">
-                    <li><a tabindex="-1" href="#">Contact</a></li>
-                    <li><a tabindex="-1" href="#">Contact My Mom</a></li>
-                    <li class="divider"></li>
-                    <li><a tabindex="-1" href="#">Contact Your Mom</a></li>
-                    <li><a tabindex="-1" href="#">Contact the President</a></li>
-                </ul>
 
-                <li>
+                    <button class="btn-dropdown dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" ng-show="auth.isAuth">
 
-                    <a href="#" ng-show="user.username != undefined" ng-controller="userController">{{user.username}}</a>
+                        {{user.username}} <b class="caret"></b>
+
+                    </button>
+
+                    <ul class="dropdown-menu">
+                        <li><a tabindex="-1" href="#">My profile</a></li>
+                        <li><a tabindex="-1" href="#">Logout</a></li>
+                        <li ng-show="auth.isAuth && auth.isAdmin"  class="divider"></li>
+                        <li ng-show="auth.isAuth && auth.isAdmin"><a tabindex="-1" href="#/{{user.username}}">Admin page</a></li>
+                    </ul>
                 </li>
             </ul>
         </div>
@@ -52,13 +56,15 @@
 <section>
     <!-- Introduction Row -->
     <div class="title text-center">
-        <h1 ng-controller="userController">{{user.username}}</h1>
+        <h1>Together</h1>
 
         <p>This application allows you to search company to travel, to go to a concert, ...</p>
         <img src="../images/title_line.png">
     </div>
 
-    <div ng-show="user.username == undefined" ng-controller="userController"><div class="row login" ng-controller="loginController">
+    <div ng-show="!auth.isAuth">
+
+        <div class="row login" ng-controller="loginController">
 
         <div class="col-lg-12 shadow ">
             <div class="col-lg-6 border-right">
@@ -217,3 +223,5 @@
 
     </div>
 </section>
+
+</div>

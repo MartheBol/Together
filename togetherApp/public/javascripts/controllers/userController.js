@@ -8,6 +8,21 @@
         $http.get('/user').success(function(data) {
             $scope.user = data;
 
+            if(data.username == 'admin'){
+                $scope.auth = {isAuth: true, isAdmin : true};
+            }
+            else if(data.username != 'admin' && data.username !== undefined){
+                $scope.auth = {isAuth: true, isAdmin : false};
+            }
+            else if(data.username === undefined){
+                $scope.auth = {isAuth: false, isAdmin : false};
+
+            }
+
+
+            //$scope.auth = { data: {}, isAuthenticated:false};
+
+
         });
 
         /*$scope.logout = function() {

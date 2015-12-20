@@ -65,12 +65,12 @@ router.post('/login', function(req, res) {
         return res.json(err);
       }
 
-      if(user.username = 'admin'){
-        return res.json({redirect: '/activities'})
+      if(user.username == 'admin'){
+        return res.json({redirect: '/admin'})
       }
 
       else{
-        return res.json({ redirect: '/matches' });
+        return res.json({ redirect: '/activities' });
       }
 
     });

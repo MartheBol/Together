@@ -1,0 +1,113 @@
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#/home">Together.</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav" ng-controller="userController">
+                <li>
+                    <a href="#/howto">how to</a>
+                </li>
+                <li ng-hide="auth.isAuth">
+                    <a href="#/signup">register</a>
+                </li>
+                <li ng-show="auth.isAuth && !auth.isAdmin">
+                    <a href="#/activities">activities</a>
+                </li>
+                <li ng-show="auth.isAuth && !auth.isAdmin">
+                    <a href="#/matches">matches</a>
+                </li>
+                <li ng-show="auth.isAuth && !auth.isAdmin" class="active">
+                    <a href="#/searchprofiles">search profiles</a>
+                </li>
+                <li>
+
+                    <button class="btn-dropdown dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" ng-show="auth.isAuth">
+
+                        {{user.username}} <b class="caret"></b>
+
+                    </button>
+
+                    <ul class="dropdown-menu">
+                        <li><a tabindex="-1" href="#">My profile</a></li>
+                        <li><a tabindex="-1" href="#">Logout</a></li>
+                        <li ng-show="auth.isAuth && auth.isAdmin"  class="divider"></li>
+                        <li ng-show="auth.isAuth && auth.isAdmin"><a tabindex="-1" href="#/{{user.username}}">Admin page</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+<section ng-controller="ProfilesController" data-ng-init="showProfiles()">
+    <!-- Introduction Row -->
+    <div class="title text-center">
+        <h1>Together.</h1>
+
+        <p>Search profiles</p>
+        <img src="../images/title_line.png">
+    </div>
+    <div class="line"></div>
+
+
+    <div class="text-right">
+
+        <button ng-click="showDiv()" class="btn-dropdown">filter <b class="caret"></b></button>
+
+    </div>
+
+
+    <div class="row shadow" ng-show="filter.showFilter">
+
+        <div class="col-sm-4">
+            <div class="col-lg-12">
+                <label for="sortOn">Sort from:</label>
+                <select id="sortOn" class="form-control" ng-model="sortProperty" ng-change="hideDiv()">
+                    <option value="username">A - Z</option>
+                    <option value="-username">Z - A</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="col-lg-12">
+                <label><input type="radio" name="sex" value="Iman" ng-model="filterQuery" ng-change="hideDiv()"> Iman</label>
+                <label><input type="radio" name="sex" value="admin" ng-model="filterQuery" ng-change="hideDiv()"> admin</label>
+                <label><input type="radio" name="sex" value="nofilter" ng-model="filterQuery" ng-change="hideDiv()"> no filter</label>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="row ">
+
+        <div class="col-sm-4" ng-repeat="profile in arrProfiles | orderBy:sortProperty | filter: filterImages">
+            <div class="col-lg-12 shadow">
+                <img class="img-circle img-responsive img-center" ng-src="{{profile.img}}" height="100" width="100">
+                <h2 class="text-center">{{profile.username}}</h2>
+                <div class="info text-center ">
+                    <div  class="text-left">
+                        <p>{{profile.place}}<span class="fa fa-map-marker fa-pull-right"></span> </p>
+                        <p>{{profile.interests}}<span class="fa fa-heart fa-pull-right"></span></p>
+                    </div>
+                </div>
+                <button class="btn-inverse col-md-12"><span class="fa fa-comment fa-align-center"></span></button>
+            </div>
+        </div>
+
+    </div>
+
+</section>

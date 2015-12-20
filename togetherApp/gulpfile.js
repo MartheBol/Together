@@ -12,14 +12,13 @@ var gulp = require("gulp"),
     jshint = require("gulp-jshint"),
     jsStylish = require("jshint-stylish"),
     nodemon = require('gulp-nodemon'),
-    less = require('gulp-less'),
     gutil = require('gulp-util'),
     autoprefixer = require('gulp-autoprefixer');
 
 var jsFiles = ['*.js', 'src/**/*.js'];
 
 gulp.task("default", function(){
-  gulp.watch("./public/less/**/*.less", ['css']);
+  gulp.watch("./public/less/**/*.less", ['less']);
   gulp.watch([
       "./public/config/config.js",
       "./public/app.js",
@@ -48,7 +47,7 @@ gulp.task("js", function(){
       .pipe(sourcemaps.write())
       .pipe(gulp.dest("./public/dist/js"))
       .pipe(notify({
-        message:"jsbuilt"
+        message:"js built"
       }));
 
 });
@@ -63,6 +62,9 @@ gulp.task("less", function(){
        .pipe(concat('site.min.css'))
        .pipe(sourcemaps.write())
        .pipe(gulp.dest("./public/dist/css"))
+       .pipe(notify({
+           message:"less built"
+       }));
 });
 
 //gulp.task("css", function(){
@@ -87,7 +89,7 @@ gulp.task("less", function(){
    * */
 //});
 
-gulp.task('serve', ['js', 'css'], function () {
+gulp.task('serve', ['js', 'less'], function () {
     var options = {
         script: 'app.js',
         delayTime: 1,

@@ -23,6 +23,13 @@
             })
             .when("/activities",{
                 templateUrl: "./views/activities.html"
+            })
+            .when("/admin",{
+                templateUrl: "./views/admin.html"
+            })
+            .when("/searchprofiles",{
+                templateUrl: "./views/searchProfiles.html"
             });
+
     });
 })();

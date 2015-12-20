@@ -15,20 +15,37 @@
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav" ng-controller="userController">
                 <li>
                     <a href="#/howto">how to</a>
                 </li>
-                <li>
+                <li ng-hide="auth.isAuth">
+                    <a href="#/signup">register</a>
+                </li>
+                <li ng-show="auth.isAuth && !auth.isAdmin">
                     <a href="#/activities">activities</a>
                 </li>
-                <li>
+                <li ng-show="auth.isAuth && !auth.isAdmin">
                     <a href="#/matches">matches</a>
                 </li>
-                <li>
-                    <a href="#">search</a>
+                <li ng-show="auth.isAuth && !auth.isAdmin">
+                    <a href="#/searchprofiles">search profiles</a>
                 </li>
+                <li>
 
+                    <button class="btn-dropdown dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" ng-show="auth.isAuth">
+
+                        {{user.username}} <b class="caret"></b>
+
+                    </button>
+
+                    <ul class="dropdown-menu">
+                        <li><a tabindex="-1" href="#">My profile</a></li>
+                        <li><a tabindex="-1" href="#">Logout</a></li>
+                        <li ng-show="auth.isAuth && auth.isAdmin"  class="divider"></li>
+                        <li ng-show="auth.isAuth && auth.isAdmin"><a tabindex="-1" href="#/{{user.username}}">Admin page</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -62,7 +79,7 @@
                         </div>
 
                         <label for="comment">biography</label>
-                        <textarea class="form-control" rows="5" id="comment"></textarea>
+                        <textarea class="form-control" rows="5" id="comment" name="biography"></textarea>
 
                     </div>
                 </div>
@@ -74,9 +91,11 @@
                         <i class="fa fa-user fa-lg"></i>
                         <input type="text"
                                class="form-control"
-                               placeholder="firstname"/>
+                               placeholder="firstname"
+                               name="firstname"
+                               ng-model="firstname"/>
 
-                        <input type="text"
+                        <input type="password"
                                class="form-control"
                                placeholder="password"
                                name="password"
@@ -85,16 +104,17 @@
                         <input type="text"
                                class="form-control"
                                placeholder="email"
-                               name="username"
-                               ng-model="username"/>
+                               name="email"
+                               ng-model="email"/>
 
 
                         <input type="date"
                                class="form-control"
-                                />
+                               name="birthdate"
+                               ng-model="birthdate"/>
 
-                        <label><input type="radio" name="sex" value="male"> male</label>
-                        <label><input type="radio" name="sex" value="female"> female</label>
+                        <label><input type="radio" name="sex" value="male" ng-model="sex"> male</label>
+                        <label><input type="radio" name="sex" value="female" ng-model="sex"> female</label>
 
 
 
@@ -110,15 +130,20 @@
                     <div class="right-inner-addon center-block">
                         <input type="text"
                                class="form-control"
-                               placeholder="lastname"/>
+                               name="lastname"
+                               placeholder="lastname"
+                               ng-model="lastname"/>
 
                         <input type="password"
                                class="form-control"
-                               placeholder="repeat password"/>
+                               placeholder="repeat password"
+                               ng-model="repeatPassword"/>
 
                         <input type="text"
                                class="form-control"
-                               placeholder="zipcode"/>
+                               name="zipcode"
+                               placeholder="zipcode"
+                               ng-model="zipcode"/>
 
 
 

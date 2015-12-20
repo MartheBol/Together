@@ -14,7 +14,20 @@
             var url = "http://localhost:3000/api/" + collection;
             return $http.get(url).then(function(response){
 
-                console.log(response);
+                //console.log(response);
+                return response.data;
+
+            });
+
+        };
+
+        var getByID = function (collection, id) {
+
+
+            var url = "http://localhost:3000/api/" + collection + "/" + id;
+            return $http.get(url).then(function(response){
+
+                //console.log(response);
                 return response.data;
 
             });
@@ -24,7 +37,8 @@
         //public gedeelte
         return{
 
-            getCollection:getCollection
+            getCollection:getCollection,
+            getByID:getByID
 
         };
 
