@@ -40,7 +40,7 @@
 
                     <ul class="dropdown-menu">
                         <li><a tabindex="-1" href="#">My profile</a></li>
-                        <li><a tabindex="-1" href="#">Logout</a></li>
+                        <li><a tabindex="-1" href="/logout">Logout</a></li>
                         <li ng-show="auth.isAuth && auth.isAdmin"  class="divider"></li>
                         <li ng-show="auth.isAuth && auth.isAdmin"><a tabindex="-1" href="#/{{user.username}}">Admin page</a></li>
                     </ul>

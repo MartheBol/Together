@@ -77,6 +77,16 @@ router.post('/login', function(req, res) {
   })(req, res);
 });
 
+router.get('/logout', function(req, res){
+  if(!req.user){
+    res.redirect('/#/home');
+  }
+  else {
+    req.logout();
+    res.redirect('/#/home');
+  }
+});
+
 router.post('/register', function(req, res) {
   if (!req.body.username || !req.body.password) {
     return res.json({ error: 'All fields are required' });
