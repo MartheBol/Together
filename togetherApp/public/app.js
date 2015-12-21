@@ -29,6 +29,9 @@
             })
             .when("/searchprofiles",{
                 templateUrl: "./views/searchProfiles.html"
+            })
+            .when("/myprofile",{
+                templateUrl: "./views/myProfile.html"
             });
 
     });

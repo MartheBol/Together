@@ -20,9 +20,6 @@
             }
 
 
-            //$scope.auth = { data: {}, isAuthenticated:false};
-
-
         });
 
         /*$scope.logout = function() {

@@ -11,7 +11,7 @@
 
             dbService.getCollection('users').then(function(response){
 
-                console.log(response);
+                //console.log(response);
                 $scope.arrUsers = response.userlist;
 
             });
@@ -20,7 +20,12 @@
 
         $scope.getUserByID = function(){
 
-            console.log("test");
+            dbService.getItem('user').then(function(response){
+
+                console.log(response);
+                $scope.userProfile = response;
+
+            });
 
         };
     };
