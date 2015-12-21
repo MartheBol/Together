@@ -34,11 +34,23 @@
 
         };
 
+        var getItem = function(item){
+
+            var url = "http://localhost:3000/api/" + item;
+            return $http.get('/user').then(function(response){
+
+                return response.data;
+
+            });
+
+        };
+
         //public gedeelte
         return{
 
             getCollection:getCollection,
-            getByID:getByID
+            getByID:getByID,
+            getItem:getItem
 
         };
 

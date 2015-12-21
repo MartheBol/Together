@@ -54,61 +54,47 @@
     <!-- /.container -->
 </nav>
 
-<section ng-controller="ProfilesController" data-ng-init="showProfiles()" ng-hide="">
+<section ng-controller="userController" data-ng-init="" ng-hide="">
     <!-- Introduction Row -->
     <div class="title text-center">
         <h1>Together.</h1>
 
-        <p>Search profiles</p>
+        <p>{{user.username}}</p>
         <img src="../images/title_line.png">
     </div>
     <div class="line"></div>
 
 
-    <div class="text-right">
-
-        <button ng-click="showDiv()" class="btn-dropdown">filter <b class="caret"></b></button>
-
-    </div>
+    <div class="row">
 
 
-    <div class="row shadow" ng-show="filter.showFilter">
+        <div class="col-sm-12">
 
-        <div class="col-sm-4">
-            <div class="col-lg-12">
-                <label for="sortOn">Sort from:</label>
-                <select id="sortOn" class="form-control" ng-model="sortProperty" ng-change="hideDiv()">
-                    <option value="username">A - Z</option>
-                    <option value="-username">Z - A</option>
-                </select>
-            </div>
-        </div>
+            <form>
 
-        <div class="col-sm-4">
-            <div class="col-lg-12">
-                <label><input type="radio" name="sex" value="Iman" ng-model="filterQuery" ng-change="hideDiv()"> Iman</label>
-                <label><input type="radio" name="sex" value="admin" ng-model="filterQuery" ng-change="hideDiv()"> admin</label>
-                <label><input type="radio" name="sex" value="nofilter" ng-model="filterQuery" ng-change="hideDiv()"> no filter</label>
-            </div>
-        </div>
+                <div class="col-lg-12 shadow">
 
-    </div>
+                    <label>Image:</label>
+                    <img class="img-circle img-responsive img-center" ng-src="{{user.img}}" height="100" width="100"/>
 
+                    <label for="firstname">Firstname:</label>
+                    <input id="firstname" value="{{user.firstname}}"/>
 
-    <div class="row ">
+                    <label for="lastname">Lastname:</label>
+                    <input id="lastname" value="{{user.lastname}}"/>
 
-        <div class="col-sm-4" ng-repeat="profile in arrProfiles | orderBy:sortProperty | filter: filterImages">
-            <div class="col-lg-12 shadow">
-                <img class="img-circle img-responsive img-center" ng-src="{{profile.img}}" height="100" width="100">
-                <h2 class="text-center">{{profile.username}}</h2>
-                <div class="info text-center ">
-                    <div  class="text-left">
-                        <p>{{profile.place}}<span class="fa fa-map-marker fa-pull-right"></span> </p>
-                        <p>{{profile.interests}}<span class="fa fa-heart fa-pull-right"></span></p>
-                    </div>
+                    <label for="username">Username:</label>
+                    <input id="username" value="{{user.username}}"/>
+
+                    <label for="birthdate">Birthdate:</label>
+                    <input id="birthdate" value="{{user.birthdate}}"/>
+
                 </div>
-                <button class="btn-inverse col-md-12"><span class="fa fa-comment fa-align-center"></span></button>
-            </div>
+
+                <button class="btn-inverse col-md-1 pull-right">Save</button>
+
+            </form>
+
         </div>
 
     </div>

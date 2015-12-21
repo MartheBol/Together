@@ -11,7 +11,10 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#/home">Together.</a>
+
+            <a class="navbar-brand" href="#/admin" ng-hide="(auth.isAuth && !auth.isAdmin) || (!auth.isAuth)">Together.</a>
+            <a class="navbar-brand" href="#/home" ng-show="(auth.isAuth && !auth.isAdmin) || (!auth.isAuth)">Together.</a>
+
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
@@ -40,7 +43,7 @@
                     </button>
 
                     <ul class="dropdown-menu">
-                        <li><a tabindex="-1" href="#">My profile</a></li>
+                        <li><a tabindex="-1" href="#/myprofile">My profile</a></li>
                         <li><a tabindex="-1" href="/logout">Logout</a></li>
                         <li ng-show="auth.isAuth && auth.isAdmin"  class="divider"></li>
                         <li ng-show="auth.isAuth && auth.isAdmin"><a tabindex="-1" href="#/{{user.username}}">Admin page</a></li>
@@ -53,7 +56,7 @@
     <!-- /.container -->
 </nav>
 
-<section ng-controller="ActivitiesController" data-ng-init="showActivities()">
+<section ng-controller="ActivitiesController" data-ng-init="showActivities()" ng-hide="">
     <!-- Introduction Row -->
     <div class="title text-center">
         <h1>Together.</h1>
@@ -72,19 +75,25 @@
     <div class="row">
 
         <div class="col-sm-8">
+
+            <form ng-submit="addActivity()">
+
+            <div ng-show="error" class="alert alert-danger">{{ error }}</div>
+
             <div class="col-lg-12 shadow">
 
                 <div class="padding-top center-block">
+                    <!--
                     <img id="imgActivity" class="img-circle img-responsive img-center" src="http://placehold.it/100x100" height="100" width="100">
 
                     <input class="center-block" type='file' onchange="readURL(this);" />
+                    -->
 
-                    <!--
                     <div class="fileinput fileinput-new " data-provides="fileinput">
                         <input class="btn btn-default btn-file" type="file" />
                         <span class=" fileinput-filename fileinput-new"></span>
                     </div>
-                    -->
+
                 </div>
 
                 <div class="col-lg-12">
@@ -95,19 +104,25 @@
                             <i class="fa fa-map-marker fa-lg"></i>
                             <input type="text"
                                    class="form-control"
-                                   placeholder="place"/>
+                                   placeholder="zipcode"
+                                   name="zipcode"
+                                   ng-model="zipcode"/>
 
                             <input type="text"
                                    class="form-control"
-                                   placeholder="street"/>
+                                   placeholder="street"
+                                   name="street"
+                                   ng-model="street"/>
 
                             <input type="text"
                                    class="form-control"
-                                   placeholder="number"/>
+                                   placeholder="number"
+                                   name="number"
+                                   ng-model="number"/>
 
 
                             <label for="comment">description</label>
-                            <textarea class="form-control" rows="5" id="comment"></textarea>
+                            <textarea class="form-control" rows="5" id="comment" name="comment" ng-model="comment"></textarea>
 
 
                         </div>
@@ -121,12 +136,16 @@
                             <label for="dateFrom">from</label>
                             <input type="date"
                                    class="form-control"
-                                    id="dateFrom"/>
+                                   id="dateFrom"
+                                   name="dateFrom"
+                                   ng-model="dateFrom"/>
 
                             <label for="dateUntil">until</label>
                             <input type="date"
                                    class="form-control"
-                                   id="dateUntil"/>
+                                   id="dateUntil"
+                                   name="dateUntil"
+                                   ng-model="dateUntil"/>
 
                         </div>
 
@@ -137,11 +156,16 @@
                 </div>
 
             </div>
+
+            </form>
+
         </div>
+
+
 
         <div class="col-sm-4">
             <div class="col-lg-12 shadow inverse">
-                <img class="center-block" src="../images/arrow.png" width="200px">
+                <!-- <img class="center-block" src="../images/arrow.png" width="200px"> -->
 
                 <h2 class="text-center">Add a new activity!</h2>
             </div>
@@ -270,6 +294,22 @@
 
 
 </section>
+
+
+<section ng-show="">
+    <div class="title text-center">
+
+        <h1>You are not allowed on this page.</h1>
+        <p><a href="#/home" class="btn-dropdown">Return to home-page</a></p>
+
+        <img src="../images/title_line.png">
+
+
+    </div>
+
+</section>
+
+<!--
 <script>
     function readURL(input) {
 
@@ -289,5 +329,5 @@
         }
     }
 
-
 </script>
+-->
