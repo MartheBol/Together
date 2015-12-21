@@ -1,0 +1,6 @@
+﻿<div ng-controller="editableCheckboxController">
+    <input type="checkbox" />
+    <label ng-show="showLabel">{{category}}</label>
+    <input ng-show="showTextbox" type="text" ng-model="category" placeholder="category..." ng-enter="saveCategory()" />
+    <button ng-show="showLabel" class="btn btn-no-border" ng-click="edit()"><i class="glyphicon glyphicon-pencil"></i></button>
+</div>
