@@ -22,6 +22,8 @@
 
         });
 
+
+
         /*$scope.logout = function() {
             $http.get('/logout').success(function (data) {
                 $location.path(data.redirect);

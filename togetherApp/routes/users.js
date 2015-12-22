@@ -7,7 +7,7 @@ var User = require('../models/user.js');
 var mongoose = require('mongoose');
 var userSchema = require('../schemas/userSchema.js');
 var userCollection = mongoose.model('User', userSchema, "users");
-var find_correctuser = require('/Users/Marthe/GitHub/Together/togetherApp/routes/middelware/find_correctuser.js');
+var find_correctuser = require('../routes/middelware/find_correctuser.js');
 
 router.get('/', function (req, res) {
   User.getUsers(function (users) {
@@ -42,6 +42,31 @@ router.get('/userdelete/:username',find_correctuser, function (req, res) {
 
 });
 
+router.get('/userdetail/:username',find_correctuser, function (req, res) {
+  //console.log(req.correctuser);
+  //console.log(req.user.username);
 
+  console.log(req.params.username);
+
+  if(req.user === undefined || req.user.username !== 'admin'){
+
+    res.redirect('/#/home')
+
+  }
+  else{
+    console.log(req.correctuser);
+    res.json({correctuser: req.correctuser});
+    res.redirect('/#/userdetails');
+  }
+
+  //res.send(req.params);
+
+  /*var userdelete = req.params.username;
+
+   User.getCorrectUser(userdelete, req, res, function(){
+
+   });*/
+
+});
 
 module.exports = router;

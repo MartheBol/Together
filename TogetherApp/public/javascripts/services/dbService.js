@@ -34,6 +34,19 @@
 
         };
 
+        var getDetailsUser = function (collection, username) {
+
+
+            var url = "http://localhost:3000/api/" + collection + "/userdetails/" + username;
+            return $http.get(url).then(function(response){
+
+                //console.log(response);
+                return response.data;
+
+            });
+
+        };
+
         var getItem = function(item){
 
             var url = "http://localhost:3000/api/" + item;
@@ -50,7 +63,8 @@
 
             getCollection:getCollection,
             getByID:getByID,
-            getItem:getItem
+            getItem:getItem,
+            getDetailsUser: getDetailsUser
 
         };
 

@@ -18,6 +18,13 @@
 
         };
 
+        $scope.getDetailUser = function(){
+            dbService.getDetailsUser('users', req.correctuser.username).then(function(response){
+                $scope.arrDetails = response.correctuser;
+
+            });
+        };
+
         $scope.getUserByID = function(){
 
             dbService.getItem('user').then(function(response){

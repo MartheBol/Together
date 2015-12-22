@@ -32,6 +32,9 @@
             })
             .when("/myprofile",{
                 templateUrl: "./views/myProfile.html"
+            })
+            .when("/detailsuser",{
+                templateUrl: "./views/detailsUser.html"
             });
 
     });
