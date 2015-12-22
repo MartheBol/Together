@@ -2,115 +2,112 @@
 
 <div ng-controller="userController">
 
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#/home">Together.</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#/howto">how to</a>
+                    </li>
+                    <li ng-hide="auth.isAuth">
+                        <a href="#/signup">register</a>
+                    </li>
+                    <li ng-show="auth.isAuth && !auth.isAdmin">
+                        <a href="#/activities">activities</a>
+                    </li>
+                    <li ng-show="auth.isAuth && !auth.isAdmin">
+                        <a href="#/matches">matches</a>
+                    </li>
+                    <li ng-show="auth.isAuth && !auth.isAdmin">
+                        <a href="#/searchprofiles">search profiles</a>
+                    </li>
+                    <li>
 
-            <a class="navbar-brand" href="#/admin" ng-hide="(auth.isAuth && !auth.isAdmin) || (!auth.isAuth)">Together.</a>
-            <a class="navbar-brand" href="#/home" ng-show="(auth.isAuth && !auth.isAdmin) || (!auth.isAuth)">Together.</a>
+                        <button class="btn-dropdown dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" ng-show="auth.isAuth">
+
+                            {{user.username}} <b class="caret"></b>
+
+                        </button>
+
+                        <ul class="dropdown-menu">
+                            <li><a tabindex="-1" href="#">My profile</a></li>
+                            <li><a tabindex="-1" href="/logout">Logout</a></li>
+                            <li ng-show="auth.isAuth && auth.isAdmin"  class="divider"></li>
+                            <li ng-show="auth.isAuth && auth.isAdmin"><a tabindex="-1" href="#/{{user.username}}">Admin page</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <section ng-hide="(auth.isAuth && !auth.isAdmin) || (!auth.isAuth)">
+        <!-- Introduction Row -->
+        <div class="title text-center">
+            <h1>{{user.username}}</h1>
+
+            <p>This application allows you to search company to travel, to go to a concert, ...</p>
+            <img src="../images/title_line.png">
+        </div>
+
+        <div ng-show="!auth.isAuth">
+            <div class="row login" ng-controller="loginController"></div>
+        </div>
+
+        <div class="container" ng-controller="UsersController" data-ng-init="getUsers()">
+            <p>{{arrUsers.length}} users</p>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Password</th>
+                    <th>View details</th>
+                    <th>Delete user</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+                <tr ng-repeat="user in arrUsers">
+                    <td>{{user._id}}</td>
+                    <td>{{user.username}}</td>
+                    <td>{{user.password}}</td>
+                    <td><a href="#/userdetails?id={{user._id}}">View details</a></td>
+                    <td><a href="/api/users/userdelete/{{user.username}}">Delete user</a></td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+    <section ng-show="(auth.isAuth && !auth.isAdmin) || (!auth.isAuth)">
+        <!-- Introduction Row -->
+        <div class="title text-center">
+
+            <h1>You are not allowed on this page.</h1>
+            <p><a href="#/home">Return to home-page</a></p>
+
+            <img src="../images/title_line.png">
+
 
         </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li>
-                    <a href="#/howto">how to</a>
-                </li>
-                <li ng-hide="auth.isAuth">
-                    <a href="#/signup">register</a>
-                </li>
-                <li ng-show="auth.isAuth && !auth.isAdmin">
-                    <a href="#/activities">activities</a>
-                </li>
-                <li ng-show="auth.isAuth && !auth.isAdmin">
-                    <a href="#/matches">matches</a>
-                </li>
-                <li ng-show="auth.isAuth && !auth.isAdmin">
-                    <a href="#/searchprofiles">search profiles</a>
-                </li>
-                <li>
 
-                    <button class="btn-dropdown dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" ng-show="auth.isAuth">
-
-                        {{user.username}} <b class="caret"></b>
-
-                    </button>
-
-                    <ul class="dropdown-menu">
-                        <li><a tabindex="-1" href="#/myprofile">My profile</a></li>
-                        <li><a tabindex="-1" href="/logout">Logout</a></li>
-                        <li ng-show="auth.isAuth && auth.isAdmin"  class="divider"></li>
-                        <li ng-show="auth.isAuth && auth.isAdmin"><a tabindex="-1" href="#/{{user.username}}">Admin page</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container -->
-</nav>
-
-<section ng-hide="(auth.isAuth && !auth.isAdmin) || (!auth.isAuth)">
-    <!-- Introduction Row -->
-    <div class="title text-center">
-        <h1>{{user.username}}</h1>
-
-        <p>This application allows you to search company to travel, to go to a concert, ...</p>
-        <img src="../images/title_line.png">
-    </div>
-
-    <div ng-show="!auth.isAuth">
-        <div class="row login" ng-controller="loginController"></div>
-    </div>
-
-    <div class="container" ng-controller="UsersController" data-ng-init="getUsers()">
-        <p>{{arrUsers.length}} users</p>
-        <table class="table table-hover">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Username</th>
-                <th>Password</th>
-                <th>View details</th>
-                <th>Delete user</th>
-            </tr>
-            </thead>
-
-            <tbody>
-
-            <tr ng-repeat="user in arrUsers">
-                <td>{{user._id}}</td>
-                <td>{{user.username}}</td>
-                <td>{{user.password}}</td>
-                <td><a href="#/userdetails?id={{user._id}}">View details</a></td>
-                <td><a>Delete user</a></td>
-            </tr>
-
-            </tbody>
-        </table>
-    </div>
-
-</section>
-<section ng-show="(auth.isAuth && !auth.isAdmin) || (!auth.isAuth)">
-    <!-- Introduction Row -->
-    <div class="title text-center">
-
-        <h1>You are not allowed on this page.</h1>
-        <p><a href="#/home" class="btn-dropdown">Return to home-page</a></p>
-
-        <img src="../images/title_line.png">
-
-
-    </div>
-
-</section>
+    </section>
 
 </div>

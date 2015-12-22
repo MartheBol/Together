@@ -22,17 +22,16 @@
         $scope.register = function() {
             console.log("REGISTER");
             $http.post('/register', {
-                firstname: this.firstname,
+                /*firstname: this.firstname,
                 lastname : this.lastname,
-                email : this.email,
-                username : this.firstname + " " + this.lastname,
+                email : this.email,*/
+                username : this.username,
                 password : this.password,
-                birthdate : this.birthdate,
+                /*birthdate : this.birthdate,
                 sex : this.sex,
                 zipcode : this.zipcode,
-                biography : this.biography
-            })
-                .success(function (data) {
+                biography : this.biography*/
+            }).success(function (data) {
                 $scope.error = data.error;
                 $location.path(data.redirect);
             });

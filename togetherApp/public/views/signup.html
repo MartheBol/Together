@@ -107,8 +107,8 @@
                         <input type="text"
                                class="form-control"
                                placeholder="email"
-                               name="email"
-                               ng-model="email"/>
+                               name="username"
+                               ng-model="username"/>
 
 
                         <input type="date"
@@ -153,10 +153,25 @@
                             <label><input type="checkbox" name="interests" value="jazz"> party</label>
                             <div ng-controller="signupController">
 
-                                <editable-checkbox></editable-checkbox>
-                                <editable-checkbox></editable-checkbox>
-                                <editable-checkbox></editable-checkbox>
-                                <editable-checkbox></editable-checkbox>
+                                <div  class="editableCheckbox" ng-controller="editableCheckboxController">
+                                    <input type="checkbox" />
+                                    <label ng-show="showLabel">{{category}}</label>
+                                    <input ng-show="showTextbox" type="text" ng-model="category" placeholder="category..." ng-enter="saveCategory()" />
+                                    <button ng-show="showLabel" class="btn btn-no-border" ng-click="edit()"><i class="glyphicon glyphicon-pencil"></i></button>
+                                </div>
+                                <div  class="editableCheckbox" ng-controller="editableCheckboxController">
+                                    <input type="checkbox" />
+                                    <label ng-show="showLabel">{{category}}</label>
+                                    <input ng-show="showTextbox" type="text" ng-model="category" placeholder="category..." ng-enter="saveCategory()" />
+                                    <button ng-show="showLabel" class="btn btn-no-border" ng-click="edit()"><i class="glyphicon glyphicon-pencil"></i></button>
+                                </div>
+                                <div  class="editableCheckbox" ng-controller="editableCheckboxController">
+                                    <input type="checkbox" />
+                                    <label ng-show="showLabel">{{category}}</label>
+                                    <input ng-show="showTextbox" type="text" ng-model="category" placeholder="category..." ng-enter="saveCategory()" />
+                                    <button ng-show="showLabel" class="btn btn-no-border" ng-click="edit()"><i class="glyphicon glyphicon-pencil"></i></button>
+                                </div>
+
                                 <editable-checkbox></editable-checkbox>
 
                             </div>
