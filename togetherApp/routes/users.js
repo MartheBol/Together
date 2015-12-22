@@ -26,7 +26,6 @@ router.get('/userdelete/:username',find_correctuser, function (req, res) {
     res.redirect('/#/home')
   }
   else{
-    console.log('u bent de admin');
     req.correctuser.remove(function (err) {
       if (err) { return next(err); }
       res.redirect('/#/admin');
