@@ -31,7 +31,8 @@
                 sex : this.sex,
                 zipcode : this.zipcode,
                 biography : this.biography
-            }).success(function (data) {
+            })
+                .success(function (data) {
                 $scope.error = data.error;
                 $location.path(data.redirect);
             });
