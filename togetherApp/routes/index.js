@@ -10,44 +10,6 @@ router.get('/', function(req, res, next) {
   res.json({message:"heeeyyyyy"});
 });
 
-/*router.get('/register', function(req, res) {
-  res.render('index', { });
-});
-
-router.post('/register', function(req, res) {
-
-
-  Account.register(new Account({ username : req.body.username }), req.body.password, function(err, account) {
-
-    if (err) {
-      return res.send( "Sorry. That username already exists. Try again.");
-    }
-
-    passport.authenticate('local')(req, res, function () {
-      //res.render('registered');
-    });
-  });
-});
-
-router.get('/login', function(req, res) {
-  //res.render('log
-  // in', { user : req.user });
-  res.send('login')
-});
-
-router.post('/login', passport.authenticate('local'), function(req, res) {
-  //res.redirect('login');
-  //res.json({message: req.user.username});
-  res.send('login werkt')
-});
-
-router.get('/users', function(req, res){
-  //database aanspreken
-  //mongoose.service.getusers() = lijst
-  //res.json(lijst)
-  res.send('users')
-});*/
-
 router.post('/login', function(req, res) {
 
   if (!req.body.username || !req.body.password) {
