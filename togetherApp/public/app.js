@@ -33,9 +33,15 @@
             .when("/myprofile",{
                 templateUrl: "./views/myProfile.html"
             })
+            .when("/userdetails/:username",{
+                templateUrl: "./views/detailsUser.html",
+                controller: 'UsersController'
+            })
             .when("/detailsuser",{
                 templateUrl: "./views/detailsUser.html"
             });
+
+
 
     });
     app.directive('ngEnter', function () {

@@ -5,7 +5,7 @@
 
     "use strict";
 
-    var UsersController = function($scope, dbService) {
+    var UsersController = function($scope, $routeParams, dbService) {
 
         $scope.getUsers = function(){
 
@@ -19,9 +19,9 @@
         };
 
         $scope.getDetailUser = function(){
-            dbService.getDetailsUser('users', req.correctuser.username).then(function(response){
-                $scope.arrDetails = response.correctuser;
 
+            dbService.getDetailsUser('users', $routeParams.username).then(function(response){
+                $scope.arrDetails = response.correctuser;
             });
         };
 
@@ -37,6 +37,6 @@
         };
     };
 
-    angular.module("app").controller("UsersController", ["$scope", "dbService", UsersController]);
+    angular.module("app").controller("UsersController", ["$scope", "$routeParams", "dbService", UsersController]);
 
 })();

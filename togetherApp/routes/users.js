@@ -46,8 +46,8 @@ router.get('/userdetail/:username',find_correctuser, function (req, res) {
   }
   else{
     console.log(req.correctuser);
-    //res.json({correctuser: req.correctuser});
-    res.render('/#/userdetails', {correctuser: req.correctuser});
+    res.json({correctuser: req.correctuser});
+    //res.render('/#/userdetails', {correctuser: req.correctuser});
     //res.redirect('/#/userdetails');
   }
 

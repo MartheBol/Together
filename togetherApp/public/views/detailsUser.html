@@ -1,4 +1,5 @@
-<!-- Navigation -->
+
+
 
 <div ng-controller="userController">
 
@@ -55,43 +56,14 @@
         <!-- /.container -->
     </nav>
 
-    <section ng-hide="(auth.isAuth && !auth.isAdmin) || (!auth.isAuth)">
+    <section ng-init="getDetailUser()" ng-hide="(auth.isAuth && !auth.isAdmin) || (!auth.isAuth)">
         <!-- Introduction Row -->
         <div class="title text-center">
-            <h1>{{user.username}}</h1>
+            <h1>{{arrDetails.username}}</h1>
 
-            <p>This application allows you to search company to travel, to go to a concert, ...</p>
-            <img src="../images/title_line.png">
+
         </div>
 
-        <div ng-show="!auth.isAuth">
-            <div class="row login" ng-controller="loginController"></div>
-        </div>
-
-        <div class="container" ng-controller="UsersController" data-ng-init="getUsers()">
-            <p>{{arrDetails.length}} users</p>
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Username</th>
-                    <th>Password</th>
-                    <th>View details</th>
-                    <th>Delete user</th>
-                </tr>
-                </thead>
-
-                <tbody>
-
-                <tr>
-                    <td>{{arrDetails.username}}</td>
-                    <td>{{arrDetails.password}}</td>
-
-                </tr>
-
-                </tbody>
-            </table>
-        </div>
 
     </section>
     <section ng-show="(auth.isAuth && !auth.isAdmin) || (!auth.isAuth)">
