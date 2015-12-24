@@ -18,7 +18,13 @@ var userSchema = mongoose.Schema({
 */
 var userSchema = mongoose.Schema({
     username : String,
+    firstname: String,
+    lastname: String,
     password : String,
-    email: String
+    email: String,
+    zipcode: Number,
+    sex: String,
+    birthdate: String,
+    biography: String
 });
 module.exports = userSchema;

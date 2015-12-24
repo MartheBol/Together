@@ -54,7 +54,13 @@ module.exports = function(passport){
     //REGISTER
     passport.use('register', new LocalStrategy({
         usernameField: 'username',
+        lastnameField: 'lastname',
+        firstnameField: 'firstname',
+        zipcodeField: 'zipcode',
+        sexField: 'sex',
+        birthdateField: 'birthdate',
         passwordField: 'password',
+        biographyField: 'biography',
         passReqToCallback:true
     }, function(req, username, password, done){
         process.nextTick(function(){
@@ -76,7 +82,14 @@ module.exports = function(passport){
                             }
 
                             newUser.username = req.body.username;
+                            newUser.firstname = req.body.firstname;
+                            newUser.lastname = req.body.lastname;
+                            newUser.zipcode = req.body.zipcode;
+                            newUser.sex = req.body.sex;
+                            newUser.birthdate = req.body.birthdate;
                             newUser.password = hash;
+                            newUser.biography = req.body.biography;
+                            console.log(req.body.biography);
                             newUser.save(function(err){
                                 if(err){
                                     throw  err
