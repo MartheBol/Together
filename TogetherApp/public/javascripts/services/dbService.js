@@ -36,7 +36,6 @@
             var url = "http://localhost:3000/api/" + collection + "/userdetail/" + username;
             return $http.get(url).then(function(response){
 
-                //console.log(response);
                 console.log(response);
                 return response.data;
 

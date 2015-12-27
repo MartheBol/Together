@@ -5,7 +5,7 @@
 
     "use strict";
 
-    var ProfilesController = function($scope, dbService) {
+    var ProfilesController = function($scope, $routeParams, dbService) {
 
         var clicksOnBtn = 0;
 
@@ -26,12 +26,32 @@
 
         $scope.showProfiles = function(){
 
+            var username = "testuser"; //TIJDELIJKE OPLOSSING TOTDAT HET USER OPHALEN VOLLEDIG WERKT (= ONDERSTAANDE FUNCTIE IN DBSERVICE)
+
+            /*
+            dbService.getDetailsUser('users', $routeParams.username).then(function(response){
+
+                //console.log(response);
+                //console.log(response.correctuser.username);
+                //ownID = response.correctuser._id;
+            });
+            */
+
+
             dbService.getCollection('users').then(function(response){
 
-                console.log(response);
-                $scope.arrProfiles = response.userlist;
+                var arrProfiles = response.userlist;
+                for(var i = 0; i < arrProfiles.length; i++){
+                    if(arrProfiles[i].username === username) {
+                        arrProfiles.splice(i, 1);
+                    }
+
+                }
+                $scope.arrProfiles = arrProfiles;
 
             });
+
+
 
         };
 
@@ -48,7 +68,11 @@
              }
              */
 
-            else if($scope.filterQuery.toLowerCase() == i.username.toLowerCase()){
+            else if(i.sex === undefined){
+                return false;
+            }
+
+            else if($scope.filterQuery.toLowerCase() == i.sex.toLowerCase()){
                 return true;
             }
 
@@ -60,6 +84,6 @@
         };
     };
 
-    angular.module("app").controller("ProfilesController", ["$scope", "dbService", ProfilesController]);
+    angular.module("app").controller("ProfilesController", ["$scope", "$routeParams", "dbService", ProfilesController]);
 
 })();
