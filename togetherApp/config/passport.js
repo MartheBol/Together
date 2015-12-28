@@ -3,6 +3,7 @@
  */
 var LocalStrategy = require('passport-local').Strategy;
 var User = require('../models/account');
+var dateFormat = require('dateformat');
 
 
 
@@ -81,12 +82,16 @@ module.exports = function(passport){
                                 throw  err
                             }
 
+                            var date = req.body.birthdate,
+                                dateshort = date.substring(0, 10);
+
+
                             newUser.username = req.body.username;
                             newUser.firstname = req.body.firstname;
                             newUser.lastname = req.body.lastname;
                             newUser.zipcode = req.body.zipcode;
                             newUser.sex = req.body.sex;
-                            newUser.birthdate = req.body.birthdate;
+                            newUser.birthdate = dateshort;
                             newUser.password = hash;
                             newUser.biography = req.body.biography;
                             console.log(req.body.biography);
