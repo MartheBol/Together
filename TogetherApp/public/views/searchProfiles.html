@@ -54,14 +54,13 @@
     <!-- /.container -->
 </nav>
 
-<section ng-controller="userController">
 
-    <p>{{user}}</p>
-
+<section ng-controller = "userController">
     <section ng-controller="ProfilesController" ng-init="showProfiles()" ng-hide="">
         <!-- Introduction Row -->
         <div class="title text-center">
             <h1>Together.</h1>
+            {{user.username}}
 
             <p>Search profiles</p>
             <img src="../images/title_line.png">
@@ -120,6 +119,7 @@
         </div>
 
     </section>
+</section>
     <section ng-show="">
 
         <div class="title text-center">
@@ -132,6 +132,4 @@
         </div>
 
     </section>
-
-</section>
 

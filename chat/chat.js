@@ -1,7 +1,8 @@
 /**
  * Created by Marthe on 4/12/15.
  */
-var socket = io();
+
+var socket = io;
 function submitfunction(){
     var from = $('#user').val();
     var message = $('#m').val();

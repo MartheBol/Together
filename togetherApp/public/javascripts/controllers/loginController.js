@@ -31,10 +31,12 @@
                 birthdate : this.birthdate,
                 sex : this.sex,
                 biography : this.biography
+
             }).success(function (data) {
                 $scope.error = data.error;
                 $location.path(data.redirect);
             });
+
         };
     };
 
