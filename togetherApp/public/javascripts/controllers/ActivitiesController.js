@@ -10,7 +10,16 @@
 
         $scope.getActivities = function(){
             dbService.getCollection('activities').then(function(response){
-                $scope.arrActivities = response.activitielist;
+                var arrTemp = response.activitielist;
+                var arrActs = [];
+
+                for(var i = 0, l = arrTemp.length; i < l; i++){
+                    if(new Date(arrTemp[i].untilDate).getTime() > new Date().getTime()){
+                        arrActs.push(arrTemp[i]);
+                    }
+                }
+
+                $scope.arrActivities = arrActs;
 
             });
 
