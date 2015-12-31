@@ -13,6 +13,8 @@
                 $scope.arrActivities = response.activitielist;
 
             });
+
+
         };
 
         $scope.addActivity = function() {
@@ -52,7 +54,8 @@
                         console.log(data);
                         $scope.error = data.error;
                         //$location.path(data.redirect);
-                        $route.reload();
+                        $scope.getActivities();
+                        resetForm();
                     });
 
 
@@ -114,9 +117,11 @@
         }
 
 
-
-
-
+        function resetForm(){
+            var frm = document.getElementsByName('ActivityForm')[0];
+            console.log('je komt in de restfrom');
+            frm.reset();
+        }
     };
 
     angular.module("app").controller("ActivitiesController", ["$scope", "dbService", "$http","$location", "$routeParams", "$route", ActivitiesController]);
