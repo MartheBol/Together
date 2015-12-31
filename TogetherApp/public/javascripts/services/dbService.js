@@ -57,6 +57,17 @@
 
         };
 
+        var getNoiseWords = function () {
+
+            var url = "http://localhost:3000/data/noisewords.json";
+            return $http.get(url).then(function(response){
+
+                return response.data;
+
+            });
+
+        };
+
 
         //public gedeelte
         return{
@@ -65,7 +76,8 @@
             getByID:getByID,
             getItem:getItem,
             getDetailsUser: getDetailsUser,
-            getDetailsActivity: getDetailsActivity
+            getDetailsActivity: getDetailsActivity,
+            getNoiseWords: getNoiseWords
 
         };
 

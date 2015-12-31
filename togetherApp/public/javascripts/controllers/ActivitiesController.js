@@ -2,20 +2,95 @@
  * Created by iman on 5/12/15.
  */
 
-(function(){
+(function() {
 
     "use strict";
 
-    var ActivitiesController = function($scope, dbService, $http , $location, $routeParams, $route) {
+    var ActivitiesController = function ($scope, dbService, $http, $location, $routeParams, $route) {
 
-        $scope.getActivities = function(){
-            dbService.getCollection('activities').then(function(response){
-                $scope.arrActivities = response.activitielist;
+        $scope.getActivities = function () {
+            dbService.getCollection('activities').then(function (response) {
+
+                var arrTemp = response.activitielist;
+                var arrActs = [];
+
+                for (var i = 0, l = arrTemp.length; i < l; i++) {
+                    if (new Date(arrTemp[i].untilDate).getTime() > new Date().getTime()) {
+                        arrActs.push(arrTemp[i]);
+                    }
+                }
+
+                $scope.arrActivities = arrActs;
 
             });
 
 
         };
+
+        String.prototype.replaceAll = function( token, newToken, ignoreCase ) {
+            var _token;
+            var str = this + "";
+            var i = -1;
+
+            if ( typeof token === "string" ) {
+
+                if ( ignoreCase ) {
+
+                    _token = token.toLowerCase();
+
+                    while( (
+                        i = str.toLowerCase().indexOf(
+                            token, i >= 0 ? i + newToken.length : 0
+                        ) ) !== -1
+                        ) {
+                        str = str.substring( 0, i ) +
+                            newToken +
+                            str.substring( i + token.length );
+                    }
+
+                } else {
+                    return this.split( token ).join( newToken );
+                }
+
+            }
+            return str;
+        };
+
+
+        function isInArray(value, array) {
+            return array.indexOf(value);
+        }
+
+        function getKeywordsFromDescription(description) {
+
+
+            description = description.replaceAll('.', '');
+            description = description.replaceAll(',', '');
+            description = description.replaceAll('?', '');
+            description = description.replaceAll('!', '');
+            description = description.replaceAll('"', '');
+            description = description.replaceAll("'", '');
+
+
+            var words = description.split(" ");
+            var keyWords = "";
+
+            dbService.getNoiseWords().then(function(response) {
+
+                var noiseWords = response.noisewords;
+
+                for (var i = 0; i < words.length; i++) {
+
+                    if (isInArray(words[i].toLowerCase(), noiseWords) == -1) {
+                        keyWords += words[i];
+                        keyWords += " ";
+                    }
+                }
+
+                return keyWords;
+
+            });
+        }
 
         $scope.addActivity = function() {
             console.log("ADD ACTIVITY");
@@ -24,10 +99,13 @@
             var number = this.number;
             var zipcode = this.zipcode;
             var description = this.comment;
+            //var description = getKeywordsFromDescription(this.comment);
             var dateFrom = this.dateFrom;
             var dateUntil = this.dateUntil;
             var timestamp = new Date().getTime();
-            console.log(street);
+            console.log("STREET: "+street);
+            console.log("DESCRIPTION: "+description);
+
 
             if((street !== undefined) &&
                 (number !== undefined) &&
@@ -38,6 +116,7 @@
                 (timestamp !== undefined)){
 
                 if(dateFrom <= dateUntil){
+
                     $scope.error = "";
                     var url = "http://localhost:3000/api/activities/addactivity";
 
@@ -59,7 +138,6 @@
                     });
 
 
-
                 }
                 else if(dateFrom > dateUntil){
                     $scope.error = "ERROR: Date until can't be earlier than date from.";
@@ -67,10 +145,13 @@
 
             }
             else{
-                $scope.error = "ERROR: All fields are required.8888";
+                $scope.error = "ERROR: All fields are required.";
             }
 
+
+
         };
+
 
         $scope.getDetailActivity = function(){
             dbService.getDetailsActivity('activities', $routeParams.activityName).then(function(response){
@@ -93,6 +174,7 @@
             geocodeAddress(geocoder, map);
 
         }
+
         function geocodeAddress(geocoder, resultsMap) {
             var street = $scope.arrDetailsActivity.street;
             var number = $scope.arrDetailsActivity.number;
@@ -119,7 +201,7 @@
 
         function resetForm(){
             var frm = document.getElementsByName('ActivityForm')[0];
-            console.log('je komt in de restfrom');
+            console.log('je komt in de resetform');
             frm.reset();
         }
     };
