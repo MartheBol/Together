@@ -35,9 +35,8 @@ router.get('/userdelete/:username',find_correctuser, function (req, res) {
 
 });
 
+
 router.get('/userdetail/:username',find_correctuser, function (req, res) {
-
-
   console.log(req.params.username);
 
   if(req.user === undefined || req.user.username !== 'admin'){
@@ -45,7 +44,6 @@ router.get('/userdetail/:username',find_correctuser, function (req, res) {
 
   }
   else{
-    console.log(req.correctuser);
     res.json({correctuser: req.correctuser});
     //res.render('/#/userdetails', {correctuser: req.correctuser});
     //res.redirect('/#/userdetails');

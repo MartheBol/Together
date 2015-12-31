@@ -7,6 +7,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var activitySchema = require('../schemas/activitySchema.js');
 var activityCollection = mongoose.model('Activity', activitySchema, "activities");
+var find_correctactivity = require('../routes/middelware/find_correctactivity.js');
 
 router.post('/addactivity', function(req, res) {
     if (!req.body.activityName || !req.body.dateFrom || !req.body.dateUntil) {
@@ -33,6 +34,29 @@ router.post('/addactivity', function(req, res) {
         });
          res.json("hallo")
     }
+});
+
+router.get('/', function(req, res){
+    Activity.getActivities(function (activities) {
+        res.json({activitielist: activities});
+        //console.log(activities)
+    });
+});
+
+router.get('/activitydetail/:activityName', find_correctactivity, function (req, res) {
+    res.json({activity: req.activity})
+    /*if(req.user === undefined){
+        res.redirect('/#/home')
+    }
+    else{
+        console.log(req.correctuser);
+        res.json({correctuser: req.correctuser});
+        //res.render('/#/userdetails', {correctuser: req.correctuser});
+        //res.redirect('/#/userdetails');
+    }*/
+
+
+
 });
 
 module.exports = router;

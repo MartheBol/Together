@@ -6,14 +6,14 @@
 
     "use strict";
 
-    var ActivitiesController = function($scope, dbService, $http , $location) {
+    var ActivitiesController = function($scope, dbService, $http , $location, $routeParams) {
 
-        $scope.showActivities = function(){
+        $scope.getActivities = function(){
+            dbService.getCollection('activities').then(function(response){
+                $scope.arrActivities = response.activitielist;
 
-            $scope.arrActivities = dbService.getCollection('users');
-
+            });
         };
-
 
         $scope.addActivity = function() {
             console.log("ADD ACTIVITY");
@@ -66,8 +66,56 @@
                 $scope.error = "ERROR: All fields are required.8888";
             }
         };
+
+        $scope.getDetailActivity = function(){
+            dbService.getDetailsActivity('activities', $routeParams.activityName).then(function(response){
+                $scope.arrDetailsActivity = response.activity;
+                initmap();
+                return $scope.arrDetailsActivity;
+
+
+            });
+        };
+
+        function initmap() {
+
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 8,
+                center: {lat: 50.8194894, lng: 3.2577076}
+            });
+            var geocoder = new google.maps.Geocoder();
+
+            geocodeAddress(geocoder, map);;
+
+        };
+        function geocodeAddress(geocoder, resultsMap) {
+            var street = $scope.arrDetailsActivity.street;
+            var number = $scope.arrDetailsActivity.number;
+            var zipcode = $scope.arrDetailsActivity.zipcode;
+
+            var address = street + " " + number + ", " + zipcode; //hier address uit db instoppen
+
+            geocoder.geocode({'address': address}, function (results, status) {
+                if (status === google.maps.GeocoderStatus.OK) {
+                    resultsMap.setCenter(results[0].geometry.location);
+                    var marker = new google.maps.Marker({
+                        map: resultsMap,
+                        position: results[0].geometry.location
+                    });
+
+                    console.log(marker)
+                } else {
+                    alert('Geocode was not successful for the following reason: ' + status);
+                }
+            });
+        }
+
+
+
+
+
     };
 
-    angular.module("app").controller("ActivitiesController", ["$scope", "dbService", "$http","$location", ActivitiesController]);
+    angular.module("app").controller("ActivitiesController", ["$scope", "dbService", "$http","$location", "$routeParams", ActivitiesController]);
 
 })();

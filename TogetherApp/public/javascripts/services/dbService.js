@@ -13,8 +13,6 @@
 
             var url = "http://localhost:3000/api/" + collection;
             return $http.get(url).then(function(response){
-
-                //console.log(response);
                 return response.data;
 
             });
@@ -24,8 +22,6 @@
         var getByID = function (collection, id) {
             var url = "http://localhost:3000/api/" + collection + "/" + id;
             return $http.get(url).then(function(response){
-
-                //console.log(response);
                 return response.data;
 
             });
@@ -35,8 +31,6 @@
         var getDetailsUser = function (collection, username) {
             var url = "http://localhost:3000/api/" + collection + "/userdetail/" + username;
             return $http.get(url).then(function(response){
-
-                console.log(response);
                 return response.data;
 
             });
@@ -54,13 +48,24 @@
 
         };
 
+        var getDetailsActivity = function (collection, activityname) {
+            var url = "http://localhost:3000/api/" + collection + "/activitydetail/" + activityname;
+            return $http.get(url).then(function(response){
+                return response.data;
+
+            });
+
+        };
+
+
         //public gedeelte
         return{
 
             getCollection:getCollection,
             getByID:getByID,
             getItem:getItem,
-            getDetailsUser: getDetailsUser
+            getDetailsUser: getDetailsUser,
+            getDetailsActivity: getDetailsActivity
 
         };
 

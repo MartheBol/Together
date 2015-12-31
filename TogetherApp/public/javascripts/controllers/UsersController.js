@@ -21,7 +21,7 @@
         $scope.getDetailUser = function(){
 
             dbService.getDetailsUser('users', $routeParams.username).then(function(response){
-                $scope.arrDetails = response.correctuser;
+                $scope.arrDetails = response.activity;
             });
         };
 
@@ -35,6 +35,8 @@
             });
 
         };
+
+
     };
 
     angular.module("app").controller("UsersController", ["$scope", "$routeParams", "dbService", UsersController]);

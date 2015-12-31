@@ -39,8 +39,12 @@
             })
             .when("/detailsuser",{
                 templateUrl: "./views/detailsUser.html"
-            });
+            })
+            .when("/activitydetails/:activityName", {
+                templateUrl: "./views/detailsActivity.html",
+                controller: "ActivitiesController"
 
+            });
 
 
     });

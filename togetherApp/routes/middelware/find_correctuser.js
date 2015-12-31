@@ -8,7 +8,6 @@ var userCollection = mongoose.model('User', userSchema, "users");
 function isCorrectUser(req, res, next) {
     var userdelete = req.params.username;
 
-    console.log(userdelete);
     userCollection.findOne({username: userdelete}).exec(function(err, userdelete){
         if(err){return next(err)}
         if(userdelete){

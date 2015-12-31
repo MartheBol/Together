@@ -1,7 +1,7 @@
 /**
  * Created by iman on 5/12/15.
  */
-(function(){
+/*(function(){
 
     "use strict";
 
@@ -67,4 +67,4 @@
     angular.module("app").factory("activitiesService", [activitiesService]);
     //                                  ^ deze naam bepaalt welke naam je nodig hebt in je controller als verwijzing!
 
-})();
+})();*/
