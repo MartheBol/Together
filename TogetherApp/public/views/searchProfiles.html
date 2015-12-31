@@ -80,7 +80,7 @@
             <div class="col-sm-4">
                 <div class="col-lg-12">
                     <label for="sortOn">Sort from:</label>
-                    <select id="sortOn" class="form-control" ng-model="sortProperty" ng-change="hideDiv()">
+                    <select id="sortOn" class="form-control" ng-model="sortProperty">
                         <option value="username">A - Z</option>
                         <option value="-username">Z - A</option>
                     </select>
@@ -89,9 +89,15 @@
 
             <div class="col-sm-4">
                 <div class="col-lg-12">
-                    <label><input type="radio" name="sex" value="male" ng-model="filterQuery" ng-change="hideDiv()"> male</label>
-                    <label><input type="radio" name="sex" value="female" ng-model="filterQuery" ng-change="hideDiv()"> female</label>
-                    <label><input type="radio" name="sex" value="nofilter" ng-model="filterQuery" ng-change="hideDiv()"> no filter</label>
+                    <label><input type="radio" name="sex" value="male" ng-model="filterQuery"> male</label>
+                    <label><input type="radio" name="sex" value="female" ng-model="filterQuery"> female</label>
+                    <label><input type="radio" name="sex" value="nofilter" ng-model="filterQuery"> no filter</label>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="col-lg-12">
+                    <button class="btn btna" ng-click="hideDiv()">Ok</button>
                 </div>
             </div>
 
@@ -120,7 +126,8 @@
 
     </section>
 </section>
-    <section ng-show="">
+<!--
+    <section ng-hide="">
 
         <div class="title text-center">
 
@@ -132,4 +139,4 @@
         </div>
 
     </section>
-
+-->
