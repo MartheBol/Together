@@ -10,16 +10,7 @@
 
         $scope.getActivities = function(){
             dbService.getCollection('activities').then(function(response){
-                var arrTemp = response.activitielist;
-                var arrActs = [];
-
-                for(var i = 0, l = arrTemp.length; i < l; i++){
-                    if(new Date(arrTemp[i].untilDate).getTime() > new Date().getTime()){
-                        arrActs.push(arrTemp[i]);
-                    }
-                }
-
-                $scope.arrActivities = arrActs;
+                $scope.arrActivities = response.activitielist;
 
             });
 
@@ -94,7 +85,7 @@
         function initmap() {
 
             var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 8,
+                zoom: 12,
                 center: {lat: 50.8194894, lng: 3.2577076}
             });
             var geocoder = new google.maps.Geocoder();
