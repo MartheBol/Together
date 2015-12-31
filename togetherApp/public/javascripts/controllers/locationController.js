@@ -19,7 +19,7 @@ var locationController = function($scope) {
         });
         var geocoder = new google.maps.Geocoder();
 
-        geocodeAddress(geocoder, map);;
+        geocodeAddress(geocoder, map);
 
     };
 
@@ -34,7 +34,8 @@ var locationController = function($scope) {
                     position: results[0].geometry.location
                 });
 
-                console.log(marker)
+                console.log(marker);
+
             } else {
                 alert('Geocode was not successful for the following reason: ' + status);
             }

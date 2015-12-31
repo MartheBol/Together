@@ -6,7 +6,7 @@
 
     "use strict";
 
-    var ActivitiesController = function($scope, dbService, $http , $location, $routeParams) {
+    var ActivitiesController = function($scope, dbService, $http , $location, $routeParams, $route) {
 
         $scope.getActivities = function(){
             dbService.getCollection('activities').then(function(response){
@@ -52,6 +52,7 @@
                         console.log(data);
                         $scope.error = data.error;
                         //$location.path(data.redirect);
+                        $route.reload();
                     });
 
 
@@ -65,6 +66,7 @@
             else{
                 $scope.error = "ERROR: All fields are required.8888";
             }
+
         };
 
         $scope.getDetailActivity = function(){
@@ -85,9 +87,9 @@
             });
             var geocoder = new google.maps.Geocoder();
 
-            geocodeAddress(geocoder, map);;
+            geocodeAddress(geocoder, map);
 
-        };
+        }
         function geocodeAddress(geocoder, resultsMap) {
             var street = $scope.arrDetailsActivity.street;
             var number = $scope.arrDetailsActivity.number;
@@ -103,7 +105,8 @@
                         position: results[0].geometry.location
                     });
 
-                    console.log(marker)
+                    console.log(marker);
+
                 } else {
                     alert('Geocode was not successful for the following reason: ' + status);
                 }
@@ -116,6 +119,6 @@
 
     };
 
-    angular.module("app").controller("ActivitiesController", ["$scope", "dbService", "$http","$location", "$routeParams", ActivitiesController]);
+    angular.module("app").controller("ActivitiesController", ["$scope", "dbService", "$http","$location", "$routeParams", "$route", ActivitiesController]);
 
 })();
