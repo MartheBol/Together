@@ -15,7 +15,7 @@
                 var arrActs = [];
 
                 for (var i = 0, l = arrTemp.length; i < l; i++) {
-                    if (new Date(arrTemp[i].untilDate).getTime() > new Date().getTime()) {
+                    if (new Date(arrTemp[i].untilDate).getTime() >= new Date().getTime()) {
                         arrActs.push(arrTemp[i]);
                     }
                 }
@@ -56,13 +56,11 @@
             return str;
         };
 
-
         function isInArray(value, array) {
             return array.indexOf(value);
         }
 
-        function getKeywordsFromDescription(description) {
-
+        function getKeywordsFromDescription(description, callback) {
 
             description = description.replaceAll('.', '');
             description = description.replaceAll(',', '');
@@ -70,7 +68,6 @@
             description = description.replaceAll('!', '');
             description = description.replaceAll('"', '');
             description = description.replaceAll("'", '');
-
 
             var words = description.split(" ");
             var keyWords = "";
@@ -87,71 +84,90 @@
                     }
                 }
 
-                return keyWords;
+                //return keyWords;
+                if(!keyWords.isEmpty){
+                    callback(null, keyWords);
+                }
+
+                else{
+                    callback("No keywords found.", null);
+                }
 
             });
         }
 
         $scope.addActivity = function() {
-            console.log("ADD ACTIVITY");
+            //console.log("ADD ACTIVITY");
+
             var activityName = this.activityName;
             var street = this.street;
             var number = this.number;
             var zipcode = this.zipcode;
             var description = this.comment;
-            //var description = getKeywordsFromDescription(this.comment);
             var dateFrom = this.dateFrom;
             var dateUntil = this.dateUntil;
             var timestamp = new Date().getTime();
-            console.log("STREET: "+street);
-            console.log("DESCRIPTION: "+description);
+            //console.log("STREET: "+street);
+
+            getKeywordsFromDescription(description, function(error, data){
+
+                    if(!error){
+
+                        description = data;
+                        //var description = this.comment;
+                        //var description = getKeywordsFromDescription(this.comment);
+
+                        if((street !== undefined) &&
+                            (number !== undefined) &&
+                            (zipcode !== undefined) &&
+                            (description !== undefined) &&
+                            (dateFrom !== undefined) &&
+                            (dateUntil !== undefined) &&
+                            (timestamp !== undefined)){
+
+                            if(dateFrom <= dateUntil){
+
+                                $scope.error = "";
+                                var url = "http://localhost:3000/api/activities/addactivity";
+
+                                $http.post(url, {
+                                    activityName:activityName,
+                                    street : street,
+                                    number: number,
+                                    zipcode: zipcode,
+                                    description : description,
+                                    dateFrom : dateFrom,
+                                    dateUntil : dateUntil,
+                                    timestamp : timestamp
+                                }).success(function (data) {
+                                    console.log(data);
+                                    $scope.error = data.error;
+                                    //$location.path(data.redirect);
+                                    $scope.getActivities();
+                                    resetForm();
+                                });
 
 
-            if((street !== undefined) &&
-                (number !== undefined) &&
-                (zipcode !== undefined) &&
-                (description !== undefined) &&
-                (dateFrom !== undefined) &&
-                (dateUntil !== undefined) &&
-                (timestamp !== undefined)){
+                            }
+                            else if(dateFrom > dateUntil){
+                                $scope.error = "ERROR: Date until can't be earlier than date from.";
+                            }
 
-                if(dateFrom <= dateUntil){
+                        }
+                        else{
+                            $scope.error = "ERROR: All fields are required.";
+                        }
 
-                    $scope.error = "";
-                    var url = "http://localhost:3000/api/activities/addactivity";
+                    }
+                    else{
+                        console.log(error);
+                    }
 
-                    $http.post(url, {
-                        activityName:activityName,
-                        street : street,
-                        number: number,
-                        zipcode: zipcode,
-                        description : description,
-                        dateFrom : dateFrom,
-                        dateUntil : dateUntil,
-                        timestamp : timestamp
-                    }).success(function (data) {
-                        console.log(data);
-                        $scope.error = data.error;
-                        //$location.path(data.redirect);
-                        $scope.getActivities();
-                        resetForm();
-                    });
-
-
-                }
-                else if(dateFrom > dateUntil){
-                    $scope.error = "ERROR: Date until can't be earlier than date from.";
-                }
-
-            }
-            else{
-                $scope.error = "ERROR: All fields are required.";
-            }
+                });
 
 
 
         };
-
 
         $scope.getDetailActivity = function(){
             dbService.getDetailsActivity('activities', $routeParams.activityName).then(function(response){
@@ -159,6 +175,45 @@
                 initmap();
                 return $scope.arrDetailsActivity;
 
+
+            });
+        };
+
+        function recentFirst(a,b) {
+            if (a.timestamp > b.timestamp)
+                return -1;
+            if (a.timestamp < b.timestamp)
+                return 1;
+            return 0;
+        }
+
+        $scope.getMostRecentActivities = function(){
+            dbService.getCollection('activities').then(function(response){
+
+                var numberOfActivities = 3;
+                var arrTemp = response.activitielist;
+                var arrAllActivities = [];
+
+                for (var i = 0, l = arrTemp.length; i < l; i++) {
+                    if (new Date(arrTemp[i].untilDate).getTime() > new Date().getTime()) {
+                        arrAllActivities.push(arrTemp[i]);
+                    }
+                }
+
+                arrAllActivities.sort(recentFirst);
+
+                var arrMostRecentActivities = [];
+
+                for(var ii=0; ii<numberOfActivities; ii++){
+                    arrMostRecentActivities.push(arrAllActivities[ii]);
+                }
+
+                //console.log("[arrAllActivities]: ");
+                //console.log(arrAllActivities);
+                //console.log("[arrMostRecentActivities]: ");
+                //console.log(arrMostRecentActivities);
+
+                $scope.arrMostRecentActivities = arrMostRecentActivities;
 
             });
         };
@@ -197,7 +252,6 @@
                 }
             });
         }
-
 
         function resetForm(){
             var frm = document.getElementsByName('ActivityForm')[0];
