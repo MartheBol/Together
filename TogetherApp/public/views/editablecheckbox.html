@@ -1,6 +1,6 @@
 ﻿<div ng-controller="editableCheckboxController">
-    <input type="checkbox" />
+    <input name="interests" ng-model="chkInterest" ng-change="isChecked('{{category}}')" type="checkbox" />
     <label ng-show="showLabel">{{category}}</label>
     <input ng-show="showTextbox" type="text" ng-model="category" placeholder="category..." ng-enter="saveCategory()" />
-    <button ng-show="showLabel" class="btn btn-no-border btn-checkbox" ng-click="edit()">edit</button><i class="glyphicon glyphicon-pencil"></i>
+    <button type="button" ng-show="showLabel" class="btn btn-no-border btn-checkbox" ng-click="edit()">edit</button><i class="glyphicon glyphicon-pencil"></i>
 </div>

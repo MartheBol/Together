@@ -24,6 +24,7 @@ var userSchema = mongoose.Schema({
     email: String,
     zipcode: Number,
     sex: String,
+    interests:Array,
     birthdate: String,
     biography: String
 });

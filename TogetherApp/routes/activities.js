@@ -24,7 +24,8 @@ router.post('/addactivity', function(req, res) {
             fromDate : req.body.dateFrom,
             untilDate : req.body.dateUntil,
             timestamp : req.body.timestamp,
-            user : req.user.username
+            user : req.user.username,
+            image:req.body.image
         });
         console.log(newActivity);
 

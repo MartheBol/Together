@@ -4,7 +4,7 @@
 (function () {
     "use strict";
 
-    var signupController = function ($scope) {
+    /*var signupController = function ($scope) {
         $scope.categories = [''];
         $scope.newCategory = "";
         $scope.saveCategory = function () {
@@ -35,7 +35,7 @@
     };
     angular.module("app")
         .controller("signupController", ["$scope", signupController])
-        .controller("editableCheckboxController", ["$scope", editableCheckboxController]);
+        .controller("editableCheckboxController", ["$scope", editableCheckboxController]);*/
 
 
 })();

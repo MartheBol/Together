@@ -6,7 +6,7 @@
 
     "use strict";
 
-    var ActivitiesController = function($scope, dbService, $http , $location, $routeParams) {
+    var ActivitiesController = function($scope, dbService, $http , $location, $routeParams,fileUpload) {
 
         $scope.getActivities = function(){
             dbService.getCollection('activities').then(function(response){
@@ -17,6 +17,7 @@
 
         $scope.addActivity = function() {
             console.log("ADD ACTIVITY");
+            //var image = this.fileinput;
             var activityName = this.activityName;
             var street = this.street;
             var number = this.number;
@@ -25,9 +26,10 @@
             var dateFrom = this.dateFrom;
             var dateUntil = this.dateUntil;
             var timestamp = new Date().getTime();
-            console.log(street);
+            //console.log(image);
 
             if((street !== undefined) &&
+                (activityName !==undefined)&&
                 (number !== undefined) &&
                 (zipcode !== undefined) &&
                 (description !== undefined) &&
@@ -39,6 +41,14 @@
                     $scope.error = "";
                     var url = "http://localhost:3000/api/activities/addactivity";
 
+
+                    var file = $scope.myFile;
+                    var uploadUrl = "/images/activities/"+file.name;
+                    fileUpload.uploadFileToUrl(file, uploadUrl);
+                    console.log(uploadUrl);
+
+
+
                     $http.post(url, {
                         activityName:activityName,
                         street : street,
@@ -47,7 +57,8 @@
                         description : description,
                         dateFrom : dateFrom,
                         dateUntil : dateUntil,
-                        timestamp : timestamp
+                        timestamp : timestamp,
+                        image: uploadUrl
                     }).success(function (data) {
                         console.log(data);
                         $scope.error = data.error;
@@ -63,7 +74,7 @@
 
             }
             else{
-                $scope.error = "ERROR: All fields are required.8888";
+                $scope.error = "ERROR: All fields are required.";
             }
         };
 
@@ -85,7 +96,7 @@
             });
             var geocoder = new google.maps.Geocoder();
 
-            geocodeAddress(geocoder, map);;
+            geocodeAddress(geocoder, map);
 
         };
         function geocodeAddress(geocoder, resultsMap) {
@@ -116,6 +127,6 @@
 
     };
 
-    angular.module("app").controller("ActivitiesController", ["$scope", "dbService", "$http","$location", "$routeParams", ActivitiesController]);
+    angular.module("app").controller("ActivitiesController", ["$scope", "dbService", "$http","$location", "$routeParams","fileUpload", ActivitiesController]);
 
 })();

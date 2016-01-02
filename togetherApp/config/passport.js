@@ -61,6 +61,7 @@ module.exports = function(passport){
         birthdateField: 'birthdate',
         passwordField: 'password',
         biographyField: 'biography',
+        interests:'interests',
         passReqToCallback:true
     }, function(req, username, password, done){
         process.nextTick(function(){
@@ -93,6 +94,7 @@ module.exports = function(passport){
                             newUser.birthdate = dateshort;
                             newUser.password = hash;
                             newUser.biography = req.body.biography;
+                            newUser.interests = req.body.interests;
                             console.log(req.body.biography);
                             newUser.save(function(err){
                                 if(err){
