@@ -56,6 +56,7 @@
 
 
 <section ng-controller = "userController">
+
     <section ng-controller="ProfilesController" ng-init="showProfiles()" ng-hide="">
         <!-- Introduction Row -->
         <div class="title text-center">
@@ -113,9 +114,17 @@
                     <div class="info text-center ">
                         <div  class="text-left">
                             <p ng-show="profile.sex">{{profile.sex}}<span class="fa fa-venus-mars fa-pull-right"></span> </p>
+                            <p ng-hide="profile.sex">gender<span class="fa fa-venus-mars fa-pull-right"></span> </p>
+
                             <p ng-show="profile.zipcode">{{profile.zipcode}}<span class="fa fa-map-marker fa-pull-right"></span></p>
+                            <p ng-hide="profile.zipcode">zipcode<span class="fa fa-map-marker fa-pull-right"></span></p>
+
                             <p ng-show="profile.birthdate">{{profile.birthdate}}<span class="fa fa-birthday-cake fa-pull-right"></span> </p>
+                            <p ng-hide="profile.birthdate">birthdate<span class="fa fa-birthday-cake fa-pull-right"></span> </p>
+
                             <p ng-show="profile.biography">{{profile.biography}}<span class="fa fa-comment fa-pull-right"></span></p>
+                            <p ng-hide="profile.biography">biography<span class="fa fa-comment fa-pull-right"></span></p>
+
                         </div>
                     </div>
                     <button class="btn-inverse col-md-12"><span class="fa fa-comment fa-align-center"></span></button>

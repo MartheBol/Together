@@ -1,11 +1,13 @@
 /**
  * Created by iman on 20/12/15.
  */
+
+
 (function(){
 
     "use strict";
 
-    var ProfilesController = function($scope, $routeParams, dbService) {
+    var ProfilesController = function($scope, $rootScope, $routeParams, dbService) {
 
         var clicksOnBtn = 0;
 
@@ -26,17 +28,10 @@
 
         $scope.showProfiles = function(){
 
-            var username = "testuser"; //TIJDELIJKE OPLOSSING TOTDAT HET USER OPHALEN VOLLEDIG WERKT (= ONDERSTAANDE FUNCTIE IN DBSERVICE)
-
-            /*
-            dbService.getDetailsUser('users', $routeParams.username).then(function(response){
-
-                //console.log(response);
-                //console.log(response.correctuser.username);
-                //ownID = response.correctuser._id;
-            });
-            */
-
+            var username = "";
+            if($rootScope.user.username !== undefined){
+                username = $rootScope.user.username;
+            }
 
             dbService.getCollection('users').then(function(response){
 
@@ -45,13 +40,14 @@
                     if(arrProfiles[i].username === username) {
                         arrProfiles.splice(i, 1);
                     }
+                    if(arrProfiles[i].username === "admin") {
+                        arrProfiles.splice(i, 1);
+                    }
 
                 }
                 $scope.arrProfiles = arrProfiles;
 
             });
-
-
 
         };
 
@@ -84,6 +80,6 @@
         };
     };
 
-    angular.module("app").controller("ProfilesController", ["$scope", "$routeParams", "dbService", ProfilesController]);
+    angular.module("app").controller("ProfilesController", ["$scope", "$rootScope", "$routeParams", "dbService", ProfilesController]);
 
 })();
