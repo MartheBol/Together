@@ -48,6 +48,11 @@
 
 
     });
+
+    app.run(function ($rootScope) {
+        $rootScope.user = {};
+    });
+
     app.directive('ngEnter', function () {
         return function (scope, element, attrs) {
             element.bind("keydown keypress", function (event) {
@@ -103,4 +108,6 @@
             templateUrl: './views/editablecheckbox.html'
         };
     });
+
+
 })();

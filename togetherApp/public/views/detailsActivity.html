@@ -64,6 +64,7 @@
                 <div class="col-sm-6">
                     <div class="col-lg-12 shadow">
                         <div class="info text-center ">
+                                <a href="#/activities" class="btn-dropdown text-left">back</a>
                                 <h2 class="text-center">Information about event</h2>
                                 <div class="text-left">
                                 <label>Place</label>
@@ -72,21 +73,23 @@
                                     {{arrDetailsActivity.zipcode}}<span class="fa fa-map-marker fa-pull-right"></span>
                                 </p>
                                 <label>From</label>
-
                                 <p> {{arrDetailsActivity.fromDate}}</p>
+
                                 <label>Until</label>
-
                                 <p> {{arrDetailsActivity.untilDate}}</p>
-                                <label>Created by</label>
 
+                                <label>Created by</label>
                                 <p>{{arrDetailsActivity.user}}</p>
 
-                                <p><!--{{activity.keywords}}--> Keywords<span class="fa fa-heart fa-pull-right"></span>
+                                <label>Keywords</label>
+                                <p>{{arrDetailsActivity.description}} <!-- Keywords --><span class="fa fa-hashtag fa-pull-right"></span>
                                 </p>
                                 <!--<p>{{activity.participants}}<span class="fa fa-check fa-pull-right"></span></p>-->
                                 </div>
-                                <a class="btn center-block btna" name="checkEvent" href="/">Interested</a>
-                            </div>
+                                <a ng-hide="arrDetailsActivity.user == user.username" class="btn center-block btna" name="checkEvent" href="/">Interested</a>
+                                <a ng-show="arrDetailsActivity.user == user.username" class="btn center-block btna" name="checkEvent" href="/">Edit</a>
+
+                        </div>
                         </div>
                     </div>
                 <div class="col-sm-6">
@@ -98,8 +101,8 @@
 
 
     </section>
+    <!--
     <section ng-show="(!auth.isAuth)">
-        <!-- Introduction Row -->
         <div class="title text-center">
 
             <h1>You are not allowed on this page.</h1>
@@ -112,6 +115,7 @@
         </div>
 
     </section>
+    -->
 </div>
 
 

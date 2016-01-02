@@ -78,7 +78,7 @@
 
         <div class="col-sm-8">
 
-            <form ng-submit="addActivity()">
+            <form ng-submit="addActivity()" name="ActivityForm">
 
             <div ng-show="error" class="alert alert-danger">{{ error }}</div>
 
@@ -160,7 +160,7 @@
 
                     </div>
 
-                    <button class="btn center-block" type="submit" name="addActivity">Add activity</button>
+                    <button class="btn center-block" type="submit" name="addActivity"">Add activity</button>
 
                 </div>
 
@@ -181,16 +181,20 @@
     </div>
 
     <div class="row">
-        <p>{{arrActivities.length}}</p>
 
         <div class="col-sm-4" ng-repeat="activity in arrActivities">
             <div class="col-lg-12 shadow">
+<<<<<<< HEAD
                 <img class="img-circle img-responsive img-center" ng-src="{{activity.image}}" height="100" width="100">
+=======
+                <img ng-show="activity.user == user.username" class="img-responsive top-left mine" src="../images/mine.png" width="50" height="50" />
+                <img class="img-circle img-responsive img-center" ng-src="{{activity.img}}" height="100" width="100"/>
+>>>>>>> 3e981992bab7e67553ecf1297ed2f8c96847d491
                 <h2 class="text-center">{{activity.activityName}}</h2>
                 <div class="info text-center ">
                     <div  class="text-left">
                         <p>{{activity.street}} {{activity.number}}, {{activity.zipcode}}<span class="fa fa-map-marker fa-pull-right"></span> </p>
-                        <p><!--{{activity.keywords}}--> Keywords<span class="fa fa-heart fa-pull-right"></span></p>
+                        <p>{{activity.description}}<!-- Keywords --><span class="fa fa-hashtag fa-pull-right"></span></p>
                         <!--<p>{{activity.participants}}<span class="fa fa-check fa-pull-right"></span></p>-->
                     </div>
                 </div>
@@ -206,8 +210,8 @@
 
 </section>
 
+    <!--
 <section ng-show="(!auth.isAuth)">
-    <!-- Introduction Row -->
     <div class="title text-center">
 
         <h1>You are not allowed on this page.</h1>
@@ -219,5 +223,6 @@
     </div>
 
 </section>
+-->
     </div>
 
