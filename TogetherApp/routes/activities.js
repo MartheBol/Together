@@ -11,7 +11,7 @@ var find_correctactivity = require('../routes/middelware/find_correctactivity.js
 
 router.post('/addactivity', function(req, res) {
     if (!req.body.activityName || !req.body.dateFrom || !req.body.dateUntil) {
-         res.json({ error: 'All fields are required' });
+        res.json({ error: 'All fields are required' });
     }else{
         //newActivity.image = req.body.fileinput;
 
@@ -24,8 +24,7 @@ router.post('/addactivity', function(req, res) {
             fromDate : req.body.dateFrom,
             untilDate : req.body.dateUntil,
             timestamp : req.body.timestamp,
-            user : req.user.username,
-            image:req.body.image
+            user : req.user.username
         });
         console.log(newActivity);
 
@@ -33,7 +32,7 @@ router.post('/addactivity', function(req, res) {
             if (err)  console.error(err);
             console.dir(newAct);
         });
-         res.json("hallo")
+        res.json("hallo")
     }
 });
 
@@ -47,14 +46,14 @@ router.get('/', function(req, res){
 router.get('/activitydetail/:activityName', find_correctactivity, function (req, res) {
     res.json({activity: req.activity})
     /*if(req.user === undefined){
-        res.redirect('/#/home')
-    }
-    else{
-        console.log(req.correctuser);
-        res.json({correctuser: req.correctuser});
-        //res.render('/#/userdetails', {correctuser: req.correctuser});
-        //res.redirect('/#/userdetails');
-    }*/
+     res.redirect('/#/home')
+     }
+     else{
+     console.log(req.correctuser);
+     res.json({correctuser: req.correctuser});
+     //res.render('/#/userdetails', {correctuser: req.correctuser});
+     //res.redirect('/#/userdetails');
+     }*/
 
 
 

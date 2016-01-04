@@ -5,12 +5,7 @@
 (function() {
 
     "use strict";
-
-<<<<<<< HEAD
-    var ActivitiesController = function($scope, dbService, $http , $location, $routeParams,fileUpload) {
-=======
     var ActivitiesController = function ($scope, dbService, $http, $location, $routeParams, $route) {
->>>>>>> 3e981992bab7e67553ecf1297ed2f8c96847d491
 
         $scope.getActivities = function () {
             dbService.getCollection('activities').then(function (response) {
@@ -101,13 +96,7 @@
         }
 
         $scope.addActivity = function() {
-<<<<<<< HEAD
             console.log("ADD ACTIVITY");
-            //var image = this.fileinput;
-=======
-            //console.log("ADD ACTIVITY");
-
->>>>>>> 3e981992bab7e67553ecf1297ed2f8c96847d491
             var activityName = this.activityName;
             var street = this.street;
             var number = this.number;
@@ -116,11 +105,9 @@
             var dateFrom = this.dateFrom;
             var dateUntil = this.dateUntil;
             var timestamp = new Date().getTime();
-<<<<<<< HEAD
-            //console.log(image);
+            console.log(street);
 
             if((street !== undefined) &&
-                (activityName !==undefined)&&
                 (number !== undefined) &&
                 (zipcode !== undefined) &&
                 (description !== undefined) &&
@@ -130,100 +117,46 @@
 
                 if(dateFrom <= dateUntil){
                     $scope.error = "";
-                    var url = "http://localhost:3000/api/activities/addactivity";
 
+                    getKeywordsFromDescription(description, function (error, data) {
+                        if(!error){
+                            description = data;
+                            var url = "http://localhost:3000/api/activities/addactivity";
 
-                    var file = $scope.myFile;
-                    var uploadUrl = "/images/activities/"+file.name;
-                    fileUpload.uploadFileToUrl(file, uploadUrl);
-                    console.log(uploadUrl);
-
-
-
-                    $http.post(url, {
-                        activityName:activityName,
-                        street : street,
-                        number: number,
-                        zipcode: zipcode,
-                        description : description,
-                        dateFrom : dateFrom,
-                        dateUntil : dateUntil,
-                        timestamp : timestamp,
-                        image: uploadUrl
-                    }).success(function (data) {
-                        console.log(data);
-                        $scope.error = data.error;
-                        //$location.path(data.redirect);
-                    });
-=======
-            //console.log("STREET: "+street);
->>>>>>> 3e981992bab7e67553ecf1297ed2f8c96847d491
-
-            getKeywordsFromDescription(description, function(error, data){
-
-                    if(!error){
-
-                        description = data;
-                        //var description = this.comment;
-                        //var description = getKeywordsFromDescription(this.comment);
-
-                        if((street !== undefined) &&
-                            (number !== undefined) &&
-                            (zipcode !== undefined) &&
-                            (description !== undefined) &&
-                            (dateFrom !== undefined) &&
-                            (dateUntil !== undefined) &&
-                            (timestamp !== undefined)){
-
-                            if(dateFrom <= dateUntil){
-
-                                $scope.error = "";
-                                var url = "http://localhost:3000/api/activities/addactivity";
-
-                                $http.post(url, {
-                                    activityName:activityName,
-                                    street : street,
-                                    number: number,
-                                    zipcode: zipcode,
-                                    description : description,
-                                    dateFrom : dateFrom,
-                                    dateUntil : dateUntil,
-                                    timestamp : timestamp
-                                }).success(function (data) {
-                                    console.log(data);
-                                    $scope.error = data.error;
-                                    //$location.path(data.redirect);
-                                    $scope.getActivities();
-                                    resetForm();
-                                });
-
-
-                            }
-                            else if(dateFrom > dateUntil){
-                                $scope.error = "ERROR: Date until can't be earlier than date from.";
-                            }
+                            $http.post(url, {
+                             activityName:activityName,
+                             street : street,
+                             number: number,
+                             zipcode: zipcode,
+                             description : description,
+                             dateFrom : dateFrom,
+                             dateUntil : dateUntil,
+                             timestamp : timestamp
+                             }).success(function (data) {
+                             console.log(data);
+                                console.log('activity is opgeslaan');
+                             $scope.error = data.error;
+                             $scope.getActivities();
+                             resetForm();
+                             //$location.path(data.redirect);
+                             });
 
                         }
                         else{
-                            $scope.error = "ERROR: All fields are required.";
+                            console.log(error);
                         }
-
-                    }
-                    else{
-                        console.log(error);
-                    }
-
-                });
+                    });
 
 
+                }
+                else if(dateFrom > dateUntil){
+                    $scope.error = "ERROR: Date until can't be earlier than date from.";
+                }
 
-<<<<<<< HEAD
             }
             else{
-                $scope.error = "ERROR: All fields are required.";
+                $scope.error = "ERROR: All fields are required.8888";
             }
-=======
->>>>>>> 3e981992bab7e67553ecf1297ed2f8c96847d491
         };
 
         $scope.getDetailActivity = function(){
@@ -284,11 +217,9 @@
             var geocoder = new google.maps.Geocoder();
 
             geocodeAddress(geocoder, map);
-<<<<<<< HEAD
-=======
+
 
         }
->>>>>>> 3e981992bab7e67553ecf1297ed2f8c96847d491
 
         function geocodeAddress(geocoder, resultsMap) {
             var street = $scope.arrDetailsActivity.street;
@@ -320,10 +251,7 @@
         }
     };
 
-<<<<<<< HEAD
     angular.module("app").controller("ActivitiesController", ["$scope", "dbService", "$http","$location", "$routeParams","fileUpload", ActivitiesController]);
-=======
-    angular.module("app").controller("ActivitiesController", ["$scope", "dbService", "$http","$location", "$routeParams", "$route", ActivitiesController]);
->>>>>>> 3e981992bab7e67553ecf1297ed2f8c96847d491
+
 
 })();
