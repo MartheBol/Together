@@ -40,10 +40,11 @@
                     if(arrProfiles[i].username === username) {
                         arrProfiles.splice(i, 1);
                     }
-                    if(arrProfiles[i].username === "admin") {
-                        arrProfiles.splice(i, 1);
+                }
+                for(var ii = 0; ii < arrProfiles.length; ii++){
+                    if(arrProfiles[ii].username === "admin") {
+                        arrProfiles.splice(ii, 1);
                     }
-
                 }
                 $scope.arrProfiles = arrProfiles;
 
