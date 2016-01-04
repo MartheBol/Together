@@ -123,6 +123,11 @@
                             description = data;
                             var url = "http://localhost:3000/api/activities/addactivity";
 
+                            var file = $scope.myFile; 
+                            var uploadUrl = "/images/activities/" + file.name;
+                            fileUpload.uploadFileToUrl(file, uploadUrl); 
+                            console.log(uploadUrl);
+
                             $http.post(url, {
                              activityName:activityName,
                              street : street,
@@ -131,7 +136,8 @@
                              description : description,
                              dateFrom : dateFrom,
                              dateUntil : dateUntil,
-                             timestamp : timestamp
+                             timestamp : timestamp,
+                             image: uploadUrl
                              }).success(function (data) {
                              console.log(data);
                                 console.log('activity is opgeslaan');
