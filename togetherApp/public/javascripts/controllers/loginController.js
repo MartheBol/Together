@@ -115,5 +115,5 @@
     angular.module("app")
         .controller("loginController", ["$scope", "$http", "$location", loginController])
         .controller("signupController", ["$scope", signupController])
-        .controller("editableCheckboxController", ["$scope", editableCheckboxController]);;
+        .controller("editableCheckboxController", ["$scope", editableCheckboxController]);
 })();
