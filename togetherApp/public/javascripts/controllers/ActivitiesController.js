@@ -15,8 +15,14 @@
                 var arrTemp = response.activitielist;
                 var arrActs = [];
 
+                var today = new Date().toISOString().substring(0, 10),
+                    todaySplit = today.split("-"),
+                    sumToday =  todaySplit[0] +  todaySplit[1] +  todaySplit[2];
+
                 for (var i = 0, l = arrTemp.length; i < l; i++) {
-                    if (new Date(arrTemp[i].untilDate).getTime() >= new Date().getTime()) {
+                    var activtyDateSplit = arrTemp[i].untilDate.substring(0,10).split("-"),
+                        sumActivity =  activtyDateSplit[0] + activtyDateSplit[1] + activtyDateSplit[2];
+                    if ( sumActivity >= sumToday) {
                         arrActs.push(arrTemp[i]);
                     }
                 }
