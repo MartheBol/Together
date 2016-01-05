@@ -86,7 +86,7 @@
                                 </p>
                                 <!--<p>{{activity.participants}}<span class="fa fa-check fa-pull-right"></span></p>-->
                                 </div>
-                                <a ng-hide="arrDetailsActivity.user == user.username" class="btn center-block btna" name="checkEvent" href="/">Interested</a>
+                                <button ng-hide="arrDetailsActivity.user == user.username" class="btn center-block btna" name="checkEvent" ng-click="interested(arrDetailsActivity.activityName,user.username, user.username)" >{{nameButton}}</button>
                                 <a ng-show="arrDetailsActivity.user == user.username" class="btn center-block btna" name="checkEvent" href="/">Edit</a>
 
                         </div>

@@ -6,7 +6,7 @@
 
     "use strict";
     var ActivitiesController = function ($scope, dbService, $http, $location, $routeParams, $route) {
-
+        $scope.nameButton="Interested";
         $scope.getActivities = function () {
             dbService.getCollection('activities').then(function (response) {
 
@@ -123,10 +123,10 @@
                             description = data;
                             var url = "http://localhost:3000/api/activities/addactivity";
 
-                            var file = $scope.myFile; 
+                            /*var file = $scope.myFile; 
                             var uploadUrl = "/images/activities/" + file.name;
                             fileUpload.uploadFileToUrl(file, uploadUrl); 
-                            console.log(uploadUrl);
+                            console.log(uploadUrl);*/
 
                             $http.post(url, {
                              activityName:activityName,
@@ -136,8 +136,7 @@
                              description : description,
                              dateFrom : dateFrom,
                              dateUntil : dateUntil,
-                             timestamp : timestamp,
-                             image: uploadUrl
+                             timestamp : timestamp
                              }).success(function (data) {
                              console.log(data);
                                 console.log('activity is opgeslaan');
@@ -173,6 +172,40 @@
 
 
             });
+        };
+
+        $scope.interested = function(activityName,interestedUser, createrUser){
+            console.log("IK BEN GEÏNTERESSEERD!");
+            console.log(activityName);
+            console.log(interestedUser);
+            console.log(createrUser);
+            var url = "";
+            if($scope.nameButton !== "Not interested") {
+
+                url = "http://localhost:3000/api/activities/interested";
+                $http.post(url, {
+                    activityName: activityName,
+                    interestedUser: interestedUser,
+                    createrUser: createrUser
+                }).success(function (data) {
+                    console.log(data);
+                    console.log(interestedUser + " is geïnteresseerd in " + activityName + " door " + createrUser);
+                    //$scope.nameButton = "Not interested";
+                    $scope.error = data.error;
+                });
+            }/*else{
+                url = "http://localhost:3000/api/activities/deleteinterested";
+                $http.post(url, {
+                    activityName: activityName,
+                    interestedUser: interestedUser,
+                    createrUser: createrUser
+                }).success(function (data) {
+                    console.log(data);
+                    console.log(interestedUser + " is niet meer geïnteresseerd in " + activityName + " door " + createrUser);
+                    $scope.nameButton = "Interested";
+                    $scope.error = data.error;
+                });
+            }*/
         };
 
         function recentFirst(a,b) {

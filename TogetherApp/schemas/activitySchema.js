@@ -13,6 +13,7 @@ var activitySchema = mongoose.Schema({
     untilDate: String,
     image: String,
     timestamp:String,
-    user: String
+    user: String,
+    matches:Array
 });
 module.exports = activitySchema;

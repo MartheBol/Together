@@ -14,17 +14,23 @@ router.post('/addactivity', function(req, res) {
         res.json({ error: 'All fields are required' });
     }else{
         //newActivity.image = req.body.fileinput;
-
+        var fromdate = req.body.dateFrom,
+            fromdateShort = fromdate.substring(0, 10);
+        var untildate = req.body.dateFrom,
+            untildateShort = untildate.substring(0, 10);
+        var matches = [];
+        matches.push(req.user.username);
         var newActivity = new Activity({
             activityName :req.body.activityName,
             zipcode :req.body.zipcode,
             street: req.body.street,
             number: req.body.number,
             description :req.body.description,
-            fromDate : req.body.dateFrom,
-            untilDate : req.body.dateUntil,
+            fromDate : fromdateShort,
+            untilDate : untildateShort,
             timestamp : req.body.timestamp,
-            user : req.user.username
+            user : req.user.username,
+            matches:matches
         });
         console.log(newActivity);
 
@@ -34,6 +40,37 @@ router.post('/addactivity', function(req, res) {
         });
         res.json("hallo")
     }
+});
+
+router.post('/interested', function(req, res) {
+
+    activityCollection.findOneAndUpdate(
+        {activityName: req.body.activityName},
+        {$push: {matches: req.body.interestedUser}},
+        {safe: true, upsert: true},
+        function(err, model) {
+            if(err !== null){
+                console.log("dit is een "+err);
+            }
+        }
+    );
+    res.json("added");
+    console.log("match added");
+
+});
+
+router.post('/deleteinterested', function(req, res) {
+    activityCollection.findOneAndUpdate(
+        {activityName: req.body.activityName},
+        {$pull: {matches: req.body.interestedUser}},
+        {safe: true, upsert: true},
+        function(err, model) {
+            if(err !== null){
+                console.log("dit is een "+err);
+            }
+        }
+    );
+
 });
 
 router.get('/', function(req, res){
