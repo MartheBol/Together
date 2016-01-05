@@ -63,13 +63,12 @@ router.post('/deleteinterested', function(req, res) {
     activityCollection.findOneAndUpdate(
         {activityName: req.body.activityName},
         {$pull: {matches: req.body.interestedUser}},
-        {safe: true, upsert: true},
         function(err, model) {
-            if(err !== null){
-                console.log("dit is een "+err);
-            }
+            console.log("dit is een "+err);
+
         }
     );
+    res.json("deleted");
 
 });
 

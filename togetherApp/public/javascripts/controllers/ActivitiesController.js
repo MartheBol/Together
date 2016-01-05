@@ -6,7 +6,9 @@
 
     "use strict";
     var ActivitiesController = function ($scope, dbService, $http, $location, $routeParams, $route) {
-        $scope.nameButton="Interested";
+        $scope.interestedAct=true;
+        $scope.nameButton = "Interested";
+
         $scope.getActivities = function () {
             dbService.getCollection('activities').then(function (response) {
 
@@ -180,7 +182,9 @@
             console.log(interestedUser);
             console.log(createrUser);
             var url = "";
-            if($scope.nameButton !== "Not interested") {
+            var interestedAct = $scope.interestedAct;
+            if(interestedAct !== false) {
+                console.log(interestedAct);
 
                 url = "http://localhost:3000/api/activities/interested";
                 $http.post(url, {
@@ -190,10 +194,12 @@
                 }).success(function (data) {
                     console.log(data);
                     console.log(interestedUser + " is geïnteresseerd in " + activityName + " door " + createrUser);
-                    //$scope.nameButton = "Not interested";
+                    $scope.interestedAct = false;
+                    $scope.nameButton = "Not interested";
                     $scope.error = data.error;
                 });
-            }/*else{
+            }else{
+                console.log(interestedAct);
                 url = "http://localhost:3000/api/activities/deleteinterested";
                 $http.post(url, {
                     activityName: activityName,
@@ -202,10 +208,12 @@
                 }).success(function (data) {
                     console.log(data);
                     console.log(interestedUser + " is niet meer geïnteresseerd in " + activityName + " door " + createrUser);
+                    $scope.interestedAct = true;
                     $scope.nameButton = "Interested";
+
                     $scope.error = data.error;
                 });
-            }*/
+            }
         };
 
         function recentFirst(a,b) {
