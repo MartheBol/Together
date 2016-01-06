@@ -55,7 +55,7 @@
         <!-- /.container -->
     </nav>
 
-    <section ng-init="getDetailActivity()" ng-hide="(!auth.isAuth)">
+    <section ng-init="getDetailActivity(user.username)" ng-hide="(!auth.isAuth)">
         <!-- Introduction Row -->
         <div class="title text-center">
             <h1>{{arrDetailsActivity.activityName}}</h1>

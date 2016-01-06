@@ -243,7 +243,7 @@
                         }
 
                         else {
-                            $scope.error = 'foutje!!!! '
+                            $scope.error = 'foutje!!!! ';
                         }
                     }
 
@@ -264,10 +264,18 @@
             }
         };
 
-        $scope.getDetailActivity = function(){
+        $scope.getDetailActivity = function(currentUser){
             dbService.getDetailsActivity('activities', $routeParams.activityName).then(function(response){
                 $scope.arrDetailsActivity = response.activity;
                 initmap();
+
+                console.log($scope.arrDetailsActivity.matches);
+                for (var i = 0; i < $scope.arrDetailsActivity.matches.length; i++) {
+                    if ($scope.arrDetailsActivity.matches[i] === currentUser) {
+                        $scope.nameButton = "Not interested";
+                        $scope.interestedAct = false;
+                    }
+                }
                 return $scope.arrDetailsActivity;
 
 
