@@ -2,13 +2,13 @@
  * Created by iman on 5/12/15.
  */
 
-(function() {
+(function () {
 
     "use strict";
-    var dateTimeNow = new Date().toISOString().substring(0,10) + " " + new Date().toISOString().substring(11,16);
+    var dateTimeNow = new Date().toISOString().substring(0, 10) + " " + new Date().toISOString().substring(11, 16);
 
     var ActivitiesController = function ($scope, dbService, $http, $location, $routeParams, $route) {
-        $scope.interestedAct=true;
+        $scope.interestedAct = true;
         $scope.nameButton = "Interested";
 
         $scope.getActivities = function () {
@@ -19,7 +19,7 @@
 
 
                 for (var i = 0, l = arrTemp.length; i < l; i++) {
-                    if(new Date(arrTemp[i].untilDate).getTime() >= new Date(dateTimeNow).getTime()) {
+                    if (new Date(arrTemp[i].untilDate).getTime() >= new Date(dateTimeNow).getTime()) {
                         arrActs.push(arrTemp[i]);
                     }
                 }
@@ -31,29 +31,29 @@
 
         };
 
-        String.prototype.replaceAll = function( token, newToken, ignoreCase ) {
+        String.prototype.replaceAll = function (token, newToken, ignoreCase) {
             var _token;
             var str = this + "";
             var i = -1;
 
-            if ( typeof token === "string" ) {
+            if (typeof token === "string") {
 
-                if ( ignoreCase ) {
+                if (ignoreCase) {
 
                     _token = token.toLowerCase();
 
-                    while( (
+                    while ((
                         i = str.toLowerCase().indexOf(
                             token, i >= 0 ? i + newToken.length : 0
                         ) ) !== -1
                         ) {
-                        str = str.substring( 0, i ) +
+                        str = str.substring(0, i) +
                             newToken +
-                            str.substring( i + token.length );
+                            str.substring(i + token.length);
                     }
 
                 } else {
-                    return this.split( token ).join( newToken );
+                    return this.split(token).join(newToken);
                 }
 
             }
@@ -63,6 +63,7 @@
         function isInArray(value, array) {
             return array.indexOf(value);
         }
+
         function getKeywordsFromDescription(description, callback) {
 
             description = description.replaceAll('.', '');
@@ -75,7 +76,7 @@
             var words = description.split(" ");
             var keyWords = "";
 
-            dbService.getNoiseWords().then(function(response) {
+            dbService.getNoiseWords().then(function (response) {
 
                 var noiseWords = response.noisewords;
 
@@ -88,68 +89,69 @@
                 }
 
                 //return keyWords;
-                if(!keyWords.isEmpty){
+                if (!keyWords.isEmpty) {
                     callback(null, keyWords);
                 }
 
-                else{
+                else {
                     callback("No keywords found.", null);
                 }
 
             });
         }
-        function stringConsistOf2Numbers(number, callback){
+
+        function stringConsistOf2Numbers(number, callback) {
             var output = number + '';
             if (output.length < 2) {
                 output = '0' + output;
                 number = output.toString();
 
             }
-            else{
+            else {
                 number = number.toString();
             }
 
 
-            if(!number.isEmpty){
+            if (!number.isEmpty) {
                 callback(null, number);
             }
 
-            else{
+            else {
                 callback("No number.", null);
             }
 
 
         }
-        function fullDate(number, number2, callback){
-            stringConsistOf2Numbers(number, function(error, numberToString){
+
+        function fullDate(number, number2, callback) {
+            stringConsistOf2Numbers(number, function (error, numberToString) {
                 number = numberToString;
-                if(error){
+                if (error) {
                     console.log(error);
 
                 }
             });
-            stringConsistOf2Numbers(number2, function(error, numberToString){
+            stringConsistOf2Numbers(number2, function (error, numberToString) {
                 number2 = numberToString;
-                if(error){
+                if (error) {
                     console.log(error);
 
                 }
             });
 
-            if(!number.isEmpty && !number2.isEmpty){
+            if (!number.isEmpty && !number2.isEmpty) {
                 callback(null, number, number2);
             }
 
-            else{
+            else {
                 callback("No number.", null);
             }
-
 
 
         }
 
 
-        $scope.addActivity = function() {
+        $scope.addActivity = function () {
             var activityName = this.activityName;
             var street = this.street;
             var number = this.number;
@@ -158,7 +160,7 @@
             var dateFrom = this.dateFrom;
             var dateUntil = this.dateUntil;
             var timestamp = new Date().getTime();
-            var startTimeHour  = this.startTimeHour;
+            var startTimeHour = this.startTimeHour;
             var startTimeMin = this.startTimeMin;
             var endTimeHour = this.endTimeHour;
             var endTimeMin = this.endTimeMin;
@@ -169,41 +171,41 @@
             var dateUntilMonth = this.dateUntilMonth;
             var dateUntilYear = this.dateUntilYear.toString();
 
-            fullDate(dateFromDay, dateFromMonth, function(error, dateFromdayString, dateFromMonthString){
+            fullDate(dateFromDay, dateFromMonth, function (error, dateFromdayString, dateFromMonthString) {
                 dateFromDay = dateFromdayString;
                 dateFromMonth = dateFromMonthString;
-                if(error){
+                if (error) {
                     console.log(error);
                 }
             });
-            fullDate(dateUntilDay, dateUntilMonth, function(error, dateUntilDayString, dateUntilMonthString){
+            fullDate(dateUntilDay, dateUntilMonth, function (error, dateUntilDayString, dateUntilMonthString) {
                 dateUntilDay = dateUntilDayString;
                 dateUntilMonth = dateUntilMonthString;
-                if(error){
+                if (error) {
                     console.log(error);
                 }
             });
 
 
-            if((street !== undefined) &&
+            if ((street !== undefined) &&
                 (number !== undefined) &&
                 (zipcode !== undefined) &&
                 (description !== undefined) &&
-                (timestamp !== undefined)){
+                (timestamp !== undefined)) {
 
                 $scope.error = "";
 
                 if (startTimeMin < 60 && startTimeHour < 25) {
 
-                    stringConsistOf2Numbers(startTimeHour, function(error, startTimeHourString){
+                    stringConsistOf2Numbers(startTimeHour, function (error, startTimeHourString) {
                         startTimeHour = startTimeHourString;
-                        if(error){
+                        if (error) {
                             console.log(error);
                         }
                     });
-                    stringConsistOf2Numbers(startTimeMin, function(error, startTimeMinString){
+                    stringConsistOf2Numbers(startTimeMin, function (error, startTimeMinString) {
                         startTimeMin = startTimeMinString;
-                        if(error){
+                        if (error) {
                             console.log(error);
 
                         }
@@ -212,19 +214,19 @@
                     console.log(startTimeHour);
                     console.log(startTimeMin);
 
-                    if (startTimeMin.length === 2  && startTimeHour.length === 2) {
+                    if (startTimeMin.length === 2 && startTimeHour.length === 2) {
                         console.log("je komt hier terecht");
 
-                        if(endTimeMin < 60 && endTimeHour < 24){
-                            stringConsistOf2Numbers(endTimeHour, function(error, endTimeHourString){
+                        if (endTimeMin < 60 && endTimeHour < 24) {
+                            stringConsistOf2Numbers(endTimeHour, function (error, endTimeHourString) {
                                 endTimeHour = endTimeHourString;
-                                if(error){
+                                if (error) {
                                     console.log(error);
                                 }
                             });
-                            stringConsistOf2Numbers(endTimeMin, function(error, endTimeMinString){
+                            stringConsistOf2Numbers(endTimeMin, function (error, endTimeMinString) {
                                 endTimeMin = endTimeMinString;
-                                if(error){
+                                if (error) {
                                     console.log(error);
 
                                 }
@@ -239,19 +241,19 @@
 
                                 getKeywordsFromDescription(description, function (error, data) {
                                     description = data;
-                                    if(!error){
+                                    if (!error) {
                                         console.log(startTimeHour + ":" + startTimeMin);
 
                                         var url = "http://localhost:3000/api/activities/addactivity";
                                         $http.post(url, {
-                                            activityName:activityName,
-                                            street : street,
+                                            activityName: activityName,
+                                            street: street,
                                             number: number,
                                             zipcode: zipcode,
-                                            description : description,
-                                            dateFrom : dateFromYear + "-" + dateFromMonth + "-" +  dateFromDay + " " + startTimeHour + ":" + startTimeMin ,
-                                            dateUntil : dateUntilYear + "-" + dateFromMonth +"-" + dateUntilDay + " " + endTimeHour + ":" +  endTimeMin,
-                                            timestamp : timestamp
+                                            description: description,
+                                            dateFrom: dateFromYear + "-" + dateFromMonth + "-" + dateFromDay + " " + startTimeHour + ":" + startTimeMin,
+                                            dateUntil: dateUntilYear + "-" + dateFromMonth + "-" + dateUntilDay + " " + endTimeHour + ":" + endTimeMin,
+                                            timestamp: timestamp
 
                                         }).success(function (data) {
                                             $scope.error = data.error;
@@ -262,7 +264,7 @@
                                         });
 
                                     }
-                                    else{
+                                    else {
                                         console.log(error);
                                     }
                                 });
@@ -273,7 +275,7 @@
                             }
                         }
 
-                        else{
+                        else {
                             $scope.error = "Endtime input is not correct";
                         }
 
@@ -289,13 +291,13 @@
 
 
             }
-            else{
+            else {
                 $scope.error = "ERROR: All fields are required.8888";
             }
         };
 
-        $scope.getDetailActivity = function(currentUser){
-            dbService.getDetailsActivity('activities', $routeParams.activityName).then(function(response){
+        $scope.getDetailActivity = function (currentUser) {
+            dbService.getDetailsActivity('activities', $routeParams.activityName).then(function (response) {
                 $scope.arrDetailsActivity = response.activity;
                 initmap();
 
@@ -312,10 +314,10 @@
             });
         };
 
-        $scope.interested = function(activityName,interestedUser, createrUser){
+        $scope.interested = function (activityName, interestedUser, createrUser) {
             var url = "";
             var interestedAct = $scope.interestedAct;
-            if(interestedAct !== false) {
+            if (interestedAct !== false) {
 
                 url = "http://localhost:3000/api/activities/interested";
                 $http.post(url, {
@@ -329,7 +331,7 @@
                     $scope.nameButton = "Not interested";
                     $scope.error = data.error;
                 });
-            }else{
+            } else {
                 console.log(interestedAct);
                 url = "http://localhost:3000/api/activities/deleteinterested";
                 $http.post(url, {
@@ -347,7 +349,7 @@
             }
         };
 
-        function recentFirst(a,b) {
+        function recentFirst(a, b) {
             if (a.timestamp > b.timestamp)
                 return -1;
             if (a.timestamp < b.timestamp)
@@ -355,17 +357,16 @@
             return 0;
         }
 
-        $scope.getMostRecentActivities = function(){
+        $scope.getMostRecentActivities = function () {
 
-            dbService.getCollection('activities').then(function(response){
+            dbService.getCollection('activities').then(function (response) {
                 var numberOfActivities = 3;
                 var arrTemp = response.activitielist;
                 var arrAllActivities = [];
 
 
-
                 for (var i = 0, l = arrTemp.length; i < l; i++) {
-                    if(new Date(arrTemp[i].untilDate).getTime() >= new Date(dateTimeNow).getTime()) {
+                    if (new Date(arrTemp[i].untilDate).getTime() >= new Date(dateTimeNow).getTime()) {
                         console.log(new Date(arrTemp[i].untilDate));
                         arrAllActivities.push(arrTemp[i]);
                     }
@@ -375,20 +376,20 @@
 
                 var arrMostRecentActivities = [];
 
-                for(var ii=0; ii<numberOfActivities; ii++){
+                for (var ii = 0; ii < numberOfActivities; ii++) {
                     arrMostRecentActivities.push(arrAllActivities[ii]);
                 }
 
                 var matches = [];
 
-                    for(var iii=0; iii<arrMostRecentActivities.length; iii++) { 
+                for (var iii = 0; iii < arrMostRecentActivities.length; iii++) {
 
                     var dummyActivity = new Activity("No name", 8500, "Together", 2, "no description", "2016-01-01 00:01", "2017-12-31 23:59", new Date(), "no username", matches);
-                      if(arrMostRecentActivities[iii] === undefined){ 
-                    arrMostRecentActivities.splice(iii, 1, dummyActivity); 
+                    if (arrMostRecentActivities[iii] === undefined) {
+                        arrMostRecentActivities.splice(iii, 1, dummyActivity);
                     }
-                 }
-                  $scope.arrMostRecentActivities = arrMostRecentActivities;
+                }
+                $scope.arrMostRecentActivities = arrMostRecentActivities;
 
             });
         };
@@ -429,14 +430,14 @@
             });
         }
 
-        function resetForm(){
+        function resetForm() {
             var frm = document.getElementsByName('ActivityForm')[0];
             console.log('je komt in de resetform');
             frm.reset();
         }
     };
 
-    angular.module("app").controller("ActivitiesController", ["$scope", "dbService", "$http","$location", "$routeParams","fileUpload", ActivitiesController]);
+    angular.module("app").controller("ActivitiesController", ["$scope", "dbService", "$http", "$location", "$routeParams", "fileUpload", ActivitiesController]);
 
 
 })();
