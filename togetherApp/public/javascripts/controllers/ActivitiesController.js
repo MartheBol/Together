@@ -66,7 +66,6 @@
         function isInArray(value, array) {
             return array.indexOf(value);
         }
-
         function getKeywordsFromDescription(description, callback) {
 
             description = description.replaceAll('.', '');
@@ -102,8 +101,7 @@
 
             });
         }
-
-        function timeConsistOf2Numbers(number, callback){
+        function stringConsistOf2Numbers(number, callback){
                 var output = number + '';
                 if (output.length < 2) {
                     output = '0' + output;
@@ -125,8 +123,33 @@
 
 
         }
+        function fullDate(number, number2, callback){
+            stringConsistOf2Numbers(number, function(error, numberToString){
+                number = numberToString;
+                if(error){
+                    console.log(error);
+
+                }
+            });
+            stringConsistOf2Numbers(number2, function(error, numberToString){
+                number2 = numberToString;
+                if(error){
+                    console.log(error);
+
+                }
+            });
+
+            if(!number.isEmpty && !number2.isEmpty){
+                callback(null, number, number2);
+            }
+
+            else{
+                callback("No number.", null);
+            }
 
 
+
+        }
 
 
         $scope.addActivity = function() {
@@ -142,119 +165,129 @@
             var startTimeMin = this.startTimeMin;
             var endTimeHour = this.endTimeHour;
             var endTimeMin = this.endTimeMin;
+            var dateFromDay = this.dateFromDay;
+            var dateFromMonth = this.dateFromMonth;
+            var dateFromYear = this.dateFromYear.toString();
+            var dateUntilDay = this.dateUntilDay;
+            var dateUntilMonth = this.dateUntilMonth;
+            var dateUntilYear = this.dateUntilYear.toString();
 
+            fullDate(dateFromDay, dateFromMonth, function(error, dateFromdayString, dateFromMonthString){
+                dateFromDay = dateFromdayString;
+                dateFromMonth = dateFromMonthString;
+                if(error){
+                    console.log(error);
+                }
+            });
+            fullDate(dateUntilDay, dateUntilMonth, function(error, dateUntilDayString, dateUntilMonthString){
+                dateUntilDay = dateUntilDayString;
+                dateUntilMonth = dateUntilMonthString;
+                if(error){
+                    console.log(error);
+                }
+            });
 
 
             if((street !== undefined) &&
                 (number !== undefined) &&
                 (zipcode !== undefined) &&
                 (description !== undefined) &&
-                (dateFrom !== undefined) &&
-                (dateUntil !== undefined) &&
                 (timestamp !== undefined)){
 
-                if(dateFrom <= dateUntil) {
-                    $scope.error = "";
+                $scope.error = "";
 
-                    if (startTimeMin < 60 && startTimeHour < 25) {
+                if (startTimeMin < 60 && startTimeHour < 25) {
 
-                        timeConsistOf2Numbers(startTimeHour, function(error, startTimeHourString){
-                            startTimeHour = startTimeHourString;
-                            if(error){
-                                console.log(error);
-                            }
-                        });
-                        timeConsistOf2Numbers(startTimeMin, function(error, startTimeMinString){
-                            startTimeMin = startTimeMinString;
-                            if(error){
-                                console.log(error);
+                    stringConsistOf2Numbers(startTimeHour, function(error, startTimeHourString){
+                        startTimeHour = startTimeHourString;
+                        if(error){
+                            console.log(error);
+                        }
+                    });
+                    stringConsistOf2Numbers(startTimeMin, function(error, startTimeMinString){
+                        startTimeMin = startTimeMinString;
+                        if(error){
+                            console.log(error);
 
-                            }
-                        });
+                        }
+                    });
 
-                        console.log(startTimeHour);
-                        console.log(startTimeMin);
+                    console.log(startTimeHour);
+                    console.log(startTimeMin);
 
-                        if (startTimeMin.length === 2  && startTimeHour.length === 2) {
-                            console.log("je komt hier terecht");
+                    if (startTimeMin.length === 2  && startTimeHour.length === 2) {
+                        console.log("je komt hier terecht");
 
-                            if(endTimeMin < 60 && endTimeHour < 24){
-                                timeConsistOf2Numbers(endTimeHour, function(error, endTimeHourString){
-                                    endTimeHour = endTimeHourString;
-                                    if(error){
-                                        console.log(error);
-                                    }
-                                });
-                                timeConsistOf2Numbers(endTimeMin, function(error, endTimeMinString){
-                                    endTimeMin = endTimeMinString;
-                                    if(error){
-                                        console.log(error);
+                        if(endTimeMin < 60 && endTimeHour < 24){
+                            stringConsistOf2Numbers(endTimeHour, function(error, endTimeHourString){
+                                endTimeHour = endTimeHourString;
+                                if(error){
+                                    console.log(error);
+                                }
+                            });
+                            stringConsistOf2Numbers(endTimeMin, function(error, endTimeMinString){
+                                endTimeMin = endTimeMinString;
+                                if(error){
+                                    console.log(error);
 
-                                    }
-                                });
+                                }
+                            });
 
-                                console.log(endTimeHour);
-                                console.log(endTimeMin);
+                            console.log(endTimeHour);
+                            console.log(endTimeMin);
 
                             if (endTimeMin.toString().length === 2 && endTimeHour.toString().length === 2) {
 
                                 console.log(startTimeHour + ":" + startTimeMin);
 
                                 getKeywordsFromDescription(description, function (error, data) {
-                                 description = data;
-                                 if(!error){
-                                 console.log(startTimeHour + ":" + startTimeMin);
+                                    description = data;
+                                    if(!error){
+                                        console.log(startTimeHour + ":" + startTimeMin);
 
-                                 var url = "http://localhost:3000/api/activities/addactivity";
-                                 $http.post(url, {
-                                 activityName:activityName,
-                                 street : street,
-                                 number: number,
-                                 zipcode: zipcode,
-                                 description : description,
-                                 dateFrom : (dateFrom.toISOString()).substring(0,10) + " " + startTimeHour + ":" +  startTimeMin,
-                                 dateUntil : (dateUntil.toISOString()).substring(0,10) + " " + endTimeHour + ":" +  endTimeMin,
-                                 timestamp : timestamp
+                                        var url = "http://localhost:3000/api/activities/addactivity";
+                                        $http.post(url, {
+                                            activityName:activityName,
+                                            street : street,
+                                            number: number,
+                                            zipcode: zipcode,
+                                            description : description,
+                                            dateFrom : dateFromYear + "-" + dateFromMonth + "-" +  dateFromDay + " " + startTimeHour + ":" + startTimeMin ,
+                                            dateUntil : dateUntilYear + "-" + dateFromMonth +"-" + dateUntilDay + " " + endTimeHour + ":" +  endTimeMin,
+                                            timestamp : timestamp
 
-                                 }).success(function (data) {
-                                 $scope.error = data.error;
-                                 $scope.getActivities();
-                                 resetForm();
+                                        }).success(function (data) {
+                                            $scope.error = data.error;
+                                            $scope.getActivities();
+                                            resetForm();
 
-                                 //$location.path(data.redirect);
-                                 });
+                                            //$location.path(data.redirect);
+                                        });
 
-                                 }
-                                 else{
-                                 console.log(error);
-                                 }
-                                 });
+                                    }
+                                    else{
+                                        console.log(error);
+                                    }
+                                });
                             }
 
                             else {
                                 $scope.error = "Enddate input is not correct";
                             }
-                            }
-
-                            else{
-                                $scope.error = "Endtime input is not correct";
-                            }
-
                         }
 
-                        else {
-                            $scope.error = 'foutje!!!! ';
+                        else{
+                            $scope.error = "Endtime input is not correct";
                         }
+
                     }
 
                     else {
-                        $scope.error = "Starttime input is not correct";
+                        $scope.error = 'De startime length is not correct!!!! ';
                     }
                 }
-
-
-                else if(dateFrom > dateUntil){
-                    $scope.error = "ERROR: Date until can't be earlier than date from.";
+                else {
+                    $scope.error = "Starttime input is not correct";
                 }
 
 

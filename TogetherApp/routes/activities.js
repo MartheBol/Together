@@ -10,7 +10,7 @@ var activityCollection = mongoose.model('Activity', activitySchema, "activities"
 var find_correctactivity = require('../routes/middelware/find_correctactivity.js');
 
 router.post('/addactivity', function(req, res) {
-    if (!req.body.activityName || !req.body.dateFrom || !req.body.dateUntil) {
+    if (!req.body.activityName) {
         res.json({ error: 'All fields are required' });
     }else{
         //newActivity.image = req.body.fileinput;
