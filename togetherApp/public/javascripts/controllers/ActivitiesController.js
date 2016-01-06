@@ -206,22 +206,15 @@
                                  console.log(startTimeHour + ":" + startTimeMin);
 
                                  var url = "http://localhost:3000/api/activities/addactivity";
-                                     var timeStart = startTimeHour + ":" +  startTimeMin;
-                                     var dateFromFull = dateFrom + timeStart  ;
-                                        console.log(dateFromFull);
-
-                                     console.log(dateUntil);
                                  $http.post(url, {
                                  activityName:activityName,
                                  street : street,
                                  number: number,
                                  zipcode: zipcode,
                                  description : description,
-                                 dateFrom : dateFromFull,
-                                 dateUntil : dateUntil,
-                                 timestamp : timestamp,
-                                     timeFrom: startTimeHour + ":" +  startTimeMin,
-                                     timeUntil: endTimeHour + ":" +  endTimeMin
+                                 dateFrom : (dateFrom.toISOString()).substring(0,10) + " " + startTimeHour + ":" +  startTimeMin,
+                                 dateUntil : (dateUntil.toISOString()).substring(0,10) + " " + endTimeHour + ":" +  endTimeMin,
+                                 timestamp : timestamp
 
                                  }).success(function (data) {
                                  $scope.error = data.error;
@@ -282,14 +275,9 @@
         };
 
         $scope.interested = function(activityName,interestedUser, createrUser){
-            console.log("IK BEN GEÏNTERESSEERD!");
-            console.log(activityName);
-            console.log(interestedUser);
-            console.log(createrUser);
             var url = "";
             var interestedAct = $scope.interestedAct;
             if(interestedAct !== false) {
-                console.log(interestedAct);
 
                 url = "http://localhost:3000/api/activities/interested";
                 $http.post(url, {
@@ -349,12 +337,6 @@
                 for(var ii=0; ii<numberOfActivities; ii++){
                     arrMostRecentActivities.push(arrAllActivities[ii]);
                 }
-
-                //console.log("[arrAllActivities]: ");
-                //console.log(arrAllActivities);
-                //console.log("[arrMostRecentActivities]: ");
-                //console.log(arrMostRecentActivities);
-
                 $scope.arrMostRecentActivities = arrMostRecentActivities;
 
             });

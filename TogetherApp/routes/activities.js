@@ -14,23 +14,20 @@ router.post('/addactivity', function(req, res) {
         res.json({ error: 'All fields are required' });
     }else{
         //newActivity.image = req.body.fileinput;
-        var fromdate = req.body.dateFrom,
-            fromdateShort = fromdate.substring(0, 10);
-        var untildate = req.body.dateFrom,
-            untildateShort = untildate.substring(0, 10);
         var matches = [];
         matches.push(req.user.username);
+        console.log("De eindtijd is: " + req.body.endTimeHour + req.body.endTimeMin)
         var newActivity = new Activity({
             activityName :req.body.activityName,
             zipcode :req.body.zipcode,
             street: req.body.street,
             number: req.body.number,
             description :req.body.description,
-            fromDate : fromdateShort,
-            untilDate : untildateShort,
+            fromDate :  req.body.dateFrom,
+            untilDate :  req.body.dateUntil,
             timestamp : req.body.timestamp,
             user : req.user.username,
-            matches:matches,
+            matches:matches
 
         });
         console.log(newActivity);
