@@ -125,16 +125,19 @@
 
         <div class="row">
 
-            <div class="col-sm-4" ng-repeat="activity in arrMostRecentActivities track by activity._id">
+            <div class="col-sm-4" ng-repeat="activity in arrMostRecentActivities">
                 <div class="col-lg-12 shadow">
-                    <img class="img-circle img-responsive img-center" ng-src="{{activity.img}}" height="100" width="100">
-                    <h2 class="text-center">Most recent</h2>
+                    <img class="img-responsive top-left mine" src="../images/most_recent.png" width="50" height="50"/>
+                    <h2 class="text-center">{{activity.activityName}}</h2>
                     <div class="info text-center ">
                         <div  class="text-left">
-                            <p>{{activity.activityName}}</p>
                             <p>{{activity.street}} {{activity.number}}, {{activity.zipcode}}<span class="fa fa-map-marker fa-pull-right"></span> </p>
-                            <!-- <p>{{activity.participants}}<span class="fa fa-check fa-pull-right"></span></p> -->
                             <p>{{activity.description}}<span class="fa fa-hashtag fa-pull-right"></span></p>
+                            <p>{{activity.matches.length}}
+                                <span ng-show="(activity.matches.length) === 1"> person </span>
+                                <span ng-hide="(activity.matches.length) === 1"> people </span>
+                                interested
+                                <span class="fa fa-star fa-pull-right"></span></p>
                         </div>
                     </div>
                 </div>
