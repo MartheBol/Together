@@ -30,7 +30,8 @@ router.post('/addactivity', function(req, res) {
             untilDate : untildateShort,
             timestamp : req.body.timestamp,
             user : req.user.username,
-            matches:matches
+            matches:matches,
+
         });
         console.log(newActivity);
 

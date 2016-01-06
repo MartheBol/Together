@@ -210,6 +210,7 @@ h1,h2{
     margin-bottom: 10px;
   }
 
+
 }
 
 .info_activities div{
@@ -222,7 +223,21 @@ h1,h2{
     margin-bottom: 10px;
   }
 
+  .time{
+    color:black;
+    border: none;
+    display:inline;
+  }
+
+  .timeinput{
+    display:inline;
+    width: 20%;
+    padding: 0;
+  }
+
 }
+
+
 
 .vcenter{
   margin-top: 70px;
@@ -238,7 +253,7 @@ h1,h2{
   resize: none;
 }
 
-input[type="text"], input[type="password"], input[type="email"], input[type="date"] {
+input[type="text"], input[type="password"], input[type="email"], input[type="date"], input[type="time"], input[type="number"] {
   border-bottom: solid @subColor 1px;
   box-shadow: none;
   -webkit-border-radius:0 ;
@@ -256,9 +271,17 @@ input[type="text"], input[type="password"], input[type="email"], input[type="dat
 
 }
 
+input[type="time"]{
+  width: 50%;
+}
+
 
 label{
   margin-right: 10px;
+}
+
+.right-inner-addon label{
+  display: block;
 }
 
 .row{
@@ -268,7 +291,6 @@ label{
 
 .login{
   @media (min-width: 768px){
-    margin: 0 14px;
   }
 }
 
@@ -328,6 +350,10 @@ editable-checkbox{
   top: 0;
   z-index: 10;
 }
+
+.alert-danger{
+  margin-top:10px;
+}
 //ICON RECHTS ZETTEN!
 /*.left-inner-addon {
  position: relative;
@@ -341,3 +367,7 @@ editable-checkbox{
  padding: 10px 12px;
  pointer-events: none;
 }*/
+
+
+
+

@@ -14,6 +14,9 @@ var activitySchema = mongoose.Schema({
     image: String,
     timestamp:String,
     user: String,
-    matches:Array
+    matches:Array,
+    timeFrom: String,
+    timeUntil: String
+
 });
 module.exports = activitySchema;

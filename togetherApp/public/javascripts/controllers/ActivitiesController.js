@@ -23,7 +23,7 @@
                     var activtyDateSplit = arrTemp[i].untilDate.substring(0,10).split("-"),
                         sumActivity =  activtyDateSplit[0] + activtyDateSplit[1] + activtyDateSplit[2];
                     if ( sumActivity >= sumToday) {
-                        arrActs.push(arrTemp[i]);
+                      arrActs.push(arrTemp[i]);
                     }
                 }
 
@@ -103,8 +103,33 @@
             });
         }
 
+        function timeConsistOf2Numbers(number, callback){
+                var output = number + '';
+                if (output.length < 2) {
+                    output = '0' + output;
+                    number = output.toString();
+
+                }
+                else{
+                    number = number.toString();
+                }
+
+
+            if(!number.isEmpty){
+                callback(null, number);
+            }
+
+            else{
+                callback("No number.", null);
+            }
+
+
+        }
+
+
+
+
         $scope.addActivity = function() {
-            console.log("ADD ACTIVITY");
             var activityName = this.activityName;
             var street = this.street;
             var number = this.number;
@@ -113,7 +138,12 @@
             var dateFrom = this.dateFrom;
             var dateUntil = this.dateUntil;
             var timestamp = new Date().getTime();
-            console.log(street);
+            var startTimeHour  = this.startTimeHour;
+            var startTimeMin = this.startTimeMin;
+            var endTimeHour = this.endTimeHour;
+            var endTimeMin = this.endTimeMin;
+
+
 
             if((street !== undefined) &&
                 (number !== undefined) &&
@@ -123,48 +153,117 @@
                 (dateUntil !== undefined) &&
                 (timestamp !== undefined)){
 
-                if(dateFrom <= dateUntil){
+                if(dateFrom <= dateUntil) {
                     $scope.error = "";
 
-                    getKeywordsFromDescription(description, function (error, data) {
-                        if(!error){
-                            description = data;
-                            var url = "http://localhost:3000/api/activities/addactivity";
+                    if (startTimeMin < 60 && startTimeHour < 25) {
 
-                            /*var file = $scope.myFile; 
-                            var uploadUrl = "/images/activities/" + file.name;
-                            fileUpload.uploadFileToUrl(file, uploadUrl); 
-                            console.log(uploadUrl);*/
+                        timeConsistOf2Numbers(startTimeHour, function(error, startTimeHourString){
+                            startTimeHour = startTimeHourString;
+                            if(error){
+                                console.log(error);
+                            }
+                        });
+                        timeConsistOf2Numbers(startTimeMin, function(error, startTimeMinString){
+                            startTimeMin = startTimeMinString;
+                            if(error){
+                                console.log(error);
 
-                            $http.post(url, {
-                             activityName:activityName,
-                             street : street,
-                             number: number,
-                             zipcode: zipcode,
-                             description : description,
-                             dateFrom : dateFrom,
-                             dateUntil : dateUntil,
-                             timestamp : timestamp
-                             }).success(function (data) {
-                             console.log(data);
-                                console.log('activity is opgeslaan');
-                             $scope.error = data.error;
-                             $scope.getActivities();
-                             resetForm();
-                             //$location.path(data.redirect);
-                             });
+                            }
+                        });
+
+                        console.log(startTimeHour);
+                        console.log(startTimeMin);
+
+                        if (startTimeMin.length === 2  && startTimeHour.length === 2) {
+                            console.log("je komt hier terecht");
+
+                            if(endTimeMin < 60 && endTimeHour < 24){
+                                timeConsistOf2Numbers(endTimeHour, function(error, endTimeHourString){
+                                    endTimeHour = endTimeHourString;
+                                    if(error){
+                                        console.log(error);
+                                    }
+                                });
+                                timeConsistOf2Numbers(endTimeMin, function(error, endTimeMinString){
+                                    endTimeMin = endTimeMinString;
+                                    if(error){
+                                        console.log(error);
+
+                                    }
+                                });
+
+                                console.log(endTimeHour);
+                                console.log(endTimeMin);
+
+                            if (endTimeMin.toString().length === 2 && endTimeHour.toString().length === 2) {
+
+                                console.log(startTimeHour + ":" + startTimeMin);
+
+                                getKeywordsFromDescription(description, function (error, data) {
+                                 description = data;
+                                 if(!error){
+                                 console.log(startTimeHour + ":" + startTimeMin);
+
+                                 var url = "http://localhost:3000/api/activities/addactivity";
+                                     var timeStart = startTimeHour + ":" +  startTimeMin;
+                                     var dateFromFull = dateFrom + timeStart  ;
+                                        console.log(dateFromFull);
+
+                                     console.log(dateUntil);
+                                 $http.post(url, {
+                                 activityName:activityName,
+                                 street : street,
+                                 number: number,
+                                 zipcode: zipcode,
+                                 description : description,
+                                 dateFrom : dateFromFull,
+                                 dateUntil : dateUntil,
+                                 timestamp : timestamp,
+                                     timeFrom: startTimeHour + ":" +  startTimeMin,
+                                     timeUntil: endTimeHour + ":" +  endTimeMin
+
+                                 }).success(function (data) {
+                                 $scope.error = data.error;
+                                 $scope.getActivities();
+                                 resetForm();
+
+                                 //$location.path(data.redirect);
+                                 });
+
+                                 }
+                                 else{
+                                 console.log(error);
+                                 }
+                                 });
+                            }
+
+                            else {
+                                $scope.error = "Enddate input is not correct";
+                            }
+                            }
+
+                            else{
+                                $scope.error = "Endtime input is not correct";
+                            }
 
                         }
-                        else{
-                            console.log(error);
+
+                        else {
+                            $scope.error = 'foutje!!!! '
                         }
-                    });
+                    }
 
-
+                    else {
+                        $scope.error = "Starttime input is not correct";
+                    }
                 }
+
+
                 else if(dateFrom > dateUntil){
                     $scope.error = "ERROR: Date until can't be earlier than date from.";
                 }
+
 
             }
             else{

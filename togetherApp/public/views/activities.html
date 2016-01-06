@@ -1,224 +1,250 @@
 <!-- Navigation -->
 
 <div ng-controller="userController">
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
 
-            <a class="navbar-brand" href="#/admin" ng-hide="(auth.isAuth && !auth.isAdmin) || (!auth.isAuth)">Together.</a>
-            <a class="navbar-brand" href="#/home" ng-show="(auth.isAuth && !auth.isAdmin) || (!auth.isAuth)">Together.</a>
+                <a class="navbar-brand" href="#/admin" ng-hide="(auth.isAuth && !auth.isAdmin) || (!auth.isAuth)">Together.</a>
+                <a class="navbar-brand" href="#/home" ng-show="(auth.isAuth && !auth.isAdmin) || (!auth.isAuth)">Together.</a>
 
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#/howto">how to</a>
+                    </li>
+                    <li ng-hide="auth.isAuth">
+                        <a href="#/signup">register</a>
+                    </li>
+                    <li ng-show="auth.isAuth && !auth.isAdmin" class="active">
+                        <a href="#/activities">activities</a>
+                    </li>
+                    <li ng-show="auth.isAuth && !auth.isAdmin">
+                        <a href="#/matches">matches</a>
+                    </li>
+                    <li ng-show="auth.isAuth && !auth.isAdmin">
+                        <a href="#/searchprofiles">search profiles</a>
+                    </li>
+                    <li>
+
+                        <button class="btn-dropdown dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
+                                ng-show="auth.isAuth">
+
+                            {{user.username}} <b class="caret"></b>
+
+                        </button>
+
+                        <ul class="dropdown-menu">
+                            <li><a tabindex="-1" href="#/myprofile">My profile</a></li>
+                            <li><a tabindex="-1" href="/logout">Logout</a></li>
+                            <li ng-show="auth.isAuth && auth.isAdmin" class="divider"></li>
+                            <li ng-show="auth.isAuth && auth.isAdmin"><a tabindex="-1" href="#/{{user.username}}">Admin
+                                page</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
         </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li>
-                    <a href="#/howto">how to</a>
-                </li>
-                <li ng-hide="auth.isAuth">
-                    <a href="#/signup">register</a>
-                </li>
-                <li ng-show="auth.isAuth && !auth.isAdmin" class="active">
-                    <a href="#/activities">activities</a>
-                </li>
-                <li ng-show="auth.isAuth && !auth.isAdmin">
-                    <a href="#/matches">matches</a>
-                </li>
-                <li ng-show="auth.isAuth && !auth.isAdmin">
-                    <a href="#/searchprofiles">search profiles</a>
-                </li>
-                <li>
+        <!-- /.container -->
+    </nav>
 
-                    <button class="btn-dropdown dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" ng-show="auth.isAuth">
 
-                        {{user.username}} <b class="caret"></b>
+    <section ng-hide="(!auth.isAuth)" ng-controller="ActivitiesController" data-ng-init="getActivities()">
+        <!-- Introduction Row -->
+        <div class="title text-center">
+            <h1>Together.</h1>
 
-                    </button>
-
-                    <ul class="dropdown-menu">
-                        <li><a tabindex="-1" href="#/myprofile">My profile</a></li>
-                        <li><a tabindex="-1" href="/logout">Logout</a></li>
-                        <li ng-show="auth.isAuth && auth.isAdmin"  class="divider"></li>
-                        <li ng-show="auth.isAuth && auth.isAdmin"><a tabindex="-1" href="#/{{user.username}}">Admin page</a></li>
-                    </ul>
-                </li>
-            </ul>
+            <p>Activities</p>
+            <img src="../images/title_line.png">
         </div>
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container -->
-</nav>
+        <div class="line"></div>
+
+        <!--
+        <div class="text-center">
+            <h2>{{aantalMatches}} matches</h2>
+        </div>
+        -->
+
+        <div class="row">
+
+            <div class="col-sm-8">
+
+                <form ng-submit="addActivity()" name="ActivityForm">
 
 
-<section ng-hide="(!auth.isAuth)" ng-controller="ActivitiesController" data-ng-init="getActivities()">
-    <!-- Introduction Row -->
-    <div class="title text-center">
-        <h1>Together.</h1>
 
-        <p>Activities</p>
-        <img src="../images/title_line.png">
-    </div>
-    <div class="line"></div>
+                    <div class="col-lg-12 shadow">
+                        <div ng-show="error" class="alert alert-danger">{{ error }}</div>
 
-    <!--
-    <div class="text-center">
-        <h2>{{aantalMatches}} matches</h2>
-    </div>
-    -->
-
-    <div class="row">
-
-        <div class="col-sm-8">
-
-            <form ng-submit="addActivity()" name="ActivityForm">
-
-            <div ng-show="error" class="alert alert-danger">{{ error }}</div>
-
-            <div class="col-lg-12 shadow">
-
-                <div class="padding-top center-block">
-                    <!--
-                    <img id="imgActivity" class="img-circle img-responsive img-center" src="http://placehold.it/100x100" height="100" width="100">
-
-                    <input class="center-block" type='file' onchange="readURL(this);" />
-                    -->
-
-                    <div class="fileinput fileinput-new " data-provides="fileinput">
-                        <input class="btn btn-default btn-file" type="file" name="fileinput" file-model="myFile" />
-                        <span class=" fileinput-filename fileinput-new"></span>
-                    </div>
-
-                </div>
-
-                <div class="col-lg-12">
-
-                    <div class="info_activities col-sm-6 ">
-
-                        <div class="right-inner-addon">
-
-                            <input type="text"
-                                   class="form-control"
-                                   placeholder="name"
-                                   name="activityName"
-                                   ng-model="activityName"/>
-
-                            <i class="fa fa-map-marker fa-lg"></i>
-                            <input type="text"
-                                   class="form-control"
-                                   placeholder="zipcode"
-                                   name="zipcode"
-                                   ng-model="zipcode"/>
-
-                            <input type="text"
-                                   class="form-control"
-                                   placeholder="street"
-                                   name="street"
-                                   ng-model="street"/>
-
-                            <input type="text"
-                                   class="form-control"
-                                   placeholder="number"
-                                   name="number"
-                                   ng-model="number"/>
-
-
-                            <label for="comment">description</label>
-                            <textarea class="form-control" rows="5" id="comment" name="comment" ng-model="comment"></textarea>
-
+                        <div class="padding-top center-block">
 
                         </div>
 
-                    </div>
+                        <div class="col-lg-12">
 
-                    <div class="info_activities col-sm-6">
+                            <div class="info_activities col-sm-6 ">
 
-                        <div class="right-inner-addon -align-right">
+                                <div class="right-inner-addon">
 
-                            <label for="dateFrom">from</label>
-                            <input type="date"
-                                   class="form-control"
-                                   id="dateFrom"
-                                   name="dateFrom"
-                                   ng-model="dateFrom"/>
+                                    <input type="text"
+                                           class="form-control"
+                                           placeholder="name"
+                                           name="activityName"
+                                           ng-model="activityName"/>
 
-                            <label for="dateUntil">until</label>
-                            <input type="date"
-                                   class="form-control"
-                                   id="dateUntil"
-                                   name="dateUntil"
-                                   ng-model="dateUntil"/>
+                                    <i class="fa fa-map-marker fa-lg"></i>
+                                    <input type="text"
+                                           class="form-control"
+                                           placeholder="zipcode"
+                                           name="zipcode"
+                                           ng-model="zipcode"/>
+
+
+                                    <input type="text"
+                                           class="form-control"
+                                           placeholder="street"
+                                           name="street"
+                                           ng-model="street"/>
+
+                                    <input type="text"
+                                           class="form-control"
+                                           placeholder="number"
+                                           name="number"
+                                           ng-model="number"/>
+
+
+                                    <label for="comment">description</label>
+                                    <textarea class="form-control" rows="5" id="comment" name="comment"
+                                              ng-model="comment"></textarea>
+
+
+                                </div>
+
+                            </div>
+
+                            <div class="info_activities col-sm-6">
+
+                                <div class="right-inner-addon -align-right">
+
+
+                                    <label for="dateFrom">from</label>
+                                    <i class="fa fa-calendar"></i>
+                                    <input type="date"
+                                           class="form-control"
+                                           id="dateFrom"
+                                           name="dateFrom"
+                                           ng-model="dateFrom"/>
+
+                                    <i class="fa fa-clock-o"></i>
+                                    <input type="number"
+                                           class="form-control timeinput"
+                                           name="startTimeHour"
+                                           ng-model="startTimeHour"
+                                           placeholder="hh"/>
+                                    <p class="time">&colon;</p>
+                                    <input type="number"
+                                           class="form-control timeinput"
+                                           name="startTimeMin"
+                                           ng-model="startTimeMin"
+                                           placeholder="mm"/>
+                                    <label for="dateUntil">until</label>
+                                    <i class="fa fa-calendar"></i>
+                                    <input type="date"
+                                           class="form-control"
+                                           id="dateUntil"
+                                           name="dateUntil"
+                                           ng-model="dateUntil"/>
+                                    <i class="fa fa-clock-o"></i>
+                                    <input type="number"
+                                           class="form-control timeinput"
+                                           name="endTimeHour"
+                                           ng-model="endTimeHour"
+                                            placeholder="hh"/>
+                                    <p class="time">&colon;</p>
+                                    <input type="number"
+                                           class="form-control timeinput"
+                                           name="endTimeMin"
+                                           ng-model="endTimeMin"
+                                            placeholder="mm"/>
+
+                                </div>
+
+                            </div>
 
                         </div>
 
+                        <button class="btn center-block" type="submit" name="addActivity">Add activity</button>
+
                     </div>
-
-                    <button class="btn center-block" type="submit" name="addActivity">Add activity</button>
-
-                </div>
 
             </div>
 
             </form>
+            <div class="col-sm-4">
+                <div class="col-lg-12 shadow inverse">
+                    <!-- <img class="center-block" src="../images/arrow.png" width="200px"> -->
 
-        </div>
-
-        <div class="col-sm-4">
-            <div class="col-lg-12 shadow inverse">
-                <!-- <img class="center-block" src="../images/arrow.png" width="200px"> -->
-
-                <h2 class="text-center">Add a new activity!</h2>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="row">
-
-        <div class="col-sm-4" ng-repeat="activity in arrActivities">
-            <div class="col-lg-12 shadow">
-                <img ng-show="activity.user == user.username" class="img-responsive top-left mine" src="../images/mine.png" width="50" height="50" />
-                <img class="img-circle img-responsive img-center" ng-src="{{activity.image}}" height="100" width="100">
-                <h2 class="text-center">{{activity.activityName}}</h2>
-                <div class="info text-center ">
-                    <div  class="text-left">
-                        <p>{{activity.street}} {{activity.number}}, {{activity.zipcode}}<span class="fa fa-map-marker fa-pull-right"></span> </p>
-                        <p>{{activity.description}}<!-- Keywords --><span class="fa fa-hashtag fa-pull-right"></span></p>
-                        <!--<p>{{activity.participants}}<span class="fa fa-check fa-pull-right"></span></p>-->
-                    </div>
+                    <h2 class="text-center">Add a new activity!</h2>
                 </div>
-                <a class="btn center-block btna" name="checkEvent" href="#/activitydetails/{{activity.activityName}}">Check event</a>
             </div>
-
 
         </div>
 
 
+<div class="row">
+    <div class="col-sm-4" ng-repeat="activity in arrActivities">
+        <div class="col-lg-12 shadow">
+            <img ng-show="activity.user == user.username" class="img-responsive top-left mine" src="../images/mine.png"
+                 width="50" height="50"/>
+            <img class="img-circle img-responsive img-center" ng-src="{{activity.image}}" height="100" width="100">
+
+            <h2 class="text-center">{{activity.activityName}}</h2>
+
+            <div class="info text-center ">
+                <div class="text-left">
+                    <p>{{activity.street}} {{activity.number}}, {{activity.zipcode}}<span
+                            class="fa fa-map-marker fa-pull-right"></span></p>
+
+                    <p>{{activity.description}}<!-- Keywords --><span class="fa fa-hashtag fa-pull-right"></span></p>
+                    <!--<p>{{activity.participants}}<span class="fa fa-check fa-pull-right"></span></p>-->
+                </div>
+            </div>
+            <a class="btn center-block btna" name="checkEvent" href="#/activitydetails/{{activity.activityName}}">Check
+                event</a>
+        </div>
+
 
     </div>
+
+
+</div>
 
 </section>
 
-    <!--
+<!--
 <section ng-show="(!auth.isAuth)">
-    <div class="title text-center">
+<div class="title text-center">
 
-        <h1>You are not allowed on this page.</h1>
-        <p><a href="#/home">Return to home-page</a></p>
+    <h1>You are not allowed on this page.</h1>
+    <p><a href="#/home">Return to home-page</a></p>
 
-        <img src="../images/title_line.png">
+    <img src="../images/title_line.png">
 
 
-    </div>
+</div>
 
 </section>
 -->
-    </div>
+</div>
 
