@@ -4,6 +4,7 @@
 
 (function() {
 
+    var dateTimeNow = new Date().toISOString().substring(0,10) + " " + new Date().toISOString().substring(11,16);
     "use strict";
     var ActivitiesController = function ($scope, dbService, $http, $location, $routeParams, $route) {
         $scope.interestedAct=true;
@@ -15,15 +16,11 @@
                 var arrTemp = response.activitielist;
                 var arrActs = [];
 
-                /*var today = new Date().toISOString().substring(0, 10),
-                    todaySplit = today.split("-"),
-                    sumToday =  todaySplit[0] +  todaySplit[1] +  todaySplit[2];*/
 
                 for (var i = 0, l = arrTemp.length; i < l; i++) {
-                    /*var activtyDateSplit = arrTemp[i].untilDate.substring(0,10).split("-"),
-                        sumActivity =  activtyDateSplit[0] + activtyDateSplit[1] + activtyDateSplit[2];
-                    if ( sumActivity >= sumToday) {*/
-                      arrActs.push(arrTemp[i]);
+                    if(new Date(arrTemp[i].untilDate).getTime() >= new Date(dateTimeNow).getTime()) {
+                        arrActs.push(arrTemp[i]);
+                    }
                 }
 
                 $scope.arrActivities = arrActs;
@@ -101,15 +98,15 @@
             });
         }
         function stringConsistOf2Numbers(number, callback){
-                var output = number + '';
-                if (output.length < 2) {
-                    output = '0' + output;
-                    number = output.toString();
+            var output = number + '';
+            if (output.length < 2) {
+                output = '0' + output;
+                number = output.toString();
 
-                }
-                else{
-                    number = number.toString();
-                }
+            }
+            else{
+                number = number.toString();
+            }
 
 
             if(!number.isEmpty){
@@ -358,19 +355,17 @@
         }
 
         $scope.getMostRecentActivities = function(){
-            dbService.getCollection('activities').then(function(response){
 
+            dbService.getCollection('activities').then(function(response){
                 var numberOfActivities = 3;
                 var arrTemp = response.activitielist;
                 var arrAllActivities = [];
 
 
+
                 for (var i = 0, l = arrTemp.length; i < l; i++) {
-
-                    var dateActivity = new Date(arrTemp[i].untilDate).getTime();
-                    var dateToday = new Date().getTime();
-
-                    if (dateActivity < dateToday) {
+                    if(new Date(arrTemp[i].untilDate).getTime() >= new Date(dateTimeNow).getTime()) {
+                        console.log(new Date(arrTemp[i].untilDate));
                         arrAllActivities.push(arrTemp[i]);
                     }
                 }
@@ -383,6 +378,7 @@
                     arrMostRecentActivities.push(arrAllActivities[ii]);
                 }
                 $scope.arrMostRecentActivities = arrMostRecentActivities;
+
             });
         };
 

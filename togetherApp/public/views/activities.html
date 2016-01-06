@@ -138,13 +138,27 @@
                                 <div class="right-inner-addon -align-right">
 
 
-                                    <label for="dateFrom">from</label>
+                                    <label >from</label>
                                     <i class="fa fa-calendar"></i>
-                                    <input type="date"
-                                           class="form-control"
-                                           id="dateFrom"
-                                           name="dateFrom"
-                                           ng-model="dateFrom"/>
+                                    <div>
+                                    <input type="number"
+                                           class="form-control dateinput"
+                                           name="dateFromDay"
+                                           ng-model="dateFromDay"
+                                           placeholder="dd"/>
+                                    <p class="date">&sol;</p>
+                                    <input type="number"
+                                           class="form-control dateinput"
+                                           name="dateFromMonth"
+                                           ng-model="dateFromMonth"
+                                           placeholder="mm"/>
+                                    <p class="date">&sol;</p>
+                                    <input type="number"
+                                           class="form-control dateinput"
+                                           name="dateFromYear"
+                                           ng-model="dateFromYear"
+                                           placeholder="yy"/>
+                                    </div>
 
                                     <i class="fa fa-clock-o"></i>
                                     <input type="number"
@@ -158,13 +172,27 @@
                                            name="startTimeMin"
                                            ng-model="startTimeMin"
                                            placeholder="mm"/>
-                                    <label for="dateUntil">until</label>
+                                    <label>until</label>
                                     <i class="fa fa-calendar"></i>
-                                    <input type="date"
-                                           class="form-control"
-                                           id="dateUntil"
-                                           name="dateUntil"
-                                           ng-model="dateUntil"/>
+                                    <div>
+                                    <input type="number"
+                                           class="form-control dateinput"
+                                           name="dateUntilDay"
+                                           ng-model="dateUntilDay"
+                                           placeholder="dd"/>
+                                    <p class="date">&sol;</p>
+                                    <input type="number"
+                                           class="form-control dateinput"
+                                           name="dateUntilMonth"
+                                           ng-model="dateUntilMonth"
+                                           placeholder="mm"/>
+                                    <p class="date">&sol;</p>
+                                    <input type="number"
+                                           class="form-control dateinput"
+                                           name="dateUntilYear"
+                                           ng-model="dateUntilYear"
+                                           placeholder="yy"/>
+                                </div>
                                     <i class="fa fa-clock-o"></i>
                                     <input type="number"
                                            class="form-control timeinput"
