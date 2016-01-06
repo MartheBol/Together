@@ -364,8 +364,13 @@
                 var arrTemp = response.activitielist;
                 var arrAllActivities = [];
 
+
                 for (var i = 0, l = arrTemp.length; i < l; i++) {
-                    if (new Date(arrTemp[i].untilDate).getTime() > new Date().getTime()) {
+
+                    var dateActivity = new Date(arrTemp[i].untilDate).getTime();
+                    var dateToday = new Date().getTime();
+
+                    if (dateActivity < dateToday) {
                         arrAllActivities.push(arrTemp[i]);
                     }
                 }
@@ -378,7 +383,6 @@
                     arrMostRecentActivities.push(arrAllActivities[ii]);
                 }
                 $scope.arrMostRecentActivities = arrMostRecentActivities;
-
             });
         };
 
