@@ -97,6 +97,47 @@
                 </tbody>
             </table>
         </div>
+        <div class="container" ng-controller="ActivitiesController" data-ng-init="getActivities()">
+            <p>{{arrUsers.length}} users</p>
+            <div ng-show="infodeletedUser !== undefined" class="alert alert-danger">{{infodeletedUser}}</div>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Activity name</th>
+                    <th>Zipcode</th>
+                    <th>Street</th>
+                    <th>Number</th>
+                    <th>Description</th>
+                    <th>From date</th>
+                    <th>Until date</th>
+                    <th>User</th>
+                    <th>Timestamp</th>
+                    <th>Details</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+                <tr ng-repeat="activity in arrActivities">
+                    <td>{{activity._id}}</td>
+                    <td>{{activity.activityName}}</td>
+                    <td>{{activity.zipcode}}</td>
+                    <td>{{activity.street}}</td>
+                    <td>{{activity.number}}</td>
+                    <td>{{activity.description}}</td>
+                    <td>{{activity.fromDate}}</td>
+                    <td>{{activity.untilDate}}</td>
+                    <td>{{activity.user}}</td>
+                    <td>{{activity.timestamp}}</td>
+
+                    <td><a href="#/activitydetails/{{activity.activityName}}">View details</a></td>
+                    <!--<td><a ng-click="deleteUser(user.username)" ng-show="user.deleted === false">Delete user</a></td>-->
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
 
     </section>
     <section ng-show="(auth.isAuth && !auth.isAdmin) || (!auth.isAuth)">
