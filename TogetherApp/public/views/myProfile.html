@@ -10,8 +10,10 @@
                 <span class="icon-bar"></span>
             </button>
 
-            <a class="navbar-brand" href="#/admin" ng-hide="(auth.isAuth && !auth.isAdmin) || (!auth.isAuth)">Together.</a>
-            <a class="navbar-brand" href="#/home" ng-show="(auth.isAuth && !auth.isAdmin) || (!auth.isAuth)">Together.</a>
+            <a class="navbar-brand" href="#/admin"
+               ng-hide="(auth.isAuth && !auth.isAdmin) || (!auth.isAuth)">Together.</a>
+            <a class="navbar-brand" href="#/home"
+               ng-show="(auth.isAuth && !auth.isAdmin) || (!auth.isAuth)">Together.</a>
 
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -34,7 +36,8 @@
                 </li>
                 <li>
 
-                    <button class="btn-dropdown dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" ng-show="auth.isAuth">
+                    <button class="btn-dropdown dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
+                            ng-show="auth.isAuth">
 
                         {{user.username}} <b class="caret"></b>
 
@@ -43,8 +46,9 @@
                     <ul class="dropdown-menu">
                         <li><a tabindex="-1" href="#/myprofile">My profile</a></li>
                         <li><a tabindex="-1" href="/logout">Logout</a></li>
-                        <li ng-show="auth.isAuth && auth.isAdmin"  class="divider"></li>
-                        <li ng-show="auth.isAuth && auth.isAdmin"><a tabindex="-1" href="#/{{user.username}}">Admin page</a></li>
+                        <li ng-show="auth.isAuth && auth.isAdmin" class="divider"></li>
+                        <li ng-show="auth.isAuth && auth.isAdmin"><a tabindex="-1" href="#/{{user.username}}">Admin
+                            page</a></li>
                     </ul>
                 </li>
             </ul>
@@ -68,128 +72,77 @@
 
                 <div class=" text-center">
 
-                    <img ng-show="user.sex === 'male'" class="img-circle img-profile" src="../images/template_profilepic_male.png" />
-                    <img ng-hide="user.sex === 'male'" class="img-circle img-profile" src="../images/template_profilepic_female.png"/>
+                    <img ng-show="user.sex === 'male'" class="img-circle img-profile"
+                         src="../images/template_profilepic_male.png"/>
+                    <img ng-hide="user.sex === 'male'" class="img-circle img-profile"
+                         src="../images/template_profilepic_female.png"/>
 
 
                 </div>
 
-                <<<<<<< HEAD
                 <div class="row">
                     <div class="text-left">
                         <div class="col-sm-6">
                             <div class="right-inner-addon center-block">
                                 <i class="fa fa-user fa-lg"></i>
-                                =======
 
-                                <div class="text-left">
-                                    <div class="col-xs-6">
-                                        <div class="right-inner-addon center-block">
-                                            <i class="fa fa-user fa-lg"></i>
-                                            >>>>>>> origin/master
+                                <label for="firstname">Firstname:</label>
+                                <input type="text" class="form-control" id="firstname" value="{{user.firstname}}"/>
 
-                                            <label for="firstname">Firstname:</label>
-                                            <input type="text" class="form-control" id="firstname" value="{{user.firstname}}"/>
+                                <label for="lastname">Lastname:</label>
+                                <input type="text" class="form-control" id="lastname" value="{{user.lastname}}"/>
 
-                                            <label for="lastname">Lastname:</label>
-                                            <input type="text" class="form-control" id="lastname" value="{{user.lastname}}"/>
+                                <label for="username">E-mail:</label>
+                                <input type="email" class="form-control" id="username" value="{{user.username}}"/>
 
-                                            <label for="username">E-mail:</label>
-                                            <input type="email" class="form-control" id="username" value="{{user.username}}"/>
+                                <label for="birthdate">Birthdate:</label>
+                                <input type="date" class="form-control" id="birthdate" value="{{user.birthdate}}"/>
 
-                                            <label for="birthdate">Birthdate:</label>
-                                            <input type="date" class="form-control" id="birthdate" value="{{user.birthdate}}"/>
+                                <label><input type="radio" name="sex" value="male" ng-model="user.sex"> male</label>
+                                <label><input type="radio" name="sex" value="female" ng-model="user.sex"> female</label>
 
 
-                                            <<<<<<< HEAD
-                                            <label><input type="radio" name="sex" value="male" ng-model="user.sex"> male</label>
-                                            <label><input type="radio" name="sex" value="female" ng-model="user.sex" > female</label>
-                                            =======
-                                            <label><input type="radio" name="sex" value="male" ng-model="user.sex" > male</label>
-                                            <label><input type="radio" name="sex" value="female" ng-model="user.sex"> female</label>
-                                            >>>>>>> origin/master
+                            </div>
+                        </div>
 
-                                        </div>
+                        <div class="col-sm-6">
+                            <div class="col-lg-12">
+                                <div class="right-inner-addon center-block">
+                                    <label for="password">Password:</label>
+                                    <input type="text" class="form-control" id="password" value=""/>
+
+                                    <label for="zipcode">Zipcode:</label>
+                                    <input type="text" class="form-control" id="zipcode" pattern="[0-9]*"
+                                           value="{{user.zipcode}}"/>
+
+
+                                    <label for="comment">Biography:</label>
+                                    <textarea class="form-control" rows="5" id="comment" ng-model="biography"
+                                              name="biography">{{user.biography}}</textarea>
+
+                                    <label>Interests:</label>
+
+                                    <div>
+                                        <label ng-repeat="interest in user.interests">
+                                            <input
+                                                    type="checkbox"
+                                                    name="selectedInterests[]"
+                                                    value="{{interest.name}}"
+                                                    ng-model="checked"
+                                                    ng-checked="user.interests"
+                                                    ng-change="stateChanged(interest)"
+                                                    > {{interest}}
+                                        </label>
+
                                     </div>
-                                    <<<<<<< HEAD
                                 </div>
 
-                                <div class = "col-sm-6">
-                                    <div class="col-lg-12">
-                                        <div class="right-inner-addon center-block">
-                                            <label for="password">Password:</label>
-                                            <input type="text" class="form-control" id="password" value=""/>
-
-                                            <label for="zipcode">Zipcode:</label>
-                                            <input type="text" class="form-control" id="zipcode" pattern="[0-9]*" value="{{user.zipcode}}"/>
-
-
-                                            <label for="comment">Biography:</label>
-                                            <textarea class="form-control" rows="5" id="comment" ng-model="biography"  name="biography" >{{user.biography}}</textarea>
-
-                                            <label>Interests:</label>
-                                            <div>
-                                                <label ng-repeat="interest in user.interests">
-                                                    <input
-                                                            type="checkbox"
-                                                            name="selectedInterests[]"
-                                                            value="{{interest.name}}"
-                                                            ng-model="checked"
-                                                            ng-checked="user.interests"
-                                                            ng-change="stateChanged(interest)"
-                                                            > {{interest}}
-                                                </label>
-                                                =======
-                                                >>>>>>> origin/master
-
-                                                <div class = "col-xs-6">
-                                                    <div class="col-lg-12">
-                                                        <div class="right-inner-addon center-block">
-                                                            <label for="password">Password:</label>
-                                                            <input type="text" class="form-control" id="password" value=""/>
-
-                                                            <label for="zipcode">Zipcode:</label>
-                                                            <input type="text" class="form-control" id="zipcode" pattern="[0-9]*" value="{{user.zipcode}}"/>
-
-
-                                                            <label for="comment">Biography:</label>
-                                                            <textarea class="form-control" rows="5" id="comment" ng-model="biography"  name="biography" >{{user.biography}}</textarea>
-
-                                                            <label>Interests:</label>
-                                                            <div>
-                                                                <label ng-repeat="interest in user.interests">
-                                                                    <input
-                                                                            type="checkbox"
-                                                                            name="selectedInterests[]"
-                                                                            value="{{interest.name}}"
-                                                                            ng-model="checked"
-                                                                            ng-checked="user.interests"
-                                                                            ng-change="stateChanged(interest)"
-                                                                            > {{interest}}
-                                                                </label>
-
-                                                            </div>
-                                                        </div>
-                                                        <button type="submit" name="save" class="btn btn-inverse block pull-right">Save</button>
-
-                                                    </div>
-                                                </div>
-
-
-                                                <<<<<<< HEAD
-                                            </div>
-                                        </div>
-
-                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
         </form>
-        <!-- </form> -->
-        =======
-    </div>
-
-
-    </div>
-    </form>
-    >>>>>>> origin/master
     </div>
 
     <!--
