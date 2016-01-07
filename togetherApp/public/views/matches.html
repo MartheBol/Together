@@ -105,7 +105,7 @@
 
     </div>
 
-    <div class="row_dynamic">
+    <div class="row_dynamic" ng-controller="ProfilesController">
 
         <div class="item" ng-repeat="match in arrMatches | orderBy:sortProperty | filter: filterMatches">
 
@@ -120,7 +120,7 @@
                         <p ng-show="match.biography">{{match.biography}}<span class="fa fa-user fa-pull-right"></span></p>
                     </div>
                 </div>
-                <button class="btn-inverse col-md-12"><span class="fa fa-comment fa-align-center"></span></button>
+                <button ng-click="startChat(user, match)" class="btn-inverse col-md-12"><span class="fa fa-comment fa-align-center"></span></button>
 
             </div>
 
