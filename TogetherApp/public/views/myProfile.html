@@ -67,7 +67,7 @@
 
     <div>
 
-        <form>
+        <form ng-controller="UsersController" ng-submit="updateUser()">
             <div class="profile-header shadow col-lg-12">
 
                 <div class=" text-center">
@@ -87,16 +87,16 @@
                                 <i class="fa fa-user fa-lg"></i>
 
                                 <label for="firstname">Firstname:</label>
-                                <input type="text" class="form-control" id="firstname" value="{{user.firstname}}"/>
+                                <input type="text" class="form-control" id="firstname" value="{{user.firstname}}" name="firstname"/>
 
                                 <label for="lastname">Lastname:</label>
-                                <input type="text" class="form-control" id="lastname" value="{{user.lastname}}"/>
+                                <input type="text" class="form-control" id="lastname" name="lastname" value="{{user.lastname}}"/>
 
                                 <label for="username">E-mail:</label>
-                                <input type="email" class="form-control" id="username" value="{{user.username}}"/>
+                                <input type="email" class="form-control" id="username" name="username" value="{{user.username}}"/>
 
                                 <label for="birthdate">Birthdate:</label>
-                                <input type="date" class="form-control" id="birthdate" value="{{user.birthdate}}"/>
+                                <input type="date" class="form-control" id="birthdate" name="birthdate" value="{{user.birthdate}}"/>
 
                                 <label><input type="radio" name="sex" value="male" ng-model="user.sex"> male</label>
                                 <label><input type="radio" name="sex" value="female" ng-model="user.sex"> female</label>
@@ -106,36 +106,45 @@
 
 
                         <div class="col-sm-6">
-                                <div class="right-inner-addon center-block">
-                                    <label for="password">Password:</label>
-                                    <input type="text" class="form-control" disabled id="password" value=" can not be changed"/>
+                            <div class="right-inner-addon center-block">
+                                <label for="password">Password:</label>
+                                <<<<<<< HEAD
+                                <input type="text" class="form-control" name="password" id="password" value=""/>
+                                =======
+                                <input type="text" class="form-control" disabled id="password" value=" can not be changed"/>
+                                >>>>>>> origin/master
 
-                                    <label for="zipcode">Zipcode:</label>
-                                    <input type="text" class="form-control" id="zipcode" pattern="[0-9]*"
-                                           value="{{user.zipcode}}"/>
+                                <label for="zipcode">Zipcode:</label>
+                                <input type="text" class="form-control" name="zipcode" id="zipcode" pattern="[0-9]*"
+                                       value="{{user.zipcode}}"/>
 
 
-                                    <label for="comment">Biography:</label>
+                                <label for="comment">Biography:</label>
+                                <<<<<<< HEAD
+                                    <textarea class="form-control" rows="5"  name="biography" id="comment" ng-model="biography"
+                                            >{{user.biography}}</textarea>
+                                =======
                                     <textarea class="form-control" rows="5" id="comment" ng-model="user.biography"
                                               name="biography"></textarea>
+                                >>>>>>> origin/master
 
-                                    <label>Interests:</label>
+                                <label>Interests:</label>
 
-                                    <div>
-                                        <label ng-repeat="interest in user.interests">
-                                            <input
-                                                    type="checkbox"
-                                                    name="selectedInterests[]"
-                                                    value="{{interest.name}}"
-                                                    ng-model="checked"
-                                                    ng-checked="user.interests"
-                                                    ng-change="stateChanged(interest)"
-                                                    > {{interest}}
-                                        </label>
+                                <div>
+                                    <label ng-repeat="interest in user.interests">
+                                        <input
+                                                type="checkbox"
+                                                name="selectedInterests[]"
+                                                value="{{interest.name}}"
+                                                ng-model="checked"
+                                                ng-checked="user.interests"
+                                                ng-change="stateChanged(interest)"
+                                                > {{interest}}
+                                    </label>
 
-                                    </div>
                                 </div>
-                                <button type="submit" name="save" class="btn btn-inverse block pull-right">Save</button>
+                            </div>
+                            <button type="submit" name="save" class="btn btn-inverse block pull-right">Save</button>
 
                         </div>
 
