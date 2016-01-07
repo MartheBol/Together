@@ -112,7 +112,10 @@
                         sameInterests = $scope.intersect(user.interests, arrProfiles[i].interests);
 
                         if(sameInterests.length !== 0){
-                            arrMatches.push(arrProfiles[i]);
+                            if(arrProfiles[i].deleted === false){
+                                arrMatches.push(arrProfiles[i]);
+                            }
+
                         }
 
                     }

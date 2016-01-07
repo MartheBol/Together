@@ -71,7 +71,7 @@
         </div>
 
         <div class="container" ng-controller="UsersController" data-ng-init="getUsers()">
-            <p>{{arrUsers.length}} users</p>
+            <h2>Users</h2>
             <div ng-show="infodeletedUser !== undefined" class="alert alert-danger">{{infodeletedUser}}</div>
             <table class="table table-hover">
                 <thead>
@@ -98,7 +98,7 @@
             </table>
         </div>
         <div class="container" ng-controller="ActivitiesController" data-ng-init="getActivities()">
-            <p>{{arrUsers.length}} users</p>
+            <h2>Activiteiten</h2>
             <div ng-show="infodeletedUser !== undefined" class="alert alert-danger">{{infodeletedUser}}</div>
             <table class="table table-hover">
                 <thead>

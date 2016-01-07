@@ -461,7 +461,7 @@
 
             geocodeAddress(geocoder, map);
 
-        };
+        }
 
 
         function geocodeAddress(geocoder, resultsMap) {
