@@ -62,6 +62,7 @@ module.exports = function(passport){
         passwordField: 'password',
         biographyField: 'biography',
         interests:'interests',
+        deleted: 'deleted',
         passReqToCallback:true
     }, function(req, username, password, done){
         process.nextTick(function(){
@@ -97,6 +98,7 @@ module.exports = function(passport){
                             newUser.password = hash;
                             newUser.biography = req.body.biography;
                             newUser.interests = req.body.interests;
+                            newUser.deleted = 0;
                             console.log(req.body.biography);
                             newUser.save(function(err){
                                 if(err){

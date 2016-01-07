@@ -14,7 +14,6 @@ function isCorrectUser(req, res, next) {
 
                 req.correctuser = userdelete;
                 next();
-
             //req.correctuser = null;
         }
         else{

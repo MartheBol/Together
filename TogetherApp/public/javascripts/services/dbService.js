@@ -38,6 +38,7 @@
 
         };
 
+
         var getItem = function(item){
 
             var url = "http://localhost:3000/api/" + item;

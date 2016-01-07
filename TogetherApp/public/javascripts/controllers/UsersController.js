@@ -21,9 +21,10 @@
         $scope.getDetailUser = function(){
 
             dbService.getDetailsUser('users', $routeParams.username).then(function(response){
-                $scope.arrDetails = response.activity;
+                $scope.arrDetails = response.correctuser;
             });
         };
+
 
         $scope.getUserByID = function(){
 

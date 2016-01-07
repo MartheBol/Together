@@ -28,11 +28,11 @@ router.post('/login', function(req, res) {
       }
 
       if(user.username == 'admin'){
-        return res.json({redirect: '/admin'})
+        return res.json({redirect: '/admin', user: user})
       }
 
       else{
-        return res.json({ redirect: '/activities', user: user });
+        return res.json({ redirect: '/activities' });
       }
 
     });
@@ -68,7 +68,7 @@ router.post('/register', function(req, res) {
         return res.json(err);
       }
 
-      return res.json({ redirect: '/user' });
+      return res.json({ redirect: '/myprofile' });
     });
   })(req, res);
 });

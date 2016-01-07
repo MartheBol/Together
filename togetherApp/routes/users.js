@@ -20,17 +20,24 @@ router.get('/userdelete/:username',find_correctuser, function (req, res) {
   //console.log(req.user.username);
 
   console.log(req.params.username);
-
-  if(req.user === undefined || req.user.username !== 'admin'){
+  console.log(req.user.username);
+  /*if(req.user === undefined || req.user.username !== 'admin'){
+    console.log('je komt hier');
 
     res.redirect('/#/home')
-  }
-  else{
-    req.correctuser.remove(function (err) {
-      if (err) { return next(err); }
-      res.redirect('/#/admin');
-    })
-  }
+  }*/
+  //else {
+  userCollection.findOneAndUpdate(
+      {username: req.params.username},
+      {$pull: {deleted : true}},
+
+      function(err, model) {
+        console.log("dit is een "+err);
+
+      }
+  );
+  res.json("deleted");
+  //}
 
 
 });

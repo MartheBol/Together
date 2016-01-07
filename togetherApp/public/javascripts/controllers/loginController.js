@@ -16,7 +16,7 @@
                 .success(function(data) {
                     console.log(data);
                     $rootScope.user = data.user;
-                    localStorage.setItem("username", $rootScope.user.username);
+                    //localStorage.setItem("username", $rootScope.user.username);
                     $scope.error = data.error;
                     $location.path(data.redirect);
                 });
