@@ -437,6 +437,16 @@
                     arrAllActivities.splice(indexMostPop, 1);
                 }
 
+                var matches = [];
+
+                for (var iii = 0; iii < arrMostPopularActivities.length; iii++) {
+
+                    var dummyActivity = new Activity("No name", 8500, "Together", 2, "no description", "2016-01-01 00:01", "2017-12-31 23:59", new Date(), "no username", matches);
+                    if (arrMostPopularActivities[iii] === undefined) {
+                        arrMostPopularActivities.splice(iii, 1, dummyActivity);
+                    }
+                }
+
                 $scope.arrMostPopularActivities = arrMostPopularActivities;
 
             });
