@@ -14,6 +14,21 @@
                 //console.log(response);
                 $scope.arrUsers = response.userlist;
 
+                for( var i = 0; i<$scope.arrUsers.length; i++){
+
+                    if($scope.arrUsers[i].deleted === false){
+                        $scope.deleted = false
+                    }
+
+                    else{
+                        $scope.deleted = true
+                    }
+
+
+
+                }
+
+
             });
 
         };
@@ -25,11 +40,15 @@
             });
         };
 
+        $scope.deleteUser = function(username){
+            dbService.deleteUser('users', username).then(function(response){
+                $scope.infodeletedUser = response;
+            })
+        };
 
         $scope.getUserByID = function(){
 
             dbService.getItem('user').then(function(response){
-
                 console.log(response);
                 $scope.userProfile = response;
 

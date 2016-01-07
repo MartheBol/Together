@@ -38,6 +38,14 @@
 
         };
 
+        var deleteUser =  function (collection, username) {
+            var url = "http://localhost:3000/api/" + collection + "/userdelete/" + username;
+            return $http.get(url).then(function (response) {;
+                return response.data;
+
+            });
+        };
+
 
         var getItem = function(item){
 
@@ -78,6 +86,7 @@
             getByID:getByID,
             getItem:getItem,
             getDetailsUser: getDetailsUser,
+            deleteUser: deleteUser,
             getDetailsActivity: getDetailsActivity,
             getNoiseWords: getNoiseWords
 

@@ -24,28 +24,38 @@ module.exports = function(passport){
     }, function(req, username, password, done){
           process.nextTick(function(){
               User.findOne({'username': username}, function(err, user){
-                  if(err){
-                      return done(err);
-                  }
 
-                  if(!user){
-                      return done(null, {error:'Oop! No user found with that username.'});
+                  if(user.deleted === false){
+                      if(err){
+                       return done(err);
+                       }
+
+                       if(!user){
+                       return done(null, {error:'Oop! No user found with that username.'});
+                       }
+
+                       else{
+
+                       user.validPassword(password, function(err, isMatch){
+                       if(err){
+                       throw err;
+                       }
+
+                       if(isMatch){
+                       return done(null, user);
+                       }
+                       else{
+                       return done(null, {error: 'Oops! Wrong password'});
+                       }
+                       })
+                       }
                   }
 
                   else{
-                      user.validPassword(password, function(err, isMatch){
-                          if(err){
-                              throw err;
-                          }
-
-                          if(isMatch){
-                              return done(null, user);
-                          }
-                          else{
-                              return done(null, {error: 'Oops! Wrong password'});
-                          }
-                      })
+                      return done(null, {error:'Oop! Your account is deleted. Contact the admin.'});
                   }
+
+
               })
           })
         }

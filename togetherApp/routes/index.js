@@ -36,6 +36,8 @@ router.post('/login', function(req, res) {
         return res.json({redirect: '/admin', user: user})
       }
 
+
+
       else{
         return res.json({ redirect: '/activities', user: user });
       }
