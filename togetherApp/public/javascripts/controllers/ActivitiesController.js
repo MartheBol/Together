@@ -357,6 +357,25 @@
             return 0;
         }
 
+        function popularFirst(arr) {
+            var max = arr[0];
+            var maxIndex = 0;
+
+            for (var i = 1; i < arr.length; i++) {
+                if (arr[i].matches.length > max.matches.length) {
+                    maxIndex = i;
+                    max = arr[i];
+                }
+            }
+
+            return maxIndex;
+        }
+
+        $scope.showActivitiesOnHomePage = function(){
+            $scope.getMostRecentActivities();
+            $scope.getMostPopularActivities();
+        };
+
         $scope.getMostRecentActivities = function () {
 
             dbService.getCollection('activities').then(function (response) {
@@ -394,18 +413,36 @@
             });
         };
 
-        function initmap() {
+        $scope.getMostPopularActivities = function(){
 
-            var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 12,
-                center: {lat: 50.8194894, lng: 3.2577076}
+            dbService.getCollection('activities').then(function(response){
+
+                var numberOfActivities = 3;
+                var arrTemp = response.activitielist;
+                var arrAllActivities = [];
+
+                for (var i = 0, l = arrTemp.length; i < l; i++) {
+                    if(new Date(arrTemp[i].untilDate).getTime() >= new Date(dateTimeNow).getTime()) {
+                        //console.log(new Date(arrTemp[i].untilDate));
+                        arrAllActivities.push(arrTemp[i]);
+                    }
+                }
+
+                var arrMostPopularActivities = [];
+
+                for(var j = 0; j < numberOfActivities; j++){
+
+                    var indexMostPop = popularFirst(arrAllActivities);
+                    arrMostPopularActivities.push(arrAllActivities[indexMostPop]);
+                    arrAllActivities.splice(indexMostPop, 1);
+                }
+
+                $scope.arrMostPopularActivities = arrMostPopularActivities;
+
             });
-            var geocoder = new google.maps.Geocoder();
-
-            geocodeAddress(geocoder, map);
+        };
 
 
-        }
 
         function geocodeAddress(geocoder, resultsMap) {
             var street = $scope.arrDetailsActivity.street;
