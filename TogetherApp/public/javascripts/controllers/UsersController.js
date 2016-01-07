@@ -36,7 +36,7 @@
         $scope.getDetailUser = function(){
 
             dbService.getDetailsUser('users', $routeParams.username).then(function(response){
-                $scope.arrDetails = response.correctuser;
+                $scope.userDetails = response.correctuser;
             });
         };
 
