@@ -452,6 +452,16 @@
             });
         };
 
+        function initmap(){
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 8,
+                center: {lat: 50.8194894, lng: 3.2577076}
+            });
+            var geocoder = new google.maps.Geocoder();
+
+            geocodeAddress(geocoder, map);
+
+        };
 
 
         function geocodeAddress(geocoder, resultsMap) {
