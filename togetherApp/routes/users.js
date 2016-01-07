@@ -7,7 +7,12 @@ var User = require('../models/user.js');
 var mongoose = require('mongoose');
 var userSchema = require('../schemas/userSchema.js');
 var userCollection = mongoose.model('User', userSchema, "users");
+
 var find_correctuser = require('../routes/middelware/find_correctuser.js');
+
+var Activity = require('../models/activity');
+var activitySchema = require('../schemas/activitySchema.js');
+var activityCollection = mongoose.model('Activity', activitySchema, "activities");
 
 router.get('/', function (req, res) {
   User.getUsers(function (users) {
@@ -30,11 +35,29 @@ router.get('/userdelete/:username',find_correctuser, function (req, res) {
       }
   );
 
+     Activity.getActivities(function (activities) {
+        for(var i = 0; i<activities.length; i++){
+            for(var ii = 0; ii<activities[i].matches.length; ii++) {
+                if(activities[i].matches[ii] == req.params.username){
+                    var matchactivities = [];
+                    matchactivities.push(activities[i]);
 
+                    for(var iii = 0; iii<matchactivities.length; iii++){
+                        console.log(matchactivities[iii].activityName)
+                        activityCollection.findOneAndUpdate(
+                            {activityName: matchactivities[iii].activityName},
+                            {$pull: {matches: req.params.username}},
+                            function(err, model) {
+                                console.log("dit is een "+err);
 
+                            }
+                        );
+                    }
+                }
+            }
+        }
+    });
     res.json("De user " + req.params.username + "is verwijderd");
-
-  //}
 
 
 });

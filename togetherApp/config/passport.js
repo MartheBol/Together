@@ -73,6 +73,7 @@ module.exports = function(passport){
         biographyField: 'biography',
         interests:'interests',
         deleted: 'deleted',
+        timestamp: 'timestamp',
         passReqToCallback:true
     }, function(req, username, password, done){
         process.nextTick(function(){
@@ -97,8 +98,6 @@ module.exports = function(passport){
 
                             var date = dateFormat(req.body.birthdate, "yyyy-mm-dd");
 
-
-
                             newUser.username = req.body.username;
                             newUser.firstname = req.body.firstname;
                             newUser.lastname = req.body.lastname;
@@ -109,6 +108,7 @@ module.exports = function(passport){
                             newUser.biography = req.body.biography;
                             newUser.interests = req.body.interests;
                             newUser.deleted = 0;
+                            newUser.timestamp =  new Date().getTime();
                             console.log(req.body.biography);
                             newUser.save(function(err){
                                 if(err){

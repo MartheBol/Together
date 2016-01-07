@@ -43,6 +43,7 @@
         $scope.deleteUser = function(username){
             dbService.deleteUser('users', username).then(function(response){
                 $scope.infodeletedUser = response;
+                $scope.getUsers();
             })
         };
 
@@ -53,6 +54,7 @@
                 $scope.userProfile = response;
 
             });
+
 
         };
 
