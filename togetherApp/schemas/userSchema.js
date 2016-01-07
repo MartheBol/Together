@@ -27,6 +27,8 @@ var userSchema = mongoose.Schema({
     interests:Array,
     birthdate: String,
     biography: String,
-    deleted: Boolean
+    deleted: Boolean,
+    timestamp: String
+
 });
 module.exports = userSchema;

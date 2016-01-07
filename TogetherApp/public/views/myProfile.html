@@ -63,18 +63,19 @@
 
     <div>
 
-        <!-- <form> -->
-        <div class="profile-header shadow">
+        <form>
+        <div class="profile-header shadow col-lg-12">
 
             <div class=" text-center">
 
                 <img ng-show="user.sex === 'male'" class="img-circle img-profile" src="../images/template_profilepic_male.png" />
                 <img ng-hide="user.sex === 'male'" class="img-circle img-profile" src="../images/template_profilepic_female.png"/>
 
+
             </div>
 
-            <div class="text-left">
 
+            <div class="text-left">
                 <div class="col-xs-6">
                     <div class="right-inner-addon center-block">
                         <i class="fa fa-user fa-lg"></i>
@@ -92,8 +93,8 @@
                         <input type="date" class="form-control" id="birthdate" value="{{user.birthdate}}"/>
 
 
-                        <label><input type="radio" name="sex" value="male" ng-model="sex" > male</label>
-                        <label><input type="radio" name="sex" value="female" ng-model="sex"> female</label>
+                        <label><input type="radio" name="sex" value="male" ng-model="user.sex" > male</label>
+                        <label><input type="radio" name="sex" value="female" ng-model="user.sex"> female</label>
 
                     </div>
                 </div>
@@ -119,25 +120,24 @@
                                             name="selectedInterests[]"
                                             value="{{interest.name}}"
                                             ng-model="checked"
+                                            ng-checked="user.interests"
                                             ng-change="stateChanged(interest)"
                                             > {{interest}}
                                 </label>
 
                             </div>
                         </div>
+                        <button type="submit" name="save" class="btn btn-inverse block pull-right">Save</button>
+
                     </div>
                 </div>
 
-                    <form>
-
-                        <button type="submit" name="save" class="btn-inverse col-md-1 pull-right">Save</button>
-
-                    </form>
 
             </div>
 
 
         </div>
+            </form>o
         <!-- </form> -->
     </div>
 
