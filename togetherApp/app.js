@@ -10,8 +10,6 @@ var users = require('./routes/users');
 var activities = require('./routes/activities');
 var configDB = require('./config/database.js');
 
-var app = express();
-
 /*ZELF GETYPT */
 /*------------------------------------------*/
 var mongoose = require('mongoose');
@@ -47,6 +45,15 @@ app.use('/api/users', users);
 app.use('/api/activities', activities);
 
 require('./config/passport')(passport);
+
+
+var server = app.listen(app.get('port'), function(){
+    console.log("Express server listening to port "+ server.address().port);
+});
+
+var io = require('socket.io')(server);
+require('./sockets.js')(io);
+
 
 
 
