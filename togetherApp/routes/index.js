@@ -9,6 +9,11 @@ router.get('/', function(req, res, next) {
   //res.render('home');
   res.json({message:"heeeyyyyy"});
 });
+router.post('/chat', function (req,res) {
+
+  return  res.json({redirect: '/chat', currentUser : req.body.currentUser, contactedUser : req.body.contactedUser});
+});
+
 
 router.post('/login', function(req, res) {
 

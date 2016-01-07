@@ -7,9 +7,27 @@
 
     "use strict";
 
-    var ProfilesController = function($scope, $rootScope, $routeParams, dbService) {
+    var ProfilesController = function($scope, $rootScope, $routeParams, dbService, $http, $location) {
 
         var clicksOnBtn = 0;
+        $scope.startChat = function(currentUser, contactedUser){
+            $http.post("/chat", {
+                currentUser: currentUser,
+                contactedUser:contactedUser
+
+            }).success(function (data) {
+                $scope.error = data.error;
+                $rootScope.currentUser = data.currentUser;
+                $rootScope.contactedUser = data.contactedUser;
+
+                localStorage.setItem("currentusername", $rootScope.currentUser.username);
+                localStorage.setItem("contactedusername", $rootScope.contactedUser.username);
+
+                $location.path(data.redirect);
+            });
+        };
+
+
 
         $scope.showDiv = function(){
             $scope.filter = {showFilter:true};
@@ -85,6 +103,6 @@
         };
     };
 
-    angular.module("app").controller("ProfilesController", ["$scope", "$rootScope", "$routeParams", "dbService", ProfilesController]);
+    angular.module("app").controller("ProfilesController", ["$scope", "$rootScope", "$routeParams", "dbService","$http", "$location", ProfilesController]);
 
 })();

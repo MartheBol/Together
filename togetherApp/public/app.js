@@ -44,6 +44,9 @@
                 templateUrl: "./views/detailsActivity.html",
                 controller: "ActivitiesController"
 
+            })
+            .when("/chat",{
+                templateUrl: "./views/chat.html"
             });
 
 
