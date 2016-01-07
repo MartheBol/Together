@@ -1,7 +1,7 @@
 /**
  * Created by Nikita on 6/01/2016.
  */
-describe('dbService', function() {
+describe('[TEST] dbService', function() {
     beforeEach(module('app'));
 
     var dbService;
@@ -10,7 +10,7 @@ describe('dbService', function() {
         dbService = _dbService_;
     }));
 
-    describe('Does function exist?', function() {
+    describe('TEST: Does function exist?', function() {
 
         it('getCollection should exist', function() {
             expect(dbService.getCollection).toBeDefined();

@@ -53,28 +53,8 @@
             return false;
         };
 
-        /*
-        $scope.showMatches = function(){
-
-            var nameUser = "Luna";
-
-            var arrMatchesByUser = matchesService.getMatches(nameUser);
-
-            $scope.aantalMatches = arrMatchesByUser.length;
-
-            $scope.arrMatches = arrMatchesByUser;
-
-            var text = "";
-            for(var i=0; i<arrMatchesByUser.length; i++){
-                text = arrMatchesByUser[i].interests.toString().replace(" ,", " ");
-                arrMatchesByUser[i].interests = text;
-            }
-
-        };
-        */
-
         //http://www.falsepositives.com/index.php/2009/12/01/javascript-function-to-get-the-intersect-of-2-arrays/
-        function intersect(arr1, arr2)
+        $scope.intersect = function(arr1, arr2)
         {
             var r = [], o = {}, l = arr2.length, i, v;
             for (i = 0; i < l; i++) {
@@ -89,7 +69,7 @@
             }
 
             return r;
-        }
+        };
 
         $scope.showMatches = function(){
 
@@ -129,7 +109,7 @@
                     for(var i=0, l=arrProfiles.length; i<l; i++){
 
                         var sameInterests = [];
-                        sameInterests = intersect(user.interests, arrProfiles[i].interests);
+                        sameInterests = $scope.intersect(user.interests, arrProfiles[i].interests);
 
                         if(sameInterests.length !== 0){
                             arrMatches.push(arrProfiles[i]);
