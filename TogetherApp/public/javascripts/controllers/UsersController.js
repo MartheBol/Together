@@ -55,14 +55,15 @@
 
             })*/
 
-            var  username =  this.username,
-                password = this.password,
-                birthdate = this.birthdate,
-                zipcode = this.zipcode,
-                sex = this.sex,
-                biography = this.biography;
+            var  username =  $scope.user.username,
+                password = $scope.user.password,
+                birthdate = $scope.user.birthdate,
+                zipcode = $scope.user.zipcode,
+                sex = $scope.user.sex,
+                biography = $scope.user.biography;
 
-            var url = "api/users/updateprofile";
+            var url = "http://localhost:3000/api/users/updateprofile";
+            console.log(url);
             $http.post(url, {
                 username : username,
                 password : password,
@@ -76,7 +77,7 @@
 
             });
 
-            console.log(username, password, birthdate, zipcode, sex, biography);
+            console.log($scope.user.username, $scope.user.password, $scope.user.birthdate, $scope.user.zipcode, $scope.user.sex, $scope.user.biography);
 
 
 

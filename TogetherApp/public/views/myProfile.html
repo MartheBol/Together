@@ -87,16 +87,16 @@
                                 <i class="fa fa-user fa-lg"></i>
 
                                 <label for="firstname">Firstname:</label>
-                                <input type="text" class="form-control" id="firstname" value="{{user.firstname}}" name="firstname"/>
+                                <input type="text" class="form-control" id="firstname" ng-model="user.firstname"  value="{{user.firstname}}" name="firstname"/>
 
                                 <label for="lastname">Lastname:</label>
-                                <input type="text" class="form-control" id="lastname" name="lastname" value="{{user.lastname}}"/>
+                                <input type="text" class="form-control" id="lastname" name="lastname" ng-model="user.lastname" value="{{user.lastname}}"/>
 
                                 <label for="username">E-mail:</label>
-                                <input type="email" class="form-control" id="username" name="username" value="{{user.username}}"/>
+                                <input type="email" class="form-control" id="username" name="username" ng-model="user.username" value="{{user.username}}"/>
 
                                 <label for="birthdate">Birthdate:</label>
-                                <input type="date" class="form-control" id="birthdate" name="birthdate" value="{{user.birthdate}}"/>
+                                <input type="text" class="form-control" id="birthdate" name="birthdate" ng-model="user.birthdate" value="{{user.birthdate}}"/>
 
                                 <label><input type="radio" name="sex" value="male" ng-model="user.sex"> male</label>
                                 <label><input type="radio" name="sex" value="female" ng-model="user.sex"> female</label>
@@ -112,7 +112,7 @@
 
                                 <label for="zipcode">Zipcode:</label>
                                 <input type="text" class="form-control" name="zipcode" id="zipcode" pattern="[0-9]*"
-                                       value="{{user.zipcode}}"/>
+                                       ng-model="user.zipcode" value="{{user.zipcode}}"/>
 
 
                                 <label for="comment">Biography:</label>

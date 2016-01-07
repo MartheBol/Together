@@ -20,9 +20,10 @@
 
                 for (var i = 0, l = arrTemp.length; i < l; i++) {
                     if (new Date(arrTemp[i].untilDate).getTime() >= new Date(dateTimeNow).getTime()) {
-                        arrActs.push(arrTemp[i]);
                         if(arrTemp[i].deleted === false){
                             $scope.deleted = false;
+                            arrActs.push(arrTemp[i]);
+
                         }
 
                         else{

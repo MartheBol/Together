@@ -78,25 +78,24 @@ router.get('/userdetail/:username', find_correctuser, function (req, res) {
 
 router.get('/updateprofile', function (req, res) {
     console.log(req.body);
+    console.log("UPDATE PROFILE");
 
-    /*if(req.user.username !== undefined){
+    if(req.user.username !== undefined){
 
      userCollection.findOneAndUpdate(
      {username: req.user.username},
-     {
-     $set: {
-     username: req.body.username,
-     password: req.body.password,
-     birthdate : req.body.birthdate,
-     zipcode: req.body.zipcode,
-     sex : req.body.sex,
-     biography: req.body.biography
-     }
+     {$set: {
+         username: req.body.username,
+         password: req.body.password,
+         birthdate : req.body.birthdate,
+         zipcode: req.body.zipcode,
+         sex : req.body.sex,
+         biography: req.body.biography
+        }
      },
      function (err, model) {
-     console.log("dit is een" + err);
-     }
-     );
+        console.log("dit is een" + err);
+     });
 
      res.json("dit werkt");
      console.log("hoera feest ")
@@ -104,7 +103,7 @@ router.get('/updateprofile', function (req, res) {
 
      else{
      console.log("user not found")
-     }*/
+     }
 
 });
 
