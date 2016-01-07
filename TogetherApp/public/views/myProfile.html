@@ -108,7 +108,7 @@
                         <div class="col-sm-6">
                                 <div class="right-inner-addon center-block">
                                     <label for="password">Password:</label>
-                                    <input type="text" class="form-control" id="password" value=""/>
+                                    <input type="text" class="form-control" disabled id="password" value=" can not be changed"/>
 
                                     <label for="zipcode">Zipcode:</label>
                                     <input type="text" class="form-control" id="zipcode" pattern="[0-9]*"
@@ -116,8 +116,8 @@
 
 
                                     <label for="comment">Biography:</label>
-                                    <textarea class="form-control" rows="5" id="comment" ng-model="biography"
-                                              name="biography">{{user.biography}}</textarea>
+                                    <textarea class="form-control" rows="5" id="comment" ng-model="user.biography"
+                                              name="biography"></textarea>
 
                                     <label>Interests:</label>
 
