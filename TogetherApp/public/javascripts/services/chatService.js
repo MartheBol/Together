@@ -15,7 +15,7 @@
                 var args = arguments;
                 $rootScope.$apply(function () {
                     callback.apply(socket, args);
-                })
+                });
             });
         };
 
@@ -24,7 +24,7 @@
                 var args = arguments;
                 $rootScope.$apply(function () {
                     callback.apply(socket, args);
-                })
+                });
             });
         };
 

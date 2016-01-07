@@ -17,11 +17,11 @@
                 for( var i = 0; i<$scope.arrUsers.length; i++){
 
                     if($scope.arrUsers[i].deleted === false){
-                        $scope.deleted = false
+                        $scope.deleted = false;
                     }
 
                     else{
-                        $scope.deleted = true
+                        $scope.deleted = true;
                     }
 
 
@@ -44,7 +44,7 @@
             dbService.deleteUser('users', username).then(function(response){
                 $scope.infodeletedUser = response;
                 $scope.getUsers();
-            })
+            });
         };
 
         $scope.getUserByID = function(){

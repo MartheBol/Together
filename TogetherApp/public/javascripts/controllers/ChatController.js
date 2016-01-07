@@ -12,8 +12,8 @@
         //$scope.contactedUser.username = $rootScope.contactedUser.username;
 
         $scope.init = function () {
-            chatService.emit("init_users",{user:$rootScope.currentUser, collection:"users"})
-        }
+            chatService.emit("init_users",{user:$rootScope.currentUser, collection:"users"});
+        };
 
     };
     angular.module("app").controller("ChatController", ["$scope", "$rootScope", "$routeParams", "dbService","$http", ChatController]);

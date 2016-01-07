@@ -40,7 +40,7 @@
 
         var deleteUser =  function (collection, username) {
             var url = "http://localhost:3000/api/" + collection + "/userdelete/" + username;
-            return $http.get(url).then(function (response) {;
+            return $http.get(url).then(function (response) {
                 return response.data;
 
             });
