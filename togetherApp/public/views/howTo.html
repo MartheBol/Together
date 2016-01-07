@@ -38,7 +38,7 @@
 
                     <button class="btn-dropdown dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" ng-show="auth.isAuth">
 
-                        {{user.username}} <b class="caret"></b>
+                        {{user.firstname}} {{user.lastname}} <b class="caret"></b>
 
                     </button>
 
@@ -56,12 +56,26 @@
     <!-- /.container -->
 </nav>
 
-<h4>Select files from your computer</h4>
-<form action="" method="post" enctype="multipart/form-data">
-    <div class="form-inline">
-        <div class="form-group">
-            <input type="file" name="files[]" multiple>
+<div class="title text-center">
+    <h1>How to use Together.</h1>
+</div>
+
+<div class="row">
+
+    <div class="col-lg-12 text-center" style="background-color: blue">
+
+        <div class="col-lg-6 text-center" style="background-color: green">
+
+            <h2>1. Register</h2>
+
         </div>
-        <button type="submit" class="btn btn-sm btn-primary">Upload files</button>
+
+        <div class="col-lg-6 text-left"  style="background-color: red">
+
+            <img src="../images/step_1.png"/>
+
+        </div>
+
     </div>
-</form>
+
+</div>
