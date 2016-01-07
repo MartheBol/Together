@@ -458,8 +458,8 @@
 
             });
         };
-        $scope.deleteActivity = function(activityname){
-            dbService.deleteActivity('activities', activityname).then(function(response){
+        $scope.deleteActivity = function(activityId){
+            dbService.deleteActivity('activities', activityId).then(function(response){
                 $scope.infodeletedActivity = response;
                 console.log(response);
                 $scope.getActivities();

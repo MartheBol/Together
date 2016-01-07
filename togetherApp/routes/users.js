@@ -76,7 +76,7 @@ router.get('/userdetail/:username', find_correctuser, function (req, res) {
 
 });
 
-router.get('/updateprofile', function (res, req) {
+router.get('/updateprofile', function (req, res) {
     userCollection.findOneAndUpdate(
         {username: req.user.username},
         {

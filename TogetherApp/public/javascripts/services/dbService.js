@@ -68,8 +68,9 @@
 
         };
 
-        var deleteActivity =  function (collection, activityname) {
-            var url = "http://localhost:3000/api/" + collection + "/activitydelete/" + activityname;
+        var deleteActivity =  function (collection, activityId) {
+            var url = "http://localhost:3000/api/" + collection + "/activitydelete/" + activityId;
+            console.log(url);
             return $http.get(url).then(function (response) {
                 console.log(response);
                 return response.data;

@@ -8,6 +8,8 @@ var mongoose = require('mongoose');
 var activitySchema = require('../schemas/activitySchema.js');
 var activityCollection = mongoose.model('Activity', activitySchema, "activities");
 var find_correctactivity = require('../routes/middelware/find_correctactivity.js');
+var find_correctactivity_byid = require('../routes/middelware/find_correctactivity_byid.js');
+
 
 router.post('/addactivity', function(req, res) {
     if (!req.body.activityName) {
@@ -71,18 +73,18 @@ router.post('/deleteinterested', function(req, res) {
     res.json("deleted");
 
 });
-router.get('/activitydelete/:activityname', find_correctactivity, function (req, res) {
+router.get('/activitydelete/:activityId', find_correctactivity_byid, function (req, res) {
     console.log('je komt in de activitydelete route');
-    console.log (req.params.activityName);
+    console.log (req.params.activityId);
 
     activityCollection.findOneAndUpdate(
-        {activityName: req.params.activityName},
+        {_id: req.params.activityId},
         {$set: {deleted: true}},
         function (err, model) {
             console.log("dit is een" + err);
         }
     );
-    res.json("De activity " + req.params.activityName + "is verwijderd");
+    res.json("De activity " + req.params.activityId + "is verwijderd");
 
 
 });

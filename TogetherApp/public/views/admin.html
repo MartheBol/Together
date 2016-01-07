@@ -133,7 +133,7 @@
                     <td>{{activity.timestamp}}</td>
 
                     <td><a href="#/activitydetails/{{activity.activityName}}">View details</a></td>
-                    <td><a ng-click="deleteActivity(activity.activityName)" ng-show="activity.deleted === false">Delete activity</a></td>
+                    <td><a ng-click="deleteActivity(activity._id)" ng-show="activity.deleted === false">Delete activity</a></td>
                 </tr>
 
                 </tbody>
