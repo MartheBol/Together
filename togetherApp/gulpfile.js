@@ -13,9 +13,16 @@ var gulp = require("gulp"),
     jsStylish = require("jshint-stylish"),
     nodemon = require('gulp-nodemon'),
     gutil = require('gulp-util'),
+    mocha = require('gulp-mocha'),
     autoprefixer = require('gulp-autoprefixer');
 
 var jsFiles = ['*.js', 'src/**/*.js'];
+
+gulp.task('mocha_test_uitvoeren', function () {
+    return gulp.src(['tests/*.js'] , { read: false })
+        .pipe(mocha({ reporter: 'list' }))
+        .on('error', gutil.log);
+});
 
 gulp.task("default", function(){
   gulp.watch("./public/less/**/*.less", ['less']);

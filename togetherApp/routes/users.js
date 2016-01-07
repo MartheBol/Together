@@ -21,7 +21,7 @@ router.get('/', function (req, res) {
 });
 
 router.get('/userdelete/:username', find_correctuser, function (req, res) {
-    console.log('je komt in de userdelete route')
+    console.log('je komt in de userdelete route');
     /*if(req.user === undefined || req.user.username !== 'admin'){
      res.redirect('/#/home')
      }
