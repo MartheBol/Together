@@ -114,16 +114,19 @@
                     <div class="info text-center ">
                         <div  class="text-left">
                             <p ng-show="profile.sex">{{profile.sex}}<span class="fa fa-venus-mars fa-pull-right"></span> </p>
-                            <p ng-hide="profile.sex">gender<span class="fa fa-venus-mars fa-pull-right"></span> </p>
+                            <p ng-hide="profile.sex">no gender<span class="fa fa-venus-mars fa-pull-right"></span> </p>
 
                             <p ng-show="profile.zipcode">{{profile.zipcode}}<span class="fa fa-map-marker fa-pull-right"></span></p>
-                            <p ng-hide="profile.zipcode">zipcode<span class="fa fa-map-marker fa-pull-right"></span></p>
+                            <p ng-hide="profile.zipcode">no zipcode<span class="fa fa-map-marker fa-pull-right"></span></p>
 
                             <p ng-show="profile.birthdate">{{profile.birthdate}}<span class="fa fa-birthday-cake fa-pull-right"></span> </p>
-                            <p ng-hide="profile.birthdate">birthdate<span class="fa fa-birthday-cake fa-pull-right"></span> </p>
+                            <p ng-hide="profile.birthdate">no birthdate<span class="fa fa-birthday-cake fa-pull-right"></span> </p>
+
+                            <p ng-show="profile.interests.toString()">{{profile.interests.toString()}}<span class="fa fa-heart fa-pull-right"></span></p>
+                            <p ng-hide="profile.interests.toString()">no interests<span class="fa fa-heart fa-pull-right"></span></p>
 
                             <p ng-show="profile.biography">{{profile.biography}}<span class="fa fa-comment fa-pull-right"></span></p>
-                            <p ng-hide="profile.biography">biography<span class="fa fa-comment fa-pull-right"></span></p>
+                            <p ng-hide="profile.biography">no biography<span class="fa fa-comment fa-pull-right"></span></p>
 
                         </div>
                     </div>

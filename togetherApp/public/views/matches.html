@@ -115,9 +115,22 @@
                 <h2 class="text-center">{{match.username}}</h2>
                 <div class="info text-center ">
                     <div  class="text-left">
-                        <p>{{match.zipcode}}<span class="fa fa-map-marker fa-pull-right"></span> </p>
-                        <p>{{match.interests.toString()}}<span class="fa fa-heart fa-pull-right"></span></p>
-                        <p ng-show="match.biography">{{match.biography}}<span class="fa fa-user fa-pull-right"></span></p>
+
+                        <p ng-show="match.sex">{{match.sex}}<span class="fa fa-venus-mars fa-pull-right"></span> </p>
+                        <p ng-hide="match.sex">no gender<span class="fa fa-venus-mars fa-pull-right"></span> </p>
+
+                        <p ng-show="match.zipcode">{{match.zipcode}}<span class="fa fa-map-marker fa-pull-right"></span></p>
+                        <p ng-hide="match.zipcode">no zipcode<span class="fa fa-map-marker fa-pull-right"></span></p>
+
+                        <p ng-show="match.birthdate">{{match.birthdate}}<span class="fa fa-birthday-cake fa-pull-right"></span> </p>
+                        <p ng-hide="match.birthdate">no birthdate<span class="fa fa-birthday-cake fa-pull-right"></span> </p>
+
+                        <p ng-show="match.interests.toString()">{{match.interests.toString()}}<span class="fa fa-heart fa-pull-right"></span></p>
+                        <p ng-hide="match.interests.toString()">no interests<span class="fa fa-heart fa-pull-right"></span></p>
+
+                        <p ng-show="match.biography">{{match.biography}}<span class="fa fa-comment fa-pull-right"></span></p>
+                        <p ng-hide="match.biography">no biography<span class="fa fa-comment fa-pull-right"></span></p>
+
                     </div>
                 </div>
                 <button ng-click="startChat(user, match)" class="btn-inverse col-md-12"><span class="fa fa-comment fa-align-center"></span></button>
