@@ -16,7 +16,8 @@ var activitySchema = mongoose.Schema({
     user: String,
     matches:Array,
     timeFrom: String,
-    timeUntil: String
+    timeUntil: String,
+    deleted: Boolean
 
 });
 module.exports = activitySchema;

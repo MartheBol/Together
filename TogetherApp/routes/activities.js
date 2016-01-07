@@ -27,9 +27,11 @@ router.post('/addactivity', function(req, res) {
             untilDate :  req.body.dateUntil,
             timestamp : req.body.timestamp,
             user : req.user.username,
-            matches:matches
+            matches:matches,
+            deleted:false
 
-        });
+
+    });
         console.log(newActivity);
 
         newActivity.save(function(err, newAct) {
@@ -69,7 +71,21 @@ router.post('/deleteinterested', function(req, res) {
     res.json("deleted");
 
 });
+router.get('/activitydelete/:activityname', find_correctactivity, function (req, res) {
+    console.log('je komt in de activitydelete route');
+    console.log (req.params.activityName);
 
+    activityCollection.findOneAndUpdate(
+        {activityName: req.params.activityName},
+        {$set: {deleted: true}},
+        function (err, model) {
+            console.log("dit is een" + err);
+        }
+    );
+    res.json("De activity " + req.params.activityName + "is verwijderd");
+
+
+});
 router.get('/', function(req, res){
     Activity.getActivities(function (activities) {
         res.json({activitielist: activities});
@@ -78,7 +94,7 @@ router.get('/', function(req, res){
 });
 
 router.get('/activitydetail/:activityName', find_correctactivity, function (req, res) {
-    res.json({activity: req.activity})
+    res.json({activity: req.activity});
     /*if(req.user === undefined){
      res.redirect('/#/home')
      }

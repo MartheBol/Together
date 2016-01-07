@@ -21,6 +21,13 @@
                 for (var i = 0, l = arrTemp.length; i < l; i++) {
                     if (new Date(arrTemp[i].untilDate).getTime() >= new Date(dateTimeNow).getTime()) {
                         arrActs.push(arrTemp[i]);
+                        if(arrTemp[i].deleted === false){
+                            $scope.deleted = false;
+                        }
+
+                        else{
+                            $scope.deleted = true;
+                        }
                     }
                 }
 
@@ -451,6 +458,14 @@
 
             });
         };
+        $scope.deleteActivity = function(activityname){
+            dbService.deleteActivity('activities', activityname).then(function(response){
+                $scope.infodeletedActivity = response;
+                console.log(response);
+                $scope.getActivities();
+            });
+        };
+
 
         function initmap(){
             var map = new google.maps.Map(document.getElementById('map'), {

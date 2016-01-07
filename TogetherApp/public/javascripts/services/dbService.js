@@ -63,9 +63,20 @@
             return $http.get(url).then(function(response){
                 return response.data;
 
+
             });
 
         };
+
+        var deleteActivity =  function (collection, activityname) {
+            var url = "http://localhost:3000/api/" + collection + "/activitydelete/" + activityname;
+            return $http.get(url).then(function (response) {
+                console.log(response);
+                return response.data;
+
+            });
+        };
+
 
         var getNoiseWords = function () {
 
@@ -88,7 +99,8 @@
             getDetailsUser: getDetailsUser,
             deleteUser: deleteUser,
             getDetailsActivity: getDetailsActivity,
-            getNoiseWords: getNoiseWords
+            getNoiseWords: getNoiseWords,
+            deleteActivity: deleteActivity
 
         };
 

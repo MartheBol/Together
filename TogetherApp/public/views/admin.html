@@ -98,8 +98,8 @@
             </table>
         </div>
         <div class="container" ng-controller="ActivitiesController" data-ng-init="getActivities()">
-            <p>{{arrUsers.length}} users</p>
-            <div ng-show="infodeletedUser !== undefined" class="alert alert-danger">{{infodeletedUser}}</div>
+            <p>{{arrActivities.length}} activities</p>
+            <div ng-show="infodeletedActivity !== undefined" class="alert alert-danger">{{infodeletedActivity}}</div>
             <table class="table table-hover">
                 <thead>
                 <tr>
@@ -113,7 +113,8 @@
                     <th>Until date</th>
                     <th>User</th>
                     <th>Timestamp</th>
-                    <th>Details</th>
+                    <th>View details</th>
+                    <th>Delete activity</th>
                 </tr>
                 </thead>
 
@@ -132,7 +133,7 @@
                     <td>{{activity.timestamp}}</td>
 
                     <td><a href="#/activitydetails/{{activity.activityName}}">View details</a></td>
-                    <!--<td><a ng-click="deleteUser(user.username)" ng-show="user.deleted === false">Delete user</a></td>-->
+                    <td><a ng-click="deleteActivity(activity.activityName)" ng-show="activity.deleted === false">Delete activity</a></td>
                 </tr>
 
                 </tbody>

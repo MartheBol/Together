@@ -42,7 +42,7 @@ router.get('/userdelete/:username', find_correctuser, function (req, res) {
                     matchactivities.push(activities[i]);
 
                     for (var iii = 0; iii < matchactivities.length; iii++) {
-                        console.log(matchactivities[iii].activityName)
+                        console.log(matchactivities[iii].activityName);
                         activityCollection.findOneAndUpdate(
                             {activityName: matchactivities[iii].activityName},
                             {$pull: {matches: req.params.username}},
