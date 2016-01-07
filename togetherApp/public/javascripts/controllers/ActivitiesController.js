@@ -251,7 +251,7 @@
                                     if (!error) {
                                         console.log(startTimeHour + ":" + startTimeMin);
 
-                                        var url = "http://localhost:3000/api/activities/addactivity";
+                                        var url = "/api/activities/addactivity";
                                         $http.post(url, {
                                             activityName: activityName,
                                             street: street,
@@ -326,7 +326,7 @@
             var interestedAct = $scope.interestedAct;
             if (interestedAct !== false) {
 
-                url = "http://localhost:3000/api/activities/interested";
+                url = "/api/activities/interested";
                 $http.post(url, {
                     activityName: activityName,
                     interestedUser: interestedUser,
@@ -340,7 +340,7 @@
                 });
             } else {
                 console.log(interestedAct);
-                url = "http://localhost:3000/api/activities/deleteinterested";
+                url = "/api/activities/deleteinterested";
                 $http.post(url, {
                     activityName: activityName,
                     interestedUser: interestedUser,
