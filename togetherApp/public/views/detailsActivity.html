@@ -82,7 +82,17 @@
                                 <p>{{arrDetailsActivity.user}}</p>
 
                                 <label>Keywords</label>
-                                <p>{{arrDetailsActivity.description}} <!-- Keywords --><span class="fa fa-hashtag fa-pull-right"></span>
+                                <p ng-show="arrDetailsActivity.description !== undefined && arrDetailsActivity.description != ''">{{arrDetailsActivity.description}} <!-- Keywords --><span class="fa fa-hashtag fa-pull-right"></span>
+                                </p>
+                                <p ng-hide="arrDetailsActivity.description !== undefined && arrDetailsActivity.description != ''">No keywords <!-- Keywords --><span class="fa fa-hashtag fa-pull-right"></span>
+                                </p>
+
+                                <label>Interested</label>
+                                <p>{{arrDetailsActivity.matches.length}}
+                                        <span ng-show="(arrDetailsActivity.matches.length) === 1"> person </span>
+                                        <span ng-hide="(arrDetailsActivity.matches.length) === 1"> people </span>
+                                        interested
+                                        <span class="fa fa-star fa-pull-right"></span>
                                 </p>
                                 <!--<p>{{activity.participants}}<span class="fa fa-check fa-pull-right"></span></p>-->
                                 </div>

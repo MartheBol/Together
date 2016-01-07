@@ -66,72 +66,68 @@
     <div class="line"></div>
 
     <div class="text-center">
-        <h2>{{aantalMatches}} matches</h2>
+        <h2 ng-show="arrMatches.length === 1">{{arrMatches.length}} match</h2>
+        <h2 ng-hide="arrMatches.length === 1">{{arrMatches.length}} matches</h2>
     </div>
 
-    <div class="row ">
+    <div class="text-right">
 
-        <div class="col-sm-4" ng-repeat="match in arrMatches">
-            <div class="col-lg-12 shadow">
+        <button ng-click="showDiv()" class="btn-dropdown">filter <b class="caret"></b></button>
+
+    </div>
+
+
+    <div class="row shadow" ng-show="filter.showFilter">
+
+        <div class="col-sm-4">
+            <div class="col-lg-12">
+                <label for="sortOn">Sort from:</label>
+                <select id="sortOn" class="form-control" ng-model="sortProperty">
+                    <option value="username">A - Z</option>
+                    <option value="-username">Z - A</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="col-lg-12">
+                <label><input type="radio" name="sex" value="male" ng-model="filterQuery"> male</label>
+                <label><input type="radio" name="sex" value="female" ng-model="filterQuery"> female</label>
+                <label><input type="radio" name="sex" value="nofilter" ng-model="filterQuery"> no filter</label>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="col-lg-12">
+                <button class="btn btna" ng-click="hideDiv()">Ok</button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row_dynamic">
+
+        <div class="item" ng-repeat="match in arrMatches | orderBy:sortProperty | filter: filterMatches">
+
+            <div class="box">
+
                 <img class="img-circle img-responsive img-center" ng-src="{{match.img}}" height="100" width="100">
-                <h2 class="text-center">{{match.user}}</h2>
+                <h2 class="text-center">{{match.username}}</h2>
                 <div class="info text-center ">
                     <div  class="text-left">
-                        <p>{{match.place}}<span class="fa fa-map-marker fa-pull-right"></span> </p>
-                        <p>{{match.interests}}<span class="fa fa-heart fa-pull-right"></span></p>
+                        <p>{{match.zipcode}}<span class="fa fa-map-marker fa-pull-right"></span> </p>
+                        <p>{{match.interests.toString()}}<span class="fa fa-heart fa-pull-right"></span></p>
+                        <p ng-show="match.biography">{{match.biography}}<span class="fa fa-user fa-pull-right"></span></p>
                     </div>
                 </div>
                 <button class="btn-inverse col-md-12"><span class="fa fa-comment fa-align-center"></span></button>
+
             </div>
+
         </div>
-
-        <!--
-
-        <div class="col-sm-4">
-            <div class="col-lg-12 shadow">
-                <img class="img-circle img-responsive img-center" src="images/poesjemetbril.gif" height="100" width="100">
-                <h2 class="text-center">Name match</h2>
-                <div class="info text-center ">
-                    <div  class="text-left">
-                        <p>Victor Ghyselincklaan 7, 8400 Ostend <span class="fa fa-map-marker fa-pull-right"></span> </p>
-                        <p>music dance cute_animals traveling world<span class="fa fa-heart fa-pull-right"></span></p>
-                    </div>
-                </div>
-                <button class="btn-inverse col-md-12"><span class="fa fa-comment fa-align-center"></span></button>
-            </div>
-        </div>
-
-        <div class="col-sm-4">
-            <div class="col-lg-12 shadow ">
-                <img class="img-circle img-responsive img-center" src="http://placehold.it/100x100" height="100" width="100">
-                <h2 class="text-center">Name match</h2>
-                <div class="info text-center ">
-                    <div  class="text-left">
-                        <p>place<span class="fa fa-map-marker fa-pull-right"></span> </p>
-                        <p>interests<span class="fa fa-heart fa-pull-right"></span></p>
-                    </div>
-                </div>
-                <button class="btn-inverse col-md-12"><span class="fa fa-comment fa-align-center"></span></button>
-            </div>
-        </div>
-
-        <div class="col-sm-4">
-            <div class="col-lg-12 shadow ">
-                <img class="img-circle img-responsive img-center" src="http://placehold.it/100x100" height="100" width="100">
-                <h2 class="text-center">Name match</h2>
-                <div class="info text-center ">
-                    <div  class="text-left">
-                        <p>place<span class="fa fa-map-marker fa-pull-right"></span> </p>
-                        <p>interests<span class="fa fa-heart fa-pull-right"></span></p>
-                    </div>
-                </div>
-                <button class="btn-inverse col-md-12"><span class="fa fa-comment fa-align-center"></span></button>
-            </div>
-        </div>
-
-        -->
 
     </div>
+
     <div class="row elements">
 
     <!--

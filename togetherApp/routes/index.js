@@ -32,7 +32,7 @@ router.post('/login', function(req, res) {
       }
 
       else{
-        return res.json({ redirect: '/activities' });
+        return res.json({ redirect: '/activities', user: user });
       }
 
     });

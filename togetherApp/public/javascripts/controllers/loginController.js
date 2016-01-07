@@ -5,7 +5,7 @@
     "use strict";
     var selectedInterest = [];
 
-    var loginController = function ($scope, $http, $location) {
+    var loginController = function ($scope, $rootScope, $http, $location) {
 
         $scope.login = function() {
             $http
@@ -15,6 +15,8 @@
                 })
                 .success(function(data) {
                     console.log(data);
+                    $rootScope.user = data.user;
+                    localStorage.setItem("username", $rootScope.user.username);
                     $scope.error = data.error;
                     $location.path(data.redirect);
                 });
@@ -113,7 +115,7 @@
     };
 
     angular.module("app")
-        .controller("loginController", ["$scope", "$http", "$location", loginController])
+        .controller("loginController", ["$scope", "$rootScope", "$http", "$location", loginController])
         .controller("signupController", ["$scope", signupController])
         .controller("editableCheckboxController", ["$scope", editableCheckboxController]);
 })();

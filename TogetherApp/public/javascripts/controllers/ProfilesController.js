@@ -28,10 +28,14 @@
 
         $scope.showProfiles = function(){
 
+            /*
             var username = "";
             if($rootScope.user.username !== undefined){
                 username = $rootScope.user.username;
             }
+            */
+            var username = "";
+            username = localStorage.getItem("username");
 
             dbService.getCollection('users').then(function(response){
 
@@ -54,7 +58,7 @@
 
         $scope.sortProperty = "title";
         $scope.filterQuery = "";
-        $scope.filterImages = function(i){
+        $scope.filterProfiles = function(i){
             if($scope.filterQuery === ""){
                 return true;
             }
