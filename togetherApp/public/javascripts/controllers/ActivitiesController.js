@@ -207,7 +207,7 @@
             }
 
             else{
-                console.log(" Enddate can't be before startdate")
+                console.log(" Enddate can't be before startdate");
             }
 
             if ((street !== undefined) &&
@@ -251,13 +251,13 @@
                             stringConsistOf2Numbers(endTimeHour, function (error, endTimeHourString) {
                                 endTimeHour = endTimeHourString;
                                 if (error) {
-                                    $scope.error = error
+                                    $scope.error = error;
                                 }
                             });
                             stringConsistOf2Numbers(endTimeMin, function (error, endTimeMinString) {
                                 endTimeMin = endTimeMinString;
                                 if (error) {
-                                    $scope.error = error
+                                    $scope.error = error;
 
                                 }
                             });
@@ -291,7 +291,7 @@
 
                                             }
                                             else {
-                                               $scope.error = error
+                                               $scope.error = error;
                                             }
                                         });
                                     }
