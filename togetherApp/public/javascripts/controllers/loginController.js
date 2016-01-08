@@ -54,7 +54,7 @@
                 // object is guaranteed to be at most 10 minutes old.
                 $scope.geolocation =  {
                     latitude: position.coords.latitude,
-                    longitude: position.coords.latitude
+                    longitude: position.coords.longitude
                 };
                 console.log($scope.geolocation);
             }
