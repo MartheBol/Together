@@ -76,7 +76,7 @@ router.get('/userdetail/:username', find_correctuser, function (req, res) {
 
 });
 
-router.get('/updateprofile', function (req, res) {
+router.post('/updateprofile', function (req, res) {
     console.log(req.body);
     console.log("UPDATE PROFILE");
 
@@ -86,7 +86,8 @@ router.get('/updateprofile', function (req, res) {
      {username: req.user.username},
      {$set: {
          username: req.body.username,
-         password: req.body.password,
+         firstname: req.body.firstname,
+         lastname: req.body.lastname,
          birthdate : req.body.birthdate,
          zipcode: req.body.zipcode,
          sex : req.body.sex,
@@ -97,12 +98,11 @@ router.get('/updateprofile', function (req, res) {
         console.log("dit is een" + err);
      });
 
-     res.json("dit werkt");
-     console.log("hoera feest ")
+     res.json("Your profiles has been changed");
      }
 
      else{
-     console.log("user not found")
+        res.json("something is wrong, you are not logged in yet!")
      }
 
 });

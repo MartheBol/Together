@@ -55,7 +55,7 @@
     <!-- /.container -->
 </nav>
 
-<section ng-controller="MatchesController" data-ng-init="showMatches()" ng-hide="">
+<section ng-controller="MatchesController" data-ng-init="showMatches()" ng-hide="(!auth.isAuth)">
     <!-- Introduction Row -->
     <div class="title text-center">
         <h1>Together.</h1>
@@ -190,13 +190,11 @@
 
     </div>
 </section>
-
-<section ng-show="">
-    <!-- Introduction Row -->
+<section ng-controller = "userController"  ng-show="(!auth.isAuth)">
     <div class="title text-center">
 
         <h1>You are not allowed on this page.</h1>
-        <p><a href="#/home" class="btn-dropdown">Return to home-page</a></p>
+        <p><a href="#/home">Return to home-page</a></p>
 
         <img src="../images/title_line.png">
 

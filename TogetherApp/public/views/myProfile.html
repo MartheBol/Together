@@ -58,7 +58,7 @@
     <!-- /.container -->
 </nav>
 
-<section ng-controller="userController" data-ng-init="" ng-hide="">
+<section ng-controller="userController" data-ng-init="" ng-hide="(!auth.isAuth)" >
     <!-- Introduction Row -->
     <div class="title text-center">
         <h1>My profile</h1>
@@ -67,8 +67,11 @@
 
     <div>
 
+        <div ng-show="infodeletedActivity !== undefined" class="alert alert-danger">{{infodeletedActivity}}</div>
+
         <form ng-controller="UsersController" ng-submit="updateUser()">
             <div class="profile-header shadow col-lg-12">
+                <div ng-controller= "UsersController" ng-show="information != undefined"  class="alert alert-success">{{information}}</div>
 
                 <div class=" text-center">
 
@@ -84,6 +87,7 @@
                     <div class="text-left">
                         <div class="col-sm-6">
                             <div class="right-inner-addon center-block">
+
 
                                 <label for="firstname">Firstname:</label>
                                 <input type="text" class="form-control" id="firstname" ng-model="user.firstname"  value="{{user.firstname}}" name="firstname"/>
@@ -186,18 +190,15 @@
 
 </section>
 
-<!--
-<section ng-show="">
-
+<section ng-controller = "userController"  ng-show="(!auth.isAuth)">
     <div class="title text-center">
 
         <h1>You are not allowed on this page.</h1>
-        <p><a href="#/home" class="btn-dropdown">Return to home-page</a></p>
+        <p><a href="#/home">Return to home-page</a></p>
 
         <img src="../images/title_line.png">
+
 
     </div>
 
 </section>
-
--->

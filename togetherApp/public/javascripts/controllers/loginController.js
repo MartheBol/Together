@@ -16,8 +16,10 @@
                 .success(function(data) {
                     console.log(data);
                     $rootScope.user = data.user;
-                    localStorage.setItem("username", $rootScope.user.username);
                     $scope.error = data.error;
+                    if($rootScope.user!== undefined){
+                        localStorage.setItem("username", $rootScope.user.username);
+                    }
                     $location.path(data.redirect);
                 });
         };

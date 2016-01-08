@@ -55,7 +55,7 @@
 </nav>
 
 
-<section ng-controller = "userController">
+<section ng-controller = "userController" ng-hide="(!auth.isAuth)">
 
     <section ng-controller="ProfilesController" ng-init="showProfiles()" ng-hide="">
         <!-- Introduction Row -->
@@ -138,17 +138,15 @@
 
     </section>
 </section>
-<!--
-    <section ng-hide="">
+<section ng-controller = "userController" ng-show="(!auth.isAuth)">
+    <div class="title text-center">
 
-        <div class="title text-center">
+        <h1>You are not allowed on this page.</h1>
+        <p><a href="#/home">Return to home-page</a></p>
 
-            <h1>You are not allowed on this page.</h1>
-            <p><a href="#/home" class="btn-dropdown">Return to home-page</a></p>
+        <img src="../images/title_line.png">
 
-            <img src="../images/title_line.png">
 
-        </div>
+    </div>
 
-    </section>
--->
+</section>
