@@ -28,6 +28,7 @@ var userSchema = mongoose.Schema({
     birthdate: String,
     biography: String,
     deleted: Boolean,
+    geolocation:Array,
     timestamp: String
 
 });

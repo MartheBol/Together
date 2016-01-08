@@ -41,9 +41,49 @@
                 console.log(selectedInterest);
             }
         };
+        $scope.geolocation = "";
+        $scope.getLocation = function(){
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(successCallback, errorCallback, {maximumAge:600000});
+            }
+            else {
+                $scope.error = "Geolocation is not supported by this browser.";
+            }
+            function successCallback(position) {
+                // By using the 'maximumAge' option above, the position
+                // object is guaranteed to be at most 10 minutes old.
+                $scope.geolocation =  {
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.latitude
+                };
+                console.log($scope.geolocation);
+            }
+
+            function errorCallback(error) {
+                // Update a div element with error.message.
+                $scope.geolocation = null;
+                switch (error.code) {
+                    case error.PERMISSION_DENIED:
+                        $scope.error = "User denied the request for Geolocation.";
+                        break;
+                    case error.POSITION_UNAVAILABLE:
+                        $scope.error = "Location information is unavailable.";
+                        break;
+                    case error.TIMEOUT:
+                        $scope.error = "The request to get user location timed out.";
+                        break;
+                    case error.UNKNOWN_ERROR:
+                        $scope.error = "An unknown error occurred.";
+                        break;
+                }
+
+            }
+        };
 
         $scope.register = function() {
             console.log("REGISTER");
+
+
 
 
             $http.post('/register', {
@@ -56,6 +96,7 @@
                 birthdate : this.birthdate,
                 sex : this.sex,
                 biography : this.biography,
+                geolocation:$scope.geolocation,
                 interests:selectedInterest
 
             }).success(function (data) {
