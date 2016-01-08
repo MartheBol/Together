@@ -73,6 +73,7 @@ module.exports = function(passport){
         biographyField: 'biography',
         interests:'interests',
         deleted: 'deleted',
+        geolocation:'geolocation',
         timestamp: 'timestamp',
         passReqToCallback:true
     }, function(req, username, password, done){
@@ -108,6 +109,7 @@ module.exports = function(passport){
                             newUser.biography = req.body.biography;
                             newUser.interests = req.body.interests;
                             newUser.deleted = 0;
+                            newUser.geolocation = req.body.geolocation;
                             newUser.timestamp =  new Date().getTime();
                             console.log(req.body.biography);
                             newUser.save(function(err){
