@@ -195,13 +195,38 @@
             });
 
 
+
+            if(new Date(dateFromYear + "-" + dateFromMonth + "-" + dateFromDay + " " + startTimeHour + ":" + startTimeMin).getTime() <= new Date(dateUntilYear + "-" + dateUntilMonth + "-" + dateUntilDay + " " + endTimeHour + ":" + endTimeMin).getTime()){
+                if(new Date(dateUntilYear + "-" + dateUntilMonth + "-" + dateUntilDay + " " + endTimeHour + ":" + endTimeMin).getTime() > new Date().getTime()){
+
+                }
+
+                else{
+                    console.log("Date until can't be before today");
+                }
+            }
+
+            else{
+                console.log(" Enddate can't be before startdate")
+            }
+
             if ((street !== undefined) &&
                 (number !== undefined) &&
                 (zipcode !== undefined) &&
                 (description !== undefined) &&
-                (timestamp !== undefined)) {
+                (timestamp !== undefined) &&
+                (dateFromYear !== undefined) &&
+                (dateFromMonth !== undefined) &&
+                (dateFromDay !== undefined) &&
+                (startTimeHour !== undefined) &&
+                (startTimeMin !== undefined) &&
+                (dateUntilYear !== undefined) &&
+                (dateUntilMonth !== undefined) &&
+                (dateUntilDay !== undefined) &&
+                (endTimeHour !== undefined) &&
+                (endTimeMin !== undefined)) {
 
-                $scope.error = "";
+
 
                 if (startTimeMin < 60 && startTimeHour < 25) {
 
@@ -219,63 +244,62 @@
                         }
                     });
 
-                    console.log(startTimeHour);
-                    console.log(startTimeMin);
 
                     if (startTimeMin.length === 2 && startTimeHour.length === 2) {
-                        console.log("je komt hier terecht");
 
                         if (endTimeMin < 60 && endTimeHour < 24) {
                             stringConsistOf2Numbers(endTimeHour, function (error, endTimeHourString) {
                                 endTimeHour = endTimeHourString;
                                 if (error) {
-                                    console.log(error);
+                                    $scope.error = error
                                 }
                             });
                             stringConsistOf2Numbers(endTimeMin, function (error, endTimeMinString) {
                                 endTimeMin = endTimeMinString;
                                 if (error) {
-                                    console.log(error);
+                                    $scope.error = error
 
                                 }
                             });
 
-                            console.log(endTimeHour);
-                            console.log(endTimeMin);
+
 
                             if (endTimeMin.toString().length === 2 && endTimeHour.toString().length === 2) {
+                                if(new Date(dateFromYear + "-" + dateFromMonth + "-" + dateFromDay + " " + startTimeHour + ":" + startTimeMin).getTime() <= new Date(dateUntilYear + "-" + dateUntilMonth + "-" + dateUntilDay + " " + endTimeHour + ":" + endTimeMin).getTime()){
+                                    if(new Date(dateUntilYear + "-" + dateUntilMonth + "-" + dateUntilDay + " " + endTimeHour + ":" + endTimeMin).getTime() > new Date().getTime()){
+                                        getKeywordsFromDescription(description, function (error, data) {
+                                            description = data;
+                                            if (!error) {
+                                                var url = "/api/activities/addactivity";
+                                                $http.post(url, {
+                                                    activityName: activityName,
+                                                    street: street,
+                                                    number: number,
+                                                    zipcode: zipcode,
+                                                    description: description,
+                                                    dateFrom: dateFromYear + "-" + dateFromMonth + "-" + dateFromDay + " " + startTimeHour + ":" + startTimeMin,
+                                                    dateUntil: dateUntilYear + "-" + dateUntilMonth + "-" + dateUntilDay + " " + endTimeHour + ":" + endTimeMin,
+                                                    timestamp: timestamp
 
-                                console.log(startTimeHour + ":" + startTimeMin);
+                                                }).success(function (data) {
+                                                    $scope.error = data.error;
+                                                    $scope.getActivities();
+                                                    resetForm();
 
-                                getKeywordsFromDescription(description, function (error, data) {
-                                    description = data;
-                                    if (!error) {
-                                        console.log(startTimeHour + ":" + startTimeMin);
+                                                    //$location.path(data.redirect);
+                                                });
 
-                                        var url = "/api/activities/addactivity";
-                                        $http.post(url, {
-                                            activityName: activityName,
-                                            street: street,
-                                            number: number,
-                                            zipcode: zipcode,
-                                            description: description,
-                                            dateFrom: dateFromYear + "-" + dateFromMonth + "-" + dateFromDay + " " + startTimeHour + ":" + startTimeMin,
-                                            dateUntil: dateUntilYear + "-" + dateFromMonth + "-" + dateUntilDay + " " + endTimeHour + ":" + endTimeMin,
-                                            timestamp: timestamp
-
-                                        }).success(function (data) {
-                                            $scope.error = data.error;
-                                            $scope.getActivities();
-                                            resetForm();
-
-                                            //$location.path(data.redirect);
+                                            }
+                                            else {
+                                               $scope.error = error
+                                            }
                                         });
+                                    }
 
+                                    else{
+                                        $scope.error ="Enddate can't be before today";
                                     }
-                                    else {
-                                        console.log(error);
-                                    }
-                                });
+                                }
                             }
 
                             else {
@@ -300,7 +324,7 @@
 
             }
             else {
-                $scope.error = "ERROR: All fields are required.8888";
+                $scope.error = "ERROR: All fields are required.";
             }
         };
 
@@ -309,7 +333,7 @@
                 $scope.arrDetailsActivity = response.activity;
                 initmap();
 
-                console.log($scope.arrDetailsActivity.matches);
+
                 for (var i = 0; i < $scope.arrDetailsActivity.matches.length; i++) {
                     if ($scope.arrDetailsActivity.matches[i] === currentUser) {
                         $scope.nameButton = "Not interested";
@@ -333,22 +357,19 @@
                     interestedUser: interestedUser,
                     createrUser: createrUser
                 }).success(function (data) {
-                    console.log(data);
-                    console.log(interestedUser + " is geïnteresseerd in " + activityName + " door " + createrUser);
+
                     $scope.interestedAct = false;
                     $scope.nameButton = "Not interested";
                     $scope.error = data.error;
                 });
             } else {
-                console.log(interestedAct);
+
                 url = "/api/activities/deleteinterested";
                 $http.post(url, {
                     activityName: activityName,
                     interestedUser: interestedUser,
                     createrUser: createrUser
                 }).success(function (data) {
-                    console.log(data);
-                    console.log(interestedUser + " is niet meer geïnteresseerd in " + activityName + " door " + createrUser);
                     $scope.interestedAct = true;
                     $scope.nameButton = "Interested";
 
@@ -394,7 +415,7 @@
 
                 for (var i = 0, l = arrTemp.length; i < l; i++) {
                     if (new Date(arrTemp[i].untilDate).getTime() >= new Date(dateTimeNow).getTime()) {
-                        console.log(new Date(arrTemp[i].untilDate));
+
                         arrAllActivities.push(arrTemp[i]);
                     }
                 }
@@ -431,7 +452,6 @@
 
                 for (var i = 0, l = arrTemp.length; i < l; i++) {
                     if(new Date(arrTemp[i].untilDate).getTime() >= new Date(dateTimeNow).getTime()) {
-                        //console.log(new Date(arrTemp[i].untilDate));
                         arrAllActivities.push(arrTemp[i]);
                     }
                 }
@@ -462,7 +482,6 @@
         $scope.deleteActivity = function(activityId){
             dbService.deleteActivity('activities', activityId).then(function(response){
                 $scope.infodeletedActivity = response;
-                console.log(response);
                 $scope.getActivities();
             });
         };
@@ -497,7 +516,7 @@
                         icon: image
                     });
 
-                    console.log(marker);
+
 
                 } else {
                     alert('Geocode was not successful for the following reason: ' + status);
@@ -507,7 +526,6 @@
 
         function resetForm() {
             var frm = document.getElementsByName('ActivityForm')[0];
-            console.log('je komt in de resetform');
             frm.reset();
         }
     };

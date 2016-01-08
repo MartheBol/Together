@@ -41,6 +41,7 @@
     "dateformat": "^1.0.12",
     "gulp-autoprefixer": "^3.1.0",
     "gulp-less": "^3.0.5",
+    "gulp-ngmin": "^0.3.0",
     "gulp-util": "^3.0.7"
   }
 }

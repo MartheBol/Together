@@ -46,13 +46,6 @@
             });
         };
 
-        var updateUser = function (collection) {
-            var url = "http://localhost:3000/api/" + collection + "/updateprofile";
-            return $http.get(url).then(function (response) {
-                return response.data;
-
-            });
-        };
 
         var getItem = function(item){
 
@@ -77,9 +70,7 @@
 
         var deleteActivity =  function (collection, activityId) {
             var url = "http://localhost:3000/api/" + collection + "/activitydelete/" + activityId;
-            console.log(url);
             return $http.get(url).then(function (response) {
-                console.log(response);
                 return response.data;
 
             });
@@ -106,7 +97,6 @@
             getItem:getItem,
             getDetailsUser: getDetailsUser,
             deleteUser: deleteUser,
-            updateUser: updateUser,
             getDetailsActivity: getDetailsActivity,
             getNoiseWords: getNoiseWords,
             deleteActivity: deleteActivity

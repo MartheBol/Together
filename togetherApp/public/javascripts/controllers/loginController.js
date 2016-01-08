@@ -14,7 +14,7 @@
                     password: this.password
                 })
                 .success(function(data) {
-                    console.log(data);
+
                     $rootScope.user = data.user;
                     $scope.error = data.error;
                     if($rootScope.user!== undefined){
@@ -28,19 +28,18 @@
         $scope.lst = [];
         $scope.change = function(){
             $scope.lst.push('2');
-            console.log($scope.lst);
+
         };
         $scope.stateChanged = function (qId) {
-            //if(!$scope.interests[qId]){ //If it is checked
             if(selectedInterest.indexOf(qId) !== -1) {
-                //console.log('artNr already exists! DELETE');
+
                 var index = selectedInterest.indexOf(qId);
                 if (index > -1) {
                     selectedInterest.splice(index, 1);
                 }
             }else{
                 selectedInterest.push(qId);
-                console.log(selectedInterest);
+
             }
         };
         $scope.geolocation = "";
@@ -58,7 +57,7 @@
                     latitude: position.coords.latitude,
                     longitude: position.coords.longitude
                 };
-                console.log($scope.geolocation);
+
             }
 
             function errorCallback(error) {
@@ -83,10 +82,6 @@
         };
 
         $scope.register = function() {
-            console.log("REGISTER");
-
-
-
 
             $http.post('/register', {
                 firstname: this.firstname,
@@ -137,17 +132,16 @@
             $scope.showTextbox = true;
         };
         $scope.isChecked = function(qId){
-            console.log(qId);
             if(qId!==  " ") {
                 if (selectedInterest.indexOf(qId) !== -1) {
                     var index = selectedInterest.indexOf(qId);
                     if (index > -1) {
                         selectedInterest.splice(index, 1);
-                        console.log(selectedInterest);
+
                     }
                 } else {
                     selectedInterest.push(qId);
-                    console.log(selectedInterest);
+
                 }
             }
         };

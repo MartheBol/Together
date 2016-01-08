@@ -48,13 +48,6 @@
         };
 
         $scope.updateUser = function(){
-            /*dbService.updateUser('users').then(function(response){
-                $scope.updateuser = response;
-                console.log(response);
-                console.log("gelukt");
-
-            })*/
-
             var  username =  $scope.user.username,
                 firstname = $scope.user.firstname,
                 lastname = $scope.user.lastname,
@@ -65,7 +58,6 @@
 
 
             var url = "/api/users/updateprofile";
-            console.log(url);
             $http.post(url, {
                 username : username,
                 firstname : firstname,
@@ -78,7 +70,6 @@
             }).success(function (data) {
                 $scope.error = data.error;
                 $scope.information  = data;
-                console.log($scope.information);
 
             });
 
@@ -89,7 +80,6 @@
         $scope.getUserByID = function(){
 
             dbService.getItem('user').then(function(response){
-                console.log(response);
                 $scope.userProfile = response;
 
             });

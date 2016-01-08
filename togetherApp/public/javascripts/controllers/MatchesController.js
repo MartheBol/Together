@@ -104,7 +104,6 @@
                     var user = response;
                     var arrMatches = [];
 
-                    console.log(user.interests);
 
                     for(var i=0, l=arrProfiles.length; i<l; i++){
 

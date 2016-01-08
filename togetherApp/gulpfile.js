@@ -9,13 +9,14 @@ var gulp = require("gulp"),
     less = require("gulp-less"),
     notify = require("gulp-notify"),
     uglify = require("gulp-uglify"),
-
+    ngmin = require('gulp-ngmin'),
     jshint = require("gulp-jshint"),
     jsStylish = require("jshint-stylish"),
     nodemon = require('gulp-nodemon'),
     gutil = require('gulp-util'),
     mocha = require('gulp-mocha'),
     autoprefixer = require('gulp-autoprefixer');
+
 
 var jsFiles = ['*.js', 'src/**/*.js'];
 
@@ -51,7 +52,8 @@ gulp.task("js", function(){
       .pipe(jshint.reporter(jsStylish))
       .pipe(sourcemaps.init())
       .pipe(concat("app.min.js"))
-      //.pipe(uglify())
+      .pipe(ngmin())
+      .pipe(uglify())
       .pipe(sourcemaps.write())
       .pipe(gulp.dest("./public/dist/js"))
       .pipe(notify({
