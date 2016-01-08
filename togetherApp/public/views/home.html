@@ -141,7 +141,7 @@
                             <!-- <p>added on: {{activity.timestamp}} <span class="fa fa-clock-o fa-pull-right"></span></p> -->
                         </div>
                     </div>
-                    <a class="btn center-block btna" name="checkEvent" href="#/activitydetails/{{activity.activityName}}">Check
+                    <a ng-show="auth.isAuth && !auth.isAdmin" class="btn center-block btna" name="checkEvent" href="#/activitydetails/{{activity.activityName}}">Check
                         event</a>
                 </div>
             </div>
@@ -165,7 +165,7 @@
                                 <span class="fa fa-star fa-pull-right"></span></p>
                         </div>
                     </div>
-                    <a class="btn center-block btna" name="checkEvent" href="#/activitydetails/{{activity.activityName}}">Check
+                    <a ng-show="auth.isAuth && !auth.isAdmin" class="btn center-block btna" name="checkEvent" href="#/activitydetails/{{activity.activityName}}">Check
                         event</a>
                 </div>
             </div>
