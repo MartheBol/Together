@@ -77,28 +77,6 @@ gulp.task("less", function(){
        }));
 });
 
-//gulp.task("css", function(){
-//  gulp.src("./public/stylesheets/**/*.less")
-//      .pipe(less())
-//    /*.pipe(csslint({
-//     'ids': false
-//     }))
-//     .pipe(sourcemaps.init())
-//     .pipe(cssMinifier())
-//     .pipe(concat("site.css"))
-//     .pipe(sourcemaps.write())*/
-//      .pipe(gulp.dest("./public/dist/css"))
-//      .pipe(notify({
-//        message:"css built"
-//      }));
-
-  /**
-   * sourcemaps -->
-   * alleen nodig om te debuggen
-   * link naar files staan in de sourcemaps
-   * */
-//});
-
 gulp.task('serve', ['js', 'less'], function () {
     var options = {
         script: 'app.js',
