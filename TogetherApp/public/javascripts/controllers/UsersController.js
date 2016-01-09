@@ -14,7 +14,7 @@
                 //console.log(response);
                 $scope.arrUsers = response.userlist;
 
-                for( var i = 0; i<$scope.arrUsers.length; i++){
+                for( var i = $scope.arrUsers.length; i--;){
 
                     if($scope.arrUsers[i].deleted === false){
                         $scope.deleted = false;

@@ -18,7 +18,7 @@
                 var arrActs = [];
 
 
-                for (var i = 0, l = arrTemp.length; i < l; i++) {
+                for (var i = arrTemp.length;i--;){
                     if (new Date(arrTemp[i].untilDate).getTime() >= new Date(dateTimeNow).getTime()) {
                         if(arrTemp[i].deleted === false){
                             $scope.deleted = false;
@@ -88,7 +88,7 @@
 
                 var noiseWords = response.noisewords;
 
-                for (var i = 0; i < words.length; i++) {
+                for (var i = words.length; i--;) {
 
                     if (isInArray(words[i].toLowerCase(), noiseWords) == -1) {
                         keyWords += words[i];
@@ -334,7 +334,7 @@
                 initmap();
 
 
-                for (var i = 0; i < $scope.arrDetailsActivity.matches.length; i++) {
+                for (var i= $scope.arrDetailsActivity.matches.length; i--;) {
                     if ($scope.arrDetailsActivity.matches[i] === currentUser) {
                         $scope.nameButton = "Not interested";
                         $scope.interestedAct = false;
@@ -413,7 +413,7 @@
                 var arrAllActivities = [];
 
 
-                for (var i = 0, l = arrTemp.length; i < l; i++) {
+                for (var i = arrTemp.length;i--;) {
                     if (new Date(arrTemp[i].untilDate).getTime() >= new Date(dateTimeNow).getTime()) {
 
                         arrAllActivities.push(arrTemp[i]);
@@ -424,13 +424,13 @@
 
                 var arrMostRecentActivities = [];
 
-                for (var ii = 0; ii < numberOfActivities; ii++) {
+                for (var ii = numberOfActivities; ii--;) {
                     arrMostRecentActivities.push(arrAllActivities[ii]);
                 }
 
                 var matches = [];
 
-                for (var iii = 0; iii < arrMostRecentActivities.length; iii++) {
+                for (var iii = arrMostRecentActivities.length; iii--;) {
 
                     var dummyActivity = new Activity("No name", 8500, "Together", 2, "no description", "2016-01-01 00:01", "2017-12-31 23:59", new Date(), "no username", matches);
                     if (arrMostRecentActivities[iii] === undefined) {
@@ -450,7 +450,7 @@
                 var arrTemp = response.activitielist;
                 var arrAllActivities = [];
 
-                for (var i = 0, l = arrTemp.length; i < l; i++) {
+                for (var i = arrTemp.length; i--;) {
                     if(new Date(arrTemp[i].untilDate).getTime() >= new Date(dateTimeNow).getTime()) {
                         arrAllActivities.push(arrTemp[i]);
                     }
@@ -467,7 +467,7 @@
 
                 var matches = [];
 
-                for (var iii = 0; iii < arrMostPopularActivities.length; iii++) {
+                for (var iii =  arrMostPopularActivities.length; iii--;) {
 
                     var dummyActivity = new Activity("No name", 8500, "Together", 2, "no description", "2016-01-01 00:01", "2017-12-31 23:59", new Date(), "no username", matches);
                     if (arrMostPopularActivities[iii] === undefined) {

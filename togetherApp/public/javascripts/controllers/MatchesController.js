@@ -105,7 +105,7 @@
                     var arrMatches = [];
 
 
-                    for(var i=0, l=arrProfiles.length; i<l; i++){
+                    for(var i=arrProfiles.length; i--;){
 
                         var sameInterests = [];
                         sameInterests = $scope.intersect(user.interests, arrProfiles[i].interests);
