@@ -57,7 +57,7 @@ router.get('/logout', function(req, res){
 });
 
 router.post('/register', function(req, res) {
-  if (!req.body.username || !req.body.password) {
+  if (!req.body.username || !req.body.password || !req.body.birthdate || !req.body.lastname || !req.body.firstname || !req.body.zipcode || !req.body.biography ) {
     return res.json({ error: 'All fields are required' });
   };
   passport.authenticate('register', function(err, user) {
