@@ -57,15 +57,37 @@
 
     <section ng-hide="(!auth.isAuth)" ng-controller="ChatController">
         <div class="title text-center">
-            <h1>{{contactedUser.username}}</h1>
+            <h1>Chat with {{contactedUser.firstname}} {{contactedUser.lastname}}</h1>
 
             <p>Chat</p>
             <img src="../images/title_line.png">
         </div>
-        <ul id="messages"></ul>
-        <form action="">
-            <input id="m" autocomplete="off" /><button>Send</button>
-        </form>
-
+        <div class="col">
+            <h3>Messages</h3>
+            <div class="overflowable">
+                <p ng-repeat="message in messages">{{message.user}}: {{message.text}}</p>
+            </div>
+        </div>
+        <div class="col">
+            <h3>Users</h3>
+            <div class="overflowable">
+                <p ng-repeat="user in users">{{user}}</p>
+            </div>
+        </div>
+        <div class="clr">
+            <form ng-submit="sendMessage()">Message:
+                <input size="60" ng-model="message"/>
+                <input type="submit" value="Send"/>
+            </form>
+        </div>
+        <div class="clr">
+            <h3>Change your name</h3>
+            <p>Your current user name is {{name}}</p>
+            <form ng-submit="changeName()">
+                <input ng-model="newName"/>
+                <input type="submit" value="Change Name"/>
+            </form>
+        </div>
     </section>
+
 </div>
