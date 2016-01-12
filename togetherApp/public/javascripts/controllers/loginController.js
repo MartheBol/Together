@@ -5,7 +5,7 @@
     "use strict";
     var selectedInterest = [];
 
-    var loginController = function ($scope, $rootScope, $http, $location) {
+    var loginController = function ($scope, $rootScope, $http, $location, chatService) {
 
         $scope.login = function() {
             $http
@@ -17,6 +17,8 @@
 
                     $rootScope.user = data.user;
                     $scope.error = data.error;
+                    chatService.emit("newUser",$rootScope.user.username);
+
                     if($rootScope.user!== undefined){
                         localStorage.setItem("username", $rootScope.user.username);
                     }
@@ -152,7 +154,7 @@
     };
 
     angular.module("app")
-        .controller("loginController", ["$scope", "$rootScope", "$http", "$location", loginController])
+        .controller("loginController", ["$scope", "$rootScope", "$http", "$location","chatService", loginController])
         .controller("signupController", ["$scope", signupController])
         .controller("editableCheckboxController", ["$scope", editableCheckboxController]);
 })();
