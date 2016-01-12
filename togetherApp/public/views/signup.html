@@ -112,6 +112,26 @@
                                name="birthdate"
                                ng-model="birthdate"/>
 
+                        <div>
+                            <input type="number"
+                                   class="form-control dateinput"
+                                   name="dateFromDay"
+                                   ng-model="dateFromDay"
+                                   placeholder="dd"/>
+                            <p class="date">&sol;</p>
+                            <input type="number"
+                                   class="form-control dateinput"
+                                   name="dateFromMonth"
+                                   ng-model="dateFromMonth"
+                                   placeholder="mm"/>
+                            <p class="date">&sol;</p>
+                            <input type="number"
+                                   class="form-control dateinput"
+                                   name="dateFromYear"
+                                   ng-model="dateFromYear"
+                                   placeholder="yyyy"/>
+                        </div>
+
                         <label><input type="radio" name="sex" value="male" ng-model="sex"> male</label>
                         <label><input type="radio" name="sex" value="female" ng-model="sex"> female</label>
 

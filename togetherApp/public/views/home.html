@@ -36,7 +36,8 @@
                     </li>
                     <li>
 
-                        <button class="btn-dropdown dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" ng-show="auth.isAuth">
+                        <button class="btn-dropdown dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
+                                ng-show="auth.isAuth">
 
                             {{user.firstname}} {{user.lastname}} <b class="caret"></b>
 
@@ -45,8 +46,9 @@
                         <ul class="dropdown-menu">
                             <li><a tabindex="-1" href="#/myprofile">My profile</a></li>
                             <li><a tabindex="-1" href="/logout">Logout</a></li>
-                            <li ng-show="auth.isAuth && auth.isAdmin"  class="divider"></li>
-                            <li ng-show="auth.isAuth && auth.isAdmin"><a tabindex="-1" href="#/{{user.username}}">Admin page</a></li>
+                            <li ng-show="auth.isAuth && auth.isAdmin" class="divider"></li>
+                            <li ng-show="auth.isAuth && auth.isAdmin"><a tabindex="-1" href="#/{{user.username}}">Admin
+                                page</a></li>
                         </ul>
                     </li>
                 </ul>
