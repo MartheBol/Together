@@ -15,11 +15,16 @@
         $scope.message = "";
         $scope.sendMessage = function () {
             console.log(this.message);
-            var message = {user: $rootScope.currentUser,
-                text:this.message,
-            receiver:$rootScope.contactedUser.username};
-            $scope.messages.push(message);
-            chatService.emit("message", message);
+            if(this.message !=="" && this.message !==null) {
+                var message = {
+                    user: $rootScope.currentUser,
+                    text: this.message,
+                    receiver: $rootScope.contactedUser.username
+                };
+                $scope.messages.push(message);
+                chatService.emit("message", message);
+                $scope.message = "";
+            }
         };
 
         chatService.on("message_receiver", function(data){
