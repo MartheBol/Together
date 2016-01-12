@@ -76,6 +76,7 @@
 
         $scope.sortProperty = "title";
         $scope.filterQuery = "";
+        $scope.filter2Query = "";
         $scope.filterProfiles = function(i){
             if($scope.filterQuery === ""){
                 return true;
@@ -100,6 +101,28 @@
             }
 
             return false;
+        };
+
+        $scope.searchInProfiles = function(){
+
+            if($scope.filter2Query !== ""){
+
+                var arrZipcodeWithProfiles = [];
+
+                for(var i = 0, l = $scope.arrProfiles.length; i<l; i++){
+
+                    if($scope.arrProfiles[i].zipcode == $scope.filter2Query){
+                        arrZipcodeWithProfiles.push($scope.arrProfiles[i]);
+                    }
+
+                }
+
+                $scope.arrProfiles = arrZipcodeWithProfiles;
+            }
+            else if($scope.filter2Query === ""){
+                $scope.showProfiles();
+            }
+
         };
     };
 

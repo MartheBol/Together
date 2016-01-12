@@ -84,14 +84,15 @@ h1,h2{
   border: none;
   font-size: 20px;
   margin-bottom: 20px;
+
 }
 
 
-  .btna {
-    @media (min-width: 768px) {
-      width: 40%;
-    }
+.btna {
+  @media (min-width: 768px) {
+    width: 40%;
   }
+}
 
 .btn:focus, .btn:active, .btn:hover{
   color: #fff;
@@ -134,6 +135,9 @@ h1,h2{
     margin: 0 15px;
   }
 
+  .row > .col-sm-8{
+    padding:0;
+  }
 }
 
 
@@ -246,9 +250,10 @@ h1,h2{
 }
 
 .col-sm-4{
-  .col-lg-12{
-    padding: 20px 0 0 0;
+  .col-lg-12, .col-lg-10, .col-lg-1{
+    padding: 20px 0;
   }
+
 }
 
 #comment{
@@ -288,6 +293,9 @@ label{
 
 .row{
   margin: 0 0 10px 0;
+  .col-sm-8{
+    padding:0;
+  }
 }
 
 .login{
@@ -360,7 +368,7 @@ editable-checkbox{
 .row_dynamic{
   margin-left: 0;
   margin-right: 0;
-  padding: 0 15px;
+  //padding: 0 15px;
   -moz-column-width: 300px;
   -webkit-column-width: 300px;
   -moz-column-gap: 10px;
@@ -417,7 +425,7 @@ editable-checkbox{
 
     float: none;
     clear: both;
-    
+
     label{
       width: 250px;
     }
@@ -427,7 +435,6 @@ editable-checkbox{
     }
 
   }
-
 
 }
 

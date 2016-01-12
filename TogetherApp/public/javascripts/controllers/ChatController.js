@@ -18,15 +18,15 @@
             var message = {user: $rootScope.currentUser,
                 text:this.message,
             receiver:$rootScope.contactedUser.username};
-            //$scope.messages.push(message);
+            $scope.messages.push(message);
             chatService.emit("message", message);
         };
 
         chatService.on("message_receiver", function(data){
             console.log("JE BENT ER!");
             console.log(data.message);
-            console.log(data.user);
-            //$scope.messages.push({text:data.message, user:data.user});
+            console.log(data.sender);
+            $scope.messages.push({text:data.message, user:data.sender});
 
         });
         // Socket listeners

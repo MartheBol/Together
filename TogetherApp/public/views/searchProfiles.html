@@ -89,6 +89,41 @@
 
             <div class="col-sm-4">
                 <div class="col-lg-12">
+                    <label for="filter">Filter gender:</label>
+                    <select id="filter" class="form-control" ng-model="filterQuery">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="nofilter">No filter</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="col-lg-10">
+                    <label for="searchZipcodeInProfiles">Zipcode:</label>
+                    <input type="text" ng-model="filter2Query" class="form-control" id="searchZipcodeInProfiles" placeholder="8400" />
+                </div>
+                <div class="col-lg-1">
+                    <button type="button" class="btn" ng-click="searchInProfiles()">
+                        <i class="glyphicon glyphicon-search"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!--
+
+            <div class="col-sm-4">
+                <div class="col-lg-12">
+                    <label for="sortOn">Sort from:</label>
+                    <select id="sortOn" class="form-control" ng-model="sortProperty">
+                        <option value="username">A - Z</option>
+                        <option value="-username">Z - A</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="col-lg-12">
                     <label><input type="radio" name="sex" value="male" ng-model="filterQuery"> male</label>
                     <label><input type="radio" name="sex" value="female" ng-model="filterQuery"> female</label>
                     <label><input type="radio" name="sex" value="nofilter" ng-model="filterQuery"> no filter</label>
@@ -100,6 +135,10 @@
                     <button class="btn btna" ng-click="hideDiv()">Ok</button>
                 </div>
             </div>
+
+            -->
+
+
 
         </div>
 

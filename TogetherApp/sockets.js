@@ -16,6 +16,7 @@ module.exports = function (io) {
             //doorsturen naar de DB!!
 
             var socketReceiver = clients[data.receiver];
+            console.log(clients);
             if(socketReceiver != null && socketReceiver!== undefined){
                 socketReceiver.emit("message_receiver", { "message": data.text, "sender": data.user });
                 //io.in(data.user.username).emit("message_receiver", { "message": data.message, "sender": data.user });
@@ -24,10 +25,11 @@ module.exports = function (io) {
         });
 
         socket.on("newUser", function(username){
-            clients.push(username);
-            console.log(clients);
+            //clients.push(username);
+            socket.username = username;
+            clients[username] = socket;
             //socket.broadcast.emit("user_connected",username)
-
+            console.log(clients);
         });
 
         socket.on("halloNikita", function(){

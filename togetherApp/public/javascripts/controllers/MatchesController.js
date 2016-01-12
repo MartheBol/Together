@@ -27,7 +27,9 @@
 
         $scope.sortProperty = "title";
         $scope.filterQuery = "";
+        $scope.filter2Query = "";
         $scope.filterMatches = function(i){
+
             if($scope.filterQuery === ""){
                 return true;
             }
@@ -48,6 +50,30 @@
 
             else if($scope.filterQuery.toLowerCase() === "nofilter"){
                 $scope.filterQuery = "";
+            }
+
+            return false;
+        };
+
+        $scope.filter2Matches = function(i){
+            if($scope.filter2Query === ""){
+                return true;
+            }
+
+            else if(i === undefined){
+                return false;
+            }
+
+            else if(i.zipcode === undefined){
+                return false;
+            }
+
+            else if($scope.filter2Query == i.zipcode){
+                return true;
+            }
+
+            else if($scope.filter2Query.toLowerCase() === ""){
+                $scope.filter2Query = "";
             }
 
             return false;
@@ -123,6 +149,28 @@
 
                 });
             });
+        };
+
+        $scope.searchInMatches = function(){
+
+            if($scope.filter2Query !== ""){
+
+                var arrZipcodeWithMatches = [];
+
+                for(var i = 0, l = $scope.arrMatches.length; i<l; i++){
+
+                    if($scope.arrMatches[i].zipcode == $scope.filter2Query){
+                        arrZipcodeWithMatches.push($scope.arrMatches[i]);
+                    }
+
+                }
+
+                $scope.arrMatches = arrZipcodeWithMatches;
+            }
+            else if($scope.filter2Query === ""){
+                $scope.showMatches();
+            }
+
         };
 
     };
