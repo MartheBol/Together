@@ -141,9 +141,9 @@
                                     <div>
                                     <input type="number"
                                            class="form-control dateinput"
-                                           name="dateFromDay"
-                                           ng-model="dateFromDay"
-                                           placeholder="dd"/>
+                                           name="dateFromYear"
+                                           ng-model="dateFromYear"
+                                           placeholder="yyyy"/>
                                     <p class="date">&sol;</p>
                                     <input type="number"
                                            class="form-control dateinput"
@@ -153,9 +153,9 @@
                                     <p class="date">&sol;</p>
                                     <input type="number"
                                            class="form-control dateinput"
-                                           name="dateFromYear"
-                                           ng-model="dateFromYear"
-                                           placeholder="yyyy"/>
+                                           name="dateFromDay"
+                                           ng-model="dateFromDay"
+                                           placeholder="dd"/>
                                     </div>
 
                                     <i class="fa fa-clock-o"></i>
@@ -170,27 +170,31 @@
                                            name="startTimeMin"
                                            ng-model="startTimeMin"
                                            placeholder="mm"/>
+
                                     <label>until</label>
                                     <i class="fa fa-calendar"></i>
                                     <div>
                                     <input type="number"
                                            class="form-control dateinput"
-                                           name="dateUntilDay"
-                                           ng-model="dateUntilDay"
-                                           placeholder="dd"/>
+                                           name="dateUntilYear"
+                                           ng-model="dateUntilYear"
+                                           placeholder="yyyy"/>
+
                                     <p class="date">&sol;</p>
                                     <input type="number"
                                            class="form-control dateinput"
                                            name="dateUntilMonth"
                                            ng-model="dateUntilMonth"
                                            placeholder="mm"/>
+
                                     <p class="date">&sol;</p>
                                     <input type="number"
                                            class="form-control dateinput"
-                                           name="dateUntilYear"
-                                           ng-model="dateUntilYear"
-                                           placeholder="yyyy"/>
-                                </div>
+                                           name="dateUntilDay"
+                                           ng-model="dateUntilDay"
+                                           placeholder="dd"/>
+                                    </div>
+
                                     <i class="fa fa-clock-o"></i>
                                     <input type="number"
                                            class="form-control timeinput"
