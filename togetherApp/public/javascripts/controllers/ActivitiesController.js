@@ -431,7 +431,7 @@
                 var arrAllActivities = [];
 
 
-                for (var i = arrTemp.length;i--;) {
+                for (var i = 0; i < arrTemp.length;i++) {
                     if (new Date(arrTemp[i].untilDate).getTime() >= new Date(dateTimeNow).getTime()) {
 
                         arrAllActivities.push(arrTemp[i]);
@@ -442,13 +442,13 @@
 
                 var arrMostRecentActivities = [];
 
-                for (var ii = numberOfActivities; ii--;) {
+                for (var ii = 0; ii < numberOfActivities; ii++) {
                     arrMostRecentActivities.push(arrAllActivities[ii]);
                 }
 
                 var matches = [];
 
-                for (var iii = arrMostRecentActivities.length; iii--;) {
+                for (var iii = 0; iii < arrMostRecentActivities.length; iii++) {
 
                     var dummyActivity = new Activity("No name", 8500, "Together", 2, "no description", "2016-01-01 00:01", "2017-12-31 23:59", new Date(), "no username", matches);
                     if (arrMostRecentActivities[iii] === undefined) {
