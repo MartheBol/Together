@@ -87,6 +87,22 @@
 
         };
 
+        var clicksOnBtn = 0;
+
+        $scope.showTableUsers = function(){
+            $scope.filter = {showFilter:true};
+            clicksOnBtn++;
+
+            if(clicksOnBtn > 1){
+                $scope.filter = {showFilter:false};
+                clicksOnBtn = 0;
+            }
+        };
+
+        $scope.hideTableUsers = function(){
+            clicksOnBtn = 0;
+            $scope.filter = {showFilter:false};
+        };
 
     };
 

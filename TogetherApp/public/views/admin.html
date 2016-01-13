@@ -58,86 +58,100 @@
     <section ng-hide="(auth.isAuth && !auth.isAdmin) || (!auth.isAuth)">
         <!-- Introduction Row -->
         <div class="title text-center">
-            <h1>{{user.username}}</h1>
-
-            <p>This application allows you to search company to travel, to go to a concert, ...</p>
+            <h1>Administrator page</h1>
             <img src="../images/title_line.png">
         </div>
 
         <div ng-show="!auth.isAuth">
-
-
             <div class="row login" ng-controller="loginController"></div>
         </div>
 
-        <div class="container" ng-controller="UsersController" data-ng-init="getUsers()">
-            <p>{{arrUsers.length}} users</p>
-            <div ng-show="infodeletedUser !== undefined" class="alert alert-danger">{{infodeletedUser}}</div>
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Username</th>
-                    <th>Password</th>
-                    <th>View details</th>
-                    <th>Delete user</th>
-                </tr>
-                </thead>
+        <div ng-controller="UsersController" >
 
-                <tbody>
+            <div class="text-left">
 
-                <tr ng-repeat="user in arrUsers">
-                    <td>{{user._id}}</td>
-                    <td>{{user.username}}</td>
-                    <td>{{user.password}}</td>
-                    <td><a href="#/userdetails/{{user.username}}">View details</a></td>
-                    <td><a ng-click="deleteUser(user.username)" ng-show="user.deleted === false">Delete user</a></td>
-                </tr>
+            <button ng-show="filter.showFilter" ng-click="showTableUsers()" class="btn-dropdown">Hide {{arrUsers.length}} users <b class="caret caret-reversed"></b></button>
+            <button ng-hide="filter.showFilter" ng-click="showTableUsers()" class="btn-dropdown">Show {{arrUsers.length}} users <b class="caret"></b></button>
 
-                </tbody>
-            </table>
+            </div>
+
+            <div ng-show="filter.showFilter" class="container table-responsive" data-ng-init="getUsers()">
+
+                <div ng-show="infodeletedUser !== undefined" class="alert alert-danger">{{infodeletedUser}}</div>
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Firstname</th>
+                        <th>Lastname</th>
+                        <th>Gender</th>
+                        <th>View details</th>
+                        <th>Delete user</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    <tr ng-repeat="user in arrUsers">
+                        <td>{{user.username}}</td>
+                        <td>{{user.firstname}}</td>
+                        <td>{{user.lastname}}</td>
+                        <td>{{user.sex}}</td>
+                        <td><a href="#/userdetails/{{user.username}}">View details</a></td>
+                        <td><a ng-click="deleteUser(user.username)" ng-show="user.deleted === false">Delete user</a></td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
         </div>
-        <div class="container" ng-controller="ActivitiesController" data-ng-init="getActivities()">
-            <p>{{arrActivities.length}} activities</p>
-            <div ng-show="infodeletedActivity !== undefined" class="alert alert-danger">{{infodeletedActivity}}</div>
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Activity name</th>
-                    <th>Zipcode</th>
-                    <th>Street</th>
-                    <th>Number</th>
-                    <th>Description</th>
-                    <th>From date</th>
-                    <th>Until date</th>
-                    <th>User</th>
-                    <th>Timestamp</th>
-                    <th>View details</th>
-                    <th>Delete activity</th>
-                </tr>
-                </thead>
 
-                <tbody>
+        <div ng-controller="ActivitiesController">
 
-                <tr ng-repeat="activity in arrActivities">
-                    <td>{{activity._id}}</td>
-                    <td>{{activity.activityName}}</td>
-                    <td>{{activity.zipcode}}</td>
-                    <td>{{activity.street}}</td>
-                    <td>{{activity.number}}</td>
-                    <td>{{activity.description}}</td>
-                    <td>{{activity.fromDate}}</td>
-                    <td>{{activity.untilDate}}</td>
-                    <td>{{activity.user}}</td>
-                    <td>{{activity.timestamp}}</td>
+            <div class="text-left">
 
-                    <td><a href="#/activitydetails/{{activity.activityName}}">View details</a></td>
-                    <td><a ng-click="deleteActivity(activity._id)" ng-show="activity.deleted === false">Delete activity</a></td>
-                </tr>
+                <button ng-show="filter.showFilter" ng-click="showTableActivities()" class="btn-dropdown">Hide {{arrActivities.length}} activities <b class="caret caret-reversed"></b></button>
+                <button ng-hide="filter.showFilter" ng-click="showTableActivities()" class="btn-dropdown">Show {{arrActivities.length}} activities <b class="caret"></b></button>
 
-                </tbody>
-            </table>
+            </div>
+
+            <div ng-show="filter.showFilter" class="container table-responsive" data-ng-init="getActivities()">
+                <div ng-show="infodeletedActivity !== undefined" class="alert alert-danger">{{infodeletedActivity}}</div>
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Activity name</th>
+                        <th>Zipcode</th>
+                        <th>Street</th>
+                        <th>Number</th>
+                        <th>From date</th>
+                        <th>Until date</th>
+                        <th>User</th>
+                        <th>View details</th>
+                        <th>Delete activity</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    <tr ng-repeat="activity in arrActivities">
+                        <td>{{activity.activityName}}</td>
+                        <td>{{activity.zipcode}}</td>
+                        <td>{{activity.street}}</td>
+                        <td>{{activity.number}}</td>
+                        <td>{{activity.fromDate}}</td>
+                        <td>{{activity.untilDate}}</td>
+                        <td>{{activity.user}}</td>
+
+                        <td><a href="#/activitydetails/{{activity.activityName}}">View details</a></td>
+                        <td><a ng-click="deleteActivity(activity._id)" ng-show="activity.deleted === false">Delete activity</a></td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
         </div>
 
     </section>

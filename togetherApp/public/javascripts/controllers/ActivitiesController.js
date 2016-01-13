@@ -11,6 +11,25 @@
         $scope.interestedAct = true;
         $scope.nameButton = "Interested";
 
+        var clicksOnBtn = 1;
+
+        $scope.filter = {showFilter:true};
+
+        $scope.showTableActivities = function(){
+            $scope.filter = {showFilter:true};
+            clicksOnBtn++;
+
+            if(clicksOnBtn > 1){
+                $scope.filter = {showFilter:false};
+                clicksOnBtn = 0;
+            }
+        };
+
+        $scope.hideTableActivities = function(){
+            clicksOnBtn = 0;
+            $scope.filter = {showFilter:false};
+        };
+
         $scope.getActivities = function () {
             dbService.getCollection('activities').then(function (response) {
 
@@ -157,7 +176,6 @@
 
 
         }
-
 
         $scope.addActivity = function () {
             var activityName = this.activityName;
@@ -479,13 +497,13 @@
 
             });
         };
+
         $scope.deleteActivity = function(activityId){
             dbService.deleteActivity('activities', activityId).then(function(response){
                 $scope.infodeletedActivity = response;
                 $scope.getActivities();
             });
         };
-
 
         function initmap(){
             var map = new google.maps.Map(document.getElementById('map'), {
@@ -497,7 +515,6 @@
             geocodeAddress(geocoder, map);
 
         }
-
 
         function geocodeAddress(geocoder, resultsMap) {
             var street = $scope.arrDetailsActivity.street;
