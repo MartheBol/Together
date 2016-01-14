@@ -10,28 +10,26 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-
-            <a class="navbar-brand" href="#/admin" ng-hide="(auth.isAuth && !auth.isAdmin) || (!auth.isAuth)">Together.</a>
-            <a class="navbar-brand" href="#/home" ng-show="(auth.isAuth && !auth.isAdmin) || (!auth.isAuth)">Together.</a>
-
+            <a class="navbar-brand" href="#/admin" title="Link to the admin page." ng-hide="(auth.isAuth && !auth.isAdmin) || (!auth.isAuth)">Together.</a>
+            <a class="navbar-brand" href="#/home" title="Link to the home page." ng-show="(auth.isAuth && !auth.isAdmin) || (!auth.isAuth)">Together.</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav" ng-controller="userController">
                 <li>
-                    <a href="#/howto">how to</a>
+                    <a href="#/howto" title="Link to the how to page.">how to</a>
                 </li>
                 <li ng-hide="auth.isAuth">
-                    <a href="#/signup">register</a>
+                    <a href="#/signup" title="Link to the signup page.">register</a>
                 </li>
                 <li ng-show="auth.isAuth && !auth.isAdmin">
-                    <a href="#/activities">activities</a>
-                </li>
-                <li ng-show="auth.isAuth && !auth.isAdmin" class="active">
-                    <a href="#/matches">matches</a>
+                    <a href="#/activities" title="Link to the activities page.">activities</a>
                 </li>
                 <li ng-show="auth.isAuth && !auth.isAdmin">
-                    <a href="#/searchprofiles">search profiles</a>
+                    <a href="#/matches" title="Link to the matches page.">matches</a>
+                </li>
+                <li ng-show="auth.isAuth && !auth.isAdmin">
+                    <a href="#/searchprofiles" title="Link to the search profiles page.">search profiles</a>
                 </li>
                 <li>
 
@@ -43,11 +41,11 @@
                     </button>
 
                     <ul class="dropdown-menu">
-                        <li><a tabindex="-1" href="#/myprofile">My profile</a></li>
-                        <li><a tabindex="-1" href="/logout">Logout</a></li>
-                        <li ng-show="auth.isAuth && auth.isAdmin" class="divider"></li>
-                        <li ng-show="auth.isAuth && auth.isAdmin"><a tabindex="-1" href="#/{{user.username}}">Admin
-                            page</a></li>
+                        <li><a tabindex="-1" href="#/myprofile" title="Link to your profile page.">My profile</a></li>
+                        <li><a tabindex="-1" href="/logout" title="Link to logout.">Logout</a></li>
+                        <li ng-show="auth.isAuth && auth.isAdmin"  class="divider"></li>
+                        <li ng-show="auth.isAuth && auth.isAdmin"><a tabindex="-1" href="#/{{user.username}}" title="Link to the admin page.">Admin page</a></li>
+
                     </ul>
                 </li>
             </ul>
@@ -232,7 +230,7 @@
     <div class="title text-center">
 
         <h1>You are not allowed on this page.</h1>
-        <p><a href="#/home">Return to home-page</a></p>
+        <p><a href="#/home" title="Link to return to the home page.">Return to home-page</a></p>
 
         <img src="../images/title_line.png">
 

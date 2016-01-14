@@ -7,7 +7,7 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
   //res.render('home');
-  res.json({message:"heeeyyyyy"});
+  res.json({message:"Test message - GET home page"});
 });
 router.post('/chat', function (req,res) {
 
@@ -18,7 +18,7 @@ router.post('/chat', function (req,res) {
 router.post('/login', function(req, res) {
 
   if (!req.body.username || !req.body.password) {
-    return res.json({ error: 'Username and Password required' });
+    return res.json({ error: 'Username and password required.' });
   }
   passport.authenticate('login', function(err, user, info) {
     if (err) {

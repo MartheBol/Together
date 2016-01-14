@@ -18,7 +18,7 @@ router.post('/addactivity', function(req, res) {
         //newActivity.image = req.body.fileinput;
         var matches = [];
         matches.push(req.user.username);
-        console.log("De eindtijd is: " + req.body.endTimeHour + req.body.endTimeMin)
+        console.log("The endtime is: " + req.body.endTimeHour + req.body.endTimeMin);
         var newActivity = new Activity({
             activityName :req.body.activityName,
             zipcode :req.body.zipcode,
@@ -52,12 +52,12 @@ router.post('/interested', function(req, res) {
         {safe: true, upsert: true},
         function(err, model) {
             if(err !== null){
-                console.log("dit is een "+err);
+                console.log("Error: "+err);
             }
         }
     );
     res.json("added");
-    console.log("match added");
+    console.log("Match added");
 
 });
 
@@ -66,7 +66,7 @@ router.post('/deleteinterested', function(req, res) {
         {activityName: req.body.activityName},
         {$pull: {matches: req.body.interestedUser}},
         function(err, model) {
-            console.log("dit is een "+err);
+            console.log("Error: "+err);
 
         }
     );
@@ -74,17 +74,17 @@ router.post('/deleteinterested', function(req, res) {
 
 });
 router.get('/activitydelete/:activityId', find_correctactivity_byid, function (req, res) {
-    console.log('je komt in de activitydelete route');
+    console.log('Je komt in de activitydelete route');
     console.log (req.params.activityId);
 
     activityCollection.findOneAndUpdate(
         {_id: req.params.activityId},
         {$set: {deleted: true}},
         function (err, model) {
-            console.log("dit is een" + err);
+            console.log("Error: " + err);
         }
     );
-    res.json("De activity " + req.params.activityId + "is verwijderd");
+    res.json("The activity " + req.params.activityId + " has been deleted.");
 
 
 });

@@ -21,7 +21,7 @@ router.get('/', function (req, res) {
 });
 
 router.get('/userdelete/:username', find_correctuser, function (req, res) {
-    console.log('je komt in de userdelete route');
+    console.log('Je komt in de userdelete route');
     /*if(req.user === undefined || req.user.username !== 'admin'){
      res.redirect('/#/home')
      }
@@ -30,7 +30,7 @@ router.get('/userdelete/:username', find_correctuser, function (req, res) {
         {username: req.params.username},
         {$set: {deleted: true}},
         function (err, model) {
-            console.log("dit is een" + err);
+            console.log("Error: " + err);
         }
     );
 
@@ -47,7 +47,7 @@ router.get('/userdelete/:username', find_correctuser, function (req, res) {
                             {activityName: matchactivities[iii].activityName},
                             {$pull: {matches: req.params.username}},
                             function (err, model) {
-                                console.log("dit is een " + err);
+                                console.log("Error: " + err);
 
                             }
                         );
@@ -56,7 +56,7 @@ router.get('/userdelete/:username', find_correctuser, function (req, res) {
             }
         }
     });
-    res.json("De user " + req.params.username + "is verwijderd");
+    res.json("The user " + req.params.username + " has been deleted.");
 
 
 });
@@ -95,14 +95,14 @@ router.post('/updateprofile', function (req, res) {
         }
      },
      function (err, model) {
-        console.log("dit is een" + err);
+        console.log("Error: " + err);
      });
 
-     res.json("Your profiles has been changed");
+     res.json("Your profile has been changed");
      }
 
      else{
-        res.json("something is wrong, you are not logged in yet!")
+        res.json("Something is wrong, you are not logged in yet!")
      }
 
 });
