@@ -19,7 +19,8 @@
                 templateUrl: "./views/matches.html"
             })
             .when("/howto",{
-                templateUrl: "./views/howTo.html"
+                templateUrl: "./views/howTo.html",
+                controller: "userController"
             })
             .when("/activities",{
                 templateUrl: "./views/activities.html"

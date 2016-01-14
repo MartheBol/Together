@@ -258,7 +258,7 @@
                     dateUntilMonth = this.dateUntilMonth;
                     dateUntilYear = this.dateUntilYear.toString();
 
-                    if (startTimeMin < 60 && startTimeHour < 24) {
+                    if (startTimeMin < 60 && startTimeHour < 25) {
 
                         stringConsistOf2Numbers(startTimeHour, function (error, startTimeHourString) {
                             startTimeHour = startTimeHourString;
@@ -277,7 +277,7 @@
 
                         if (startTimeMin.length === 2 && startTimeHour.length === 2) {
 
-                            if (endTimeMin < 60 && endTimeHour < 24) {
+                            if (endTimeMin < 60 && endTimeHour < 25) {
                                 stringConsistOf2Numbers(endTimeHour, function (error, endTimeHourString) {
                                     endTimeHour = endTimeHourString;
                                     if (error) {
