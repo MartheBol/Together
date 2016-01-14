@@ -90,15 +90,10 @@
 
             // If evenly divisible by 4 and not evenly divisible by 100,
             // or is evenly divisible by 400, then a leap year
-            if( (y%100 && !y%4) || (!y%400)){
-                daysInMonth[1] = 29;
-            }
-
-            /*
             if ( ((!(y % 4)) && y % 100) || (!(y % 400))) {
                 daysInMonth[1] = 29;
             }
-            */
+
             return d <= daysInMonth[--m];
         }
 

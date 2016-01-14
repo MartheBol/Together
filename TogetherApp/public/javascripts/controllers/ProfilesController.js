@@ -9,7 +9,6 @@
 
     var ProfilesController = function($scope, $rootScope, $routeParams, dbService, $http, $location) {
 
-        var clicksOnBtn = 0;
         $scope.startChat = function(currentUser, contactedUser){
             $http.post("/chat", {
                 currentUser: currentUser,
@@ -27,7 +26,7 @@
             });
         };
 
-
+        var clicksOnBtn = 0;
 
         $scope.showDiv = function(){
             $scope.filter = {showFilter:true};
@@ -46,12 +45,6 @@
 
         $scope.showProfiles = function(){
 
-            /*
-            var username = "";
-            if($rootScope.user.username !== undefined){
-                username = $rootScope.user.username;
-            }
-            */
             var username = "";
             username = localStorage.getItem("username");
 

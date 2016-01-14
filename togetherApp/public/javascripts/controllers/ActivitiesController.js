@@ -177,174 +177,194 @@
 
         }
 
+        function isRequiredField(element) {
+            if (element) {
+                if(element.value === '' || element === undefined) {
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            }
+        }
+
+        //http://stackoverflow.com/questions/5812220/how-to-validate-a-date
+        function isValidDate(d, m, y) {
+            // Assume not leap year by default (note zero index for Jan)
+            var daysInMonth = [31,28,31,30,31,30,31,31,30,31,30,31];
+
+            // If evenly divisible by 4 and not evenly divisible by 100,
+            // or is evenly divisible by 400, then a leap year
+            if ( (!(y % 4) && y % 100) || !(y % 400)) {
+                daysInMonth[1] = 29;
+            }
+            return d <= daysInMonth[--m];
+        }
+
         $scope.addActivity = function () {
-            var activityName = this.activityName;
-            var street = this.street;
-            var number = this.number;
-            var zipcode = this.zipcode;
-            var description = this.comment;
-            var dateFrom = this.dateFrom;
-            var dateUntil = this.dateUntil;
             var timestamp = new Date().getTime();
-            var startTimeHour = this.startTimeHour;
-            var startTimeMin = this.startTimeMin;
-            var endTimeHour = this.endTimeHour;
-            var endTimeMin = this.endTimeMin;
-            var dateFromDay = this.dateFromDay;
-            var dateFromMonth = this.dateFromMonth;
-            var dateFromYear = this.dateFromYear.toString();
-            var dateUntilDay = this.dateUntilDay;
-            var dateUntilMonth = this.dateUntilMonth;
-            var dateUntilYear = this.dateUntilYear.toString();
 
-            fullDate(dateFromDay, dateFromMonth, function (error, dateFromdayString, dateFromMonthString) {
-                dateFromDay = dateFromdayString;
-                dateFromMonth = dateFromMonthString;
+
+            /*
+            fullDate(this.dateFromDay, this.dateFromMonth, function (error, dateFromdayString, dateFromMonthString) {
+                this.dateFromDay = dateFromdayString;
+                this.dateFromMonth = dateFromMonthString;
                 if (error) {
                     console.log(error);
                 }
             });
-            fullDate(dateUntilDay, dateUntilMonth, function (error, dateUntilDayString, dateUntilMonthString) {
-                dateUntilDay = dateUntilDayString;
-                dateUntilMonth = dateUntilMonthString;
+            fullDate(this.dateUntilDay, this.dateUntilMonth, function (error, dateUntilDayString, dateUntilMonthString) {
+                this.dateUntilDay = dateUntilDayString;
+                this.dateUntilMonth = dateUntilMonthString;
                 if (error) {
                     console.log(error);
                 }
             });
+            */
+
+            if (isRequiredField(this.activityName) &&
+                isRequiredField(this.street) &&
+                isRequiredField(this.number) &&
+                isRequiredField(this.zipcode) &&
+                isRequiredField(this.comment)){
+
+                $scope.error = "";
+
+                var activityName = this.activityName;
+                var street = this.street;
+                var number = this.number;
+                var zipcode = this.zipcode;
+                var description = this.comment;
+                var startTimeHour = this.startTimeHour;
+                var startTimeMin = this.startTimeMin;
+                var endTimeHour = this.endTimeHour;
+                var endTimeMin = this.endTimeMin;
+                var dateFromDay = "";
+                var dateFromMonth = "";
+                var dateFromYear = "";
+                var dateUntilDay = "";
+                var dateUntilMonth = "";
+                var dateUntilYear = "";
+
+                if(isValidDate(this.dateFromDay, this.dateFromMonth, this.dateFromYear) &&
+                    isValidDate(this.dateUntilDay, this.dateUntilMonth, this.dateUntilYear )){
+
+                    $scope.error = "";
+
+                    dateFromDay = this.dateFromDay;
+                    dateFromMonth = this.dateFromMonth;
+                    dateFromYear = this.dateFromYear.toString();
+                    dateUntilDay = this.dateUntilDay;
+                    dateUntilMonth = this.dateUntilMonth;
+                    dateUntilYear = this.dateUntilYear.toString();
+
+                    if (startTimeMin < 60 && startTimeHour < 24) {
+
+                        stringConsistOf2Numbers(startTimeHour, function (error, startTimeHourString) {
+                            startTimeHour = startTimeHourString;
+                            if (error) {
+                                console.log(error);
+                            }
+                        });
+                        stringConsistOf2Numbers(startTimeMin, function (error, startTimeMinString) {
+                            startTimeMin = startTimeMinString;
+                            if (error) {
+                                console.log(error);
+
+                            }
+                        });
 
 
+                        if (startTimeMin.length === 2 && startTimeHour.length === 2) {
 
-            if(new Date(dateFromYear + "-" + dateFromMonth + "-" + dateFromDay + " " + startTimeHour + ":" + startTimeMin).getTime() <= new Date(dateUntilYear + "-" + dateUntilMonth + "-" + dateUntilDay + " " + endTimeHour + ":" + endTimeMin).getTime()){
-                if(new Date(dateUntilYear + "-" + dateUntilMonth + "-" + dateUntilDay + " " + endTimeHour + ":" + endTimeMin).getTime() > new Date().getTime()){
-
-                }
-
-                else{
-                    console.log("Date until can't be before today");
-                }
-            }
-
-            else{
-                console.log(" Enddate can't be before startdate");
-            }
-
-            if ((street !== undefined) &&
-                (number !== undefined) &&
-                (zipcode !== undefined) &&
-                (description !== undefined) &&
-                (timestamp !== undefined) &&
-                (dateFromYear !== undefined) &&
-                (dateFromMonth !== undefined) &&
-                (dateFromDay !== undefined) &&
-                (startTimeHour !== undefined) &&
-                (startTimeMin !== undefined) &&
-                (dateUntilYear !== undefined) &&
-                (dateUntilMonth !== undefined) &&
-                (dateUntilDay !== undefined) &&
-                (endTimeHour !== undefined) &&
-                (endTimeMin !== undefined)) {
-
-
-
-                if (startTimeMin < 60 && startTimeHour < 25) {
-
-                    stringConsistOf2Numbers(startTimeHour, function (error, startTimeHourString) {
-                        startTimeHour = startTimeHourString;
-                        if (error) {
-                            console.log(error);
-                        }
-                    });
-                    stringConsistOf2Numbers(startTimeMin, function (error, startTimeMinString) {
-                        startTimeMin = startTimeMinString;
-                        if (error) {
-                            console.log(error);
-
-                        }
-                    });
-
-
-                    if (startTimeMin.length === 2 && startTimeHour.length === 2) {
-
-                        if (endTimeMin < 60 && endTimeHour < 24) {
-                            stringConsistOf2Numbers(endTimeHour, function (error, endTimeHourString) {
-                                endTimeHour = endTimeHourString;
-                                if (error) {
-                                    $scope.error = error;
-                                }
-                            });
-                            stringConsistOf2Numbers(endTimeMin, function (error, endTimeMinString) {
-                                endTimeMin = endTimeMinString;
-                                if (error) {
-                                    $scope.error = error;
-
-                                }
-                            });
-
-
-
-                            if (endTimeMin.toString().length === 2 && endTimeHour.toString().length === 2) {
-                                if(new Date(dateFromYear + "-" + dateFromMonth + "-" + dateFromDay + " " + startTimeHour + ":" + startTimeMin).getTime() <= new Date(dateUntilYear + "-" + dateUntilMonth + "-" + dateUntilDay + " " + endTimeHour + ":" + endTimeMin).getTime()){
-                                    if(new Date(dateUntilYear + "-" + dateUntilMonth + "-" + dateUntilDay + " " + endTimeHour + ":" + endTimeMin).getTime() > new Date().getTime()){
-                                        getKeywordsFromDescription(description, function (error, data) {
-                                            description = data;
-                                            if (!error) {
-                                                var url = "/api/activities/addactivity";
-                                                $http.post(url, {
-                                                    activityName: activityName,
-                                                    street: street,
-                                                    number: number,
-                                                    zipcode: zipcode,
-                                                    description: description,
-                                                    dateFrom: dateFromYear + "-" + dateFromMonth + "-" + dateFromDay + " " + startTimeHour + ":" + startTimeMin,
-                                                    dateUntil: dateUntilYear + "-" + dateUntilMonth + "-" + dateUntilDay + " " + endTimeHour + ":" + endTimeMin,
-                                                    timestamp: timestamp
-
-                                                }).success(function (data) {
-                                                    $scope.error = data.error;
-                                                    $scope.getActivities();
-                                                    resetForm();
-
-                                                    //$location.path(data.redirect);
-                                                });
-
-                                            }
-                                            else {
-                                               $scope.error = error;
-                                            }
-                                        });
+                            if (endTimeMin < 60 && endTimeHour < 24) {
+                                stringConsistOf2Numbers(endTimeHour, function (error, endTimeHourString) {
+                                    endTimeHour = endTimeHourString;
+                                    if (error) {
+                                        $scope.error = error;
                                     }
+                                });
+                                stringConsistOf2Numbers(endTimeMin, function (error, endTimeMinString) {
+                                    endTimeMin = endTimeMinString;
+                                    if (error) {
+                                        $scope.error = error;
 
-                                    else{
-                                        $scope.error ="Enddate can't be before today";
                                     }
+                                });
+
+
+                                if (endTimeMin.toString().length === 2 && endTimeHour.toString().length === 2) {
+
+                                    if(new Date(dateFromYear + "-" + dateFromMonth + "-" + dateFromDay + " " + startTimeHour + ":" + startTimeMin).getTime() <= new Date(dateUntilYear + "-" + dateUntilMonth + "-" + dateUntilDay + " " + endTimeHour + ":" + endTimeMin).getTime()){
+
+                                        if(new Date(dateUntilYear + "-" + dateUntilMonth + "-" + dateUntilDay + " " + endTimeHour + ":" + endTimeMin).getTime() > new Date().getTime()){
+
+                                            getKeywordsFromDescription(description, function (error, data) {
+                                                description = data;
+
+                                                if (!error) {
+                                                    var url = "/api/activities/addactivity";
+                                                    $http.post(url, {
+                                                        activityName: activityName,
+                                                        street: street,
+                                                        number: number,
+                                                        zipcode: zipcode,
+                                                        description: description,
+                                                        dateFrom: dateFromYear + "-" + dateFromMonth + "-" + dateFromDay + " " + startTimeHour + ":" + startTimeMin,
+                                                        dateUntil: dateUntilYear + "-" + dateUntilMonth + "-" + dateUntilDay + " " + endTimeHour + ":" + endTimeMin,
+                                                        timestamp: timestamp
+
+                                                    }).success(function (data) {
+                                                        $scope.error = data.error;
+                                                        $scope.getActivities();
+                                                        resetForm();
+
+                                                        //$location.path(data.redirect);
+                                                    });
+
+                                                }
+
+                                                else {
+                                                    $scope.error = error;
+                                                }
+                                            });
+                                        }
+
+                                        else{
+                                            $scope.error ="Enddate can't be before today";
+                                        }
+                                    }
+                                }
+
+                                else {
+                                    $scope.error = "Enddate input is not correct";
                                 }
                             }
 
                             else {
-                                $scope.error = "Enddate input is not correct";
+                                $scope.error = "Endtime input is not correct";
                             }
+
                         }
 
                         else {
-                            $scope.error = "Endtime input is not correct";
+                            $scope.error = 'De startime length is not correct';
                         }
-
                     }
-
                     else {
-                        $scope.error = 'De startime length is not correct!!!! ';
+                        $scope.error = "Starttime input is not correct";
                     }
                 }
-                else {
-                    $scope.error = "Starttime input is not correct";
+                else{
+                    $scope.error = "Please enter valid dates";
                 }
-
 
             }
             else {
-                $scope.error = "ERROR: All fields are required.";
+                $scope.error = "All fields are required when adding a new activity.";
             }
         };
+
 
         $scope.getDetailActivity = function (currentUser) {
             dbService.getDetailsActivity('activities', $routeParams.activityName).then(function (response) {

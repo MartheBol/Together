@@ -11,12 +11,13 @@
 
             dbService.getCollection('users').then(function(response){
 
-                //console.log(response);
-                $scope.arrUsers = response.userlist;
+                var username = localStorage.getItem("username");
 
-                for( var i = $scope.arrUsers.length; i--;){
+                var arrUsers = response.userlist;
 
-                    if($scope.arrUsers[i].deleted === false){
+                for( var i = arrUsers.length; i--;){
+
+                    if(arrUsers[i].deleted === false){
                         $scope.deleted = false;
                     }
 
@@ -24,9 +25,14 @@
                         $scope.deleted = true;
                     }
 
-
-
                 }
+
+                for(var ii = arrUsers.length; ii--;){
+                    if(arrUsers[ii].username === "admin") {
+                        arrUsers.splice(ii, 1);
+                    }
+                }
+                $scope.arrUsers = arrUsers;
 
 
             });
